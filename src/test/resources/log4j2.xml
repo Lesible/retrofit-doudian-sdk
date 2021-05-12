@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration status="off">
+
+    <properties>
+        <property name="dir">/home/doudian/logs</property>
+        <property name="basePattern">%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%-15.15t] %-40.40C{1.} : %m%n</property>
+    </properties>
+
+    <appenders>
+
+        <console name="console" target="SYSTEM_OUT">
+            <!--highlight着色 t打印线程名称 .10代表从左开始截断只保留10个字符 -144l 打印位置信息,左对齐144个字符,空余用空格填-->
+            <patternLayout charset="utf-8"
+                           pattern="%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} %highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red blink, ERROR=red, WARN=yellow, INFO=green, DEBUG=green, TRACE=blue} [%-15.15t] %style{%-40.40C{1.}}{cyan} : %m%n"
+                           disableAnsi="false"/>
+        </console>
+        <rollingRandomAccessFile name="allLog" fileName="${dir}/doudian-test.log" immediateflush="false"
+                                 filePattern="${dir}/%d{yyyy-MM-dd}_doudian-test_%i.log">
+            <patternLayout charset="UTF-8" pattern="${basePattern}"/>
+            <policies>
+                <timeBasedTriggeringPolicy/>
+                <sizeBasedTriggeringPolicy size="10MB"/>
+            </policies>
+            <defaultRolloverStrategy max="50"/>
+        </rollingRandomAccessFile>
+
+    </appenders>
+
+    <loggers>
+
+        <asyncRoot level="info" includeLocation="true">
+            <appenderRef ref="console"/>
+            <appenderRef ref="allLog"/>
+        </asyncRoot>
+
+    </loggers>
+
+</configuration>
