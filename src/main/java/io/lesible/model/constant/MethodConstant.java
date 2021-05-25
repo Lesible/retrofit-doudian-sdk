@@ -49,4 +49,9 @@ public class MethodConstant {
      */
     public static final String COMMENT_REPLY = "comment.reply";
 
+    /**
+     * 获取店铺的已授权品牌列表
+     */
+    public static final String SHOP_BRAND_LIST = "shop.brandList";
+
 }

@@ -1,10 +1,7 @@
 package io.lesible;
 
 import com.alibaba.fastjson.JSON;
-import io.lesible.api.AuthApi;
-import io.lesible.api.CommentApi;
-import io.lesible.api.OrderApi;
-import io.lesible.api.ProductApi;
+import io.lesible.api.*;
 import io.lesible.config.ApiFactoryConfig;
 import io.lesible.model.constant.MethodConstant;
 import io.lesible.model.request.DySignRequest;
@@ -16,13 +13,18 @@ import io.lesible.model.request.order.OrderOrderDetailParam;
 import io.lesible.model.request.order.OrderSearchListParam;
 import io.lesible.model.request.product.ProductDetailParam;
 import io.lesible.model.request.product.ProductListParam;
+import io.lesible.model.request.shop.BrandListParam;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.auth.AccessTokenInfo;
 import io.lesible.model.response.comment.CommentPageInfo;
-import io.lesible.model.response.order.*;
+import io.lesible.model.response.order.OldOrderPageInfo;
+import io.lesible.model.response.order.OldShopOrderDetailInfo;
+import io.lesible.model.response.order.OrderPageInfo;
+import io.lesible.model.response.order.ShopOrderDetailInfo;
 import io.lesible.model.response.product.ProductDetail;
 import io.lesible.model.response.product.ProductInfo;
 import io.lesible.model.response.product.ProductPageInfo;
+import io.lesible.model.response.shop.BrandInfo;
 import io.lesible.util.ParamUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
@@ -34,6 +36,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -50,6 +53,7 @@ public class ApiTest {
     private static ProductApi PRODUCT_API;
     private static CommentApi COMMENT_API;
     private static AuthApi AUTH_API;
+    private static ShopApi SHOP_API;
 
     @BeforeAll
     public static void initApiFactory() {
@@ -62,6 +66,7 @@ public class ApiTest {
         PRODUCT_API = API_FACTORY.generateApi(ProductApi.class);
         COMMENT_API = API_FACTORY.generateApi(CommentApi.class);
         AUTH_API = API_FACTORY.generateApi(AuthApi.class);
+        SHOP_API = API_FACTORY.generateApi(ShopApi.class);
     }
 
     @Test
@@ -165,30 +170,30 @@ public class ApiTest {
         log.info("endTime: {}", endTime);
         log.info("startTime: {}", startTime);
         OrderListParam param = OrderListParam.builder()
-                .page(0).size(100).orderBy("update_time")
+                .page(100).size(100).orderBy("update_time")
                 .startTime(startTime).endTime(endTime).isDesc(1)
                 .build();
         DySignRequest<OrderListParam> request = DySignRequest.<OrderListParam>builder()
-                .accessToken("24f8e942-3423-417d-8a8c-f24fa27f84e5")
+                .accessToken("16c27fe7-ef2f-41a9-8690-2c9abde78b70")
                 .businessParam(param).method(MethodConstant.ORDER_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<OldOrderPageInfo>> dyResultCall = ORDER_API.list(paramMap);
         DyResult<OldOrderPageInfo> orderListResult = dyResultCall.execute().body();
-        OldShopOrderInfo info = orderListResult.getData().getList()
-                .stream().filter(o -> o.getPostReceiver().equals("王琦")).findFirst().get();
+        log.info("orderListResult: {}", orderListResult);
     }
 
     @Test
     public void orderDetail() throws IOException {
-        String orderIds = "4793975713351181651A";
+        String orderIds = "4798740575840939691A";
         for (String s : orderIds.split(",")) {
             OrderDetailParam param = OrderDetailParam.builder().orderId(s).build();
             DySignRequest<OrderDetailParam> request = DySignRequest.<OrderDetailParam>builder()
-                    .accessToken("24f8e942-3423-417d-8a8c-f24fa27f84e5")
+                    .accessToken("fccecd64-bd50-466f-a22b-2528e597ebda")
                     .businessParam(param).method(MethodConstant.ORDER_DETAIL).build();
             Map<String, String> paramMap = ParamUtil.buildParamMap(request);
             Call<DyResult<OldShopOrderDetailInfo>> dyResultCall = ORDER_API.detail(paramMap);
             DyResult<OldShopOrderDetailInfo> oldShopOrderDetail = dyResultCall.execute().body();
+            log.info("oldShopOrderDetail: {}", oldShopOrderDetail);
             log.info("oldShopOrderDetail: {}", JSON.toJSONString(oldShopOrderDetail));
         }
     }
@@ -198,7 +203,7 @@ public class ApiTest {
         CommentListParam param = CommentListParam.builder()
                 .orderBy("update_time").isDesc("-1").build();
         DySignRequest<CommentListParam> request = DySignRequest.<CommentListParam>builder()
-                .accessToken("fcc5856d-9e8e-44c5-bb55-5e3d91bd5b30")
+                .accessToken("f6ca36f3-6c17-450b-9254-93467a1d9f88")
                 .businessParam(param).method(MethodConstant.COMMENT_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<CommentPageInfo>> dyResultCall = COMMENT_API.list(paramMap);
@@ -217,6 +222,19 @@ public class ApiTest {
         Call<DyResult<Void>> dyResultCall = COMMENT_API.reply(paramMap);
         DyResult<Void> commentReplay = dyResultCall.execute().body();
         log.info("commentReplay: {}", commentReplay);
+    }
+
+    @Test
+    public void brandList() throws IOException {
+        //f6ca36f3-6c17-450b-9254-93467a1d9f88
+        BrandListParam param = BrandListParam.builder().build();
+        DySignRequest<BrandListParam> request = DySignRequest.<BrandListParam>builder()
+                .accessToken("f6ca36f3-6c17-450b-9254-93467a1d9f88")
+                .businessParam(param).method(MethodConstant.SHOP_BRAND_LIST).build();
+        Map<String, String> paramMap = ParamUtil.buildParamMap(request);
+        Call<DyResult<List<BrandInfo>>> dyResultCall = SHOP_API.brandList(paramMap);
+        DyResult<List<BrandInfo>> result = dyResultCall.execute().body();
+        log.info("result: {}", result);
     }
 
 }

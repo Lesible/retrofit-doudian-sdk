@@ -1,6 +1,5 @@
 package io.lesible.model.response;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import io.lesible.common.ErrorCode;
 import lombok.Data;
 
@@ -14,10 +13,11 @@ public class DyResult<R> {
 
     private R data;
 
+    private String logId;
+
     /**
      * 错误编号
      */
-    @JSONField(name = "err_no")
     private int errNo;
 
     /**

@@ -2,7 +2,7 @@
 <configuration status="off">
 
     <properties>
-        <property name="dir">/home/doudian/logs</property>
+        <property name="dir">/Users/lesible/Documents/logs</property>
         <property name="basePattern">%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%-15.15t] %-40.40C{1.} : %m%n</property>
     </properties>
 
