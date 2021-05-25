@@ -54,4 +54,9 @@ public class MethodConstant {
      */
     public static final String SHOP_BRAND_LIST = "shop.brandList";
 
+    /**
+     * 获取供商家发布商品的类目
+     */
+    public static final String SHOP_GET_SHOP_CATEGORY = "shop.getShopCategory";
+
 }

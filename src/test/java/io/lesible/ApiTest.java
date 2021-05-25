@@ -14,6 +14,7 @@ import io.lesible.model.request.order.OrderSearchListParam;
 import io.lesible.model.request.product.ProductDetailParam;
 import io.lesible.model.request.product.ProductListParam;
 import io.lesible.model.request.shop.BrandListParam;
+import io.lesible.model.request.shop.GetShopCategoryParam;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.auth.AccessTokenInfo;
 import io.lesible.model.response.comment.CommentPageInfo;
@@ -25,6 +26,7 @@ import io.lesible.model.response.product.ProductDetail;
 import io.lesible.model.response.product.ProductInfo;
 import io.lesible.model.response.product.ProductPageInfo;
 import io.lesible.model.response.shop.BrandInfo;
+import io.lesible.model.response.shop.CategoryInfo;
 import io.lesible.util.ParamUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
@@ -122,7 +124,7 @@ public class ApiTest {
         ProductDetailParam productDetailParam = new ProductDetailParam();
         productDetailParam.setProductId("3476346241309393327");
         DySignRequest<ProductDetailParam> request = DySignRequest.<ProductDetailParam>builder()
-                .accessToken("085fc798-578b-4df4-adfd-ef45bdad772a")
+                .accessToken("f6ca36f3-6c17-450b-9254-93467a1d9f88")
                 .businessParam(productDetailParam).method(MethodConstant.PRODUCT_DETAIL).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<ProductDetail>> dyResultCall = PRODUCT_API.detail(paramMap);
@@ -234,6 +236,19 @@ public class ApiTest {
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<List<BrandInfo>>> dyResultCall = SHOP_API.brandList(paramMap);
         DyResult<List<BrandInfo>> result = dyResultCall.execute().body();
+        log.info("result: {}", result);
+    }
+
+    @Test
+    public void getShopCategory() throws IOException {
+        //f6ca36f3-6c17-450b-9254-93467a1d9f88
+        GetShopCategoryParam param = GetShopCategoryParam.builder().cid(0L).build();
+        DySignRequest<GetShopCategoryParam> request = DySignRequest.<GetShopCategoryParam>builder()
+                .accessToken("f6ca36f3-6c17-450b-9254-93467a1d9f88")
+                .businessParam(param).method(MethodConstant.SHOP_GET_SHOP_CATEGORY).build();
+        Map<String, String> paramMap = ParamUtil.buildParamMap(request);
+        Call<DyResult<List<CategoryInfo>>> shopCategory = SHOP_API.getShopCategory(paramMap);
+        DyResult<List<CategoryInfo>> result = shopCategory.execute().body();
         log.info("result: {}", result);
     }
 
