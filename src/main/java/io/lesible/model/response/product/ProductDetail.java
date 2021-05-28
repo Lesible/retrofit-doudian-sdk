@@ -110,7 +110,7 @@ public class ProductDetail {
     /**
      * 预售类型，1-全款预售，0-非预售，2-阶梯库存
      *
-     * @see io.lesible.model.response.order.PreSellType
+     * @see io.lesible.model.enumeration.PreSaleType
      */
     @JSONField(name = "presell_type")
     private Integer preSellType;

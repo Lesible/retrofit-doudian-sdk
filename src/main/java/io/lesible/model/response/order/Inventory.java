@@ -21,7 +21,9 @@ public class Inventory {
     private String outWarehouseId;
 
     /**
-     * 库存类型，普通库存/区域库存
+     * 库存类型
+     *
+     * @see io.lesible.model.enumeration.InventoryType
      */
     private Integer inventoryType;
 

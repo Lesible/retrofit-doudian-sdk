@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import io.lesible.api.*;
 import io.lesible.config.ApiFactoryConfig;
 import io.lesible.model.constant.MethodConstant;
+import io.lesible.model.enumeration.InventoryType;
 import io.lesible.model.request.DySignRequest;
 import io.lesible.model.request.comment.CommentListParam;
 import io.lesible.model.request.comment.CommentReplyParam;
@@ -18,10 +19,7 @@ import io.lesible.model.request.shop.GetShopCategoryParam;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.auth.AccessTokenInfo;
 import io.lesible.model.response.comment.CommentPageInfo;
-import io.lesible.model.response.order.OldOrderPageInfo;
-import io.lesible.model.response.order.OldShopOrderDetailInfo;
-import io.lesible.model.response.order.OrderPageInfo;
-import io.lesible.model.response.order.ShopOrderDetailInfo;
+import io.lesible.model.response.order.*;
 import io.lesible.model.response.product.ProductDetail;
 import io.lesible.model.response.product.ProductInfo;
 import io.lesible.model.response.product.ProductPageInfo;
@@ -152,6 +150,18 @@ public class ApiTest {
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<OrderPageInfo>> dyResultCall = ORDER_API.searchList(paramMap);
         DyResult<OrderPageInfo> body = dyResultCall.execute().body();
+        List<ShopOrderInfo> shopOrderList = body.getData().getShopOrderList();
+        for (ShopOrderInfo shopOrderInfo : shopOrderList) {
+            List<SkuOrder> skuOrderList = shopOrderInfo.getSkuOrderList();
+            for (SkuOrder skuOrder : skuOrderList) {
+                List<Inventory> inventoryList = skuOrder.getInventoryList();
+                for (Inventory inventory : inventoryList) {
+                    if (InventoryType.get(inventory.getInventoryType()) == null) {
+                        log.info("{}:{}", inventory.getInventoryType(), inventory.getInventoryTypeDesc());
+                    }
+                }
+            }
+        }
         log.info("body: {}", body);
     }
 
