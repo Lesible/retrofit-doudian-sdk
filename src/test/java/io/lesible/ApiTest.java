@@ -18,7 +18,10 @@ import io.lesible.model.request.shop.GetShopCategoryParam;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.auth.AccessTokenInfo;
 import io.lesible.model.response.comment.CommentPageInfo;
-import io.lesible.model.response.order.*;
+import io.lesible.model.response.order.OldOrderPageInfo;
+import io.lesible.model.response.order.OldShopOrderDetailInfo;
+import io.lesible.model.response.order.OrderPageInfo;
+import io.lesible.model.response.order.ShopOrderDetailInfo;
 import io.lesible.model.response.product.ProductDetail;
 import io.lesible.model.response.product.ProductInfo;
 import io.lesible.model.response.product.ProductPageInfo;
@@ -49,6 +52,7 @@ import java.util.stream.Collectors;
 public class ApiTest {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    private static final String ACCESS_TOKEN = "f6ca36f3-6c17-450b-9254-93467a1d9f88";
     private static OrderApi ORDER_API;
     private static ProductApi PRODUCT_API;
     private static CommentApi COMMENT_API;
@@ -106,7 +110,7 @@ public class ApiTest {
         productListParam.setPage("0");
         productListParam.setSize("5");
         DySignRequest<ProductListParam> request = DySignRequest.<ProductListParam>builder()
-                .accessToken("085fc798-578b-4df4-adfd-ef45bdad772a")
+                .accessToken(ACCESS_TOKEN)
                 .businessParam(productListParam).method(MethodConstant.PRODUCT_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<ProductPageInfo>> dyResultCall = PRODUCT_API.list(paramMap);
@@ -122,8 +126,8 @@ public class ApiTest {
         ProductDetailParam productDetailParam = new ProductDetailParam();
         productDetailParam.setProductId("3476346241309393327");
         DySignRequest<ProductDetailParam> request = DySignRequest.<ProductDetailParam>builder()
-                .accessToken("f6ca36f3-6c17-450b-9254-93467a1d9f88")
-                .businessParam(productDetailParam).method(MethodConstant.PRODUCT_DETAIL).build();
+                .accessToken(ACCESS_TOKEN).businessParam(productDetailParam)
+                .method(MethodConstant.PRODUCT_DETAIL).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<ProductDetail>> dyResultCall = PRODUCT_API.detail(paramMap);
         DyResult<ProductDetail> body = dyResultCall.execute().body();
@@ -143,17 +147,11 @@ public class ApiTest {
                 .createTimeEnd(end)
                 .build();
         DySignRequest<OrderSearchListParam> request = DySignRequest.<OrderSearchListParam>builder()
-                .accessToken("f6ca36f3-6c17-450b-9254-93467a1d9f88")
+                .accessToken(ACCESS_TOKEN)
                 .businessParam(param).method(MethodConstant.ORDER_SEARCH_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<OrderPageInfo>> dyResultCall = ORDER_API.searchList(paramMap);
         DyResult<OrderPageInfo> body = dyResultCall.execute().body();
-        for (ShopOrderInfo shopOrderInfo : body.getData().getShopOrderList()) {
-            List<Object> orderPhaseList = shopOrderInfo.getOrderPhaseList();
-            if (orderPhaseList != null && orderPhaseList.size() > 0) {
-                log.info("orderPhaseList: {}", orderPhaseList);
-            }
-        }
         log.info("body: {}", body);
     }
 
@@ -161,7 +159,7 @@ public class ApiTest {
     public void orderOrderDetail() throws IOException {
         OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId("4793994778726551289").build();
         DySignRequest<OrderOrderDetailParam> request = DySignRequest.<OrderOrderDetailParam>builder()
-                .accessToken("24f8e942-3423-417d-8a8c-f24fa27f84e5")
+                .accessToken(ACCESS_TOKEN)
                 .businessParam(param).method(MethodConstant.ORDER_ORDER_DETAIL).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<ShopOrderDetailInfo>> dyResultCall = ORDER_API.orderDetail(paramMap);
@@ -186,7 +184,7 @@ public class ApiTest {
                 .startTime(startTime).endTime(endTime).isDesc(1)
                 .build();
         DySignRequest<OrderListParam> request = DySignRequest.<OrderListParam>builder()
-                .accessToken("16c27fe7-ef2f-41a9-8690-2c9abde78b70")
+                .accessToken(ACCESS_TOKEN)
                 .businessParam(param).method(MethodConstant.ORDER_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<OldOrderPageInfo>> dyResultCall = ORDER_API.list(paramMap);
@@ -200,7 +198,7 @@ public class ApiTest {
         for (String s : orderIds.split(",")) {
             OrderDetailParam param = OrderDetailParam.builder().orderId(s).build();
             DySignRequest<OrderDetailParam> request = DySignRequest.<OrderDetailParam>builder()
-                    .accessToken("fccecd64-bd50-466f-a22b-2528e597ebda")
+                    .accessToken(ACCESS_TOKEN)
                     .businessParam(param).method(MethodConstant.ORDER_DETAIL).build();
             Map<String, String> paramMap = ParamUtil.buildParamMap(request);
             Call<DyResult<OldShopOrderDetailInfo>> dyResultCall = ORDER_API.detail(paramMap);
@@ -215,7 +213,7 @@ public class ApiTest {
         CommentListParam param = CommentListParam.builder()
                 .orderBy("update_time").isDesc("-1").build();
         DySignRequest<CommentListParam> request = DySignRequest.<CommentListParam>builder()
-                .accessToken("f6ca36f3-6c17-450b-9254-93467a1d9f88")
+                .accessToken(ACCESS_TOKEN)
                 .businessParam(param).method(MethodConstant.COMMENT_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<CommentPageInfo>> dyResultCall = COMMENT_API.list(paramMap);
@@ -228,7 +226,7 @@ public class ApiTest {
         CommentReplyParam param = CommentReplyParam.builder().commentId("137844687636578599")
                 .content("谢谢您的光临,能让您满意真是太好了").build();
         DySignRequest<CommentReplyParam> request = DySignRequest.<CommentReplyParam>builder()
-                .accessToken("3f828c6b-3329-4d48-b584-1f1826ae72ec")
+                .accessToken(ACCESS_TOKEN)
                 .businessParam(param).method(MethodConstant.COMMENT_REPLY).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<Void>> dyResultCall = COMMENT_API.reply(paramMap);
@@ -241,7 +239,7 @@ public class ApiTest {
         //f6ca36f3-6c17-450b-9254-93467a1d9f88
         BrandListParam param = BrandListParam.builder().build();
         DySignRequest<BrandListParam> request = DySignRequest.<BrandListParam>builder()
-                .accessToken("f6ca36f3-6c17-450b-9254-93467a1d9f88")
+                .accessToken(ACCESS_TOKEN)
                 .businessParam(param).method(MethodConstant.SHOP_BRAND_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<List<BrandInfo>>> dyResultCall = SHOP_API.brandList(paramMap);
@@ -254,7 +252,7 @@ public class ApiTest {
         //f6ca36f3-6c17-450b-9254-93467a1d9f88
         GetShopCategoryParam param = GetShopCategoryParam.builder().cid(0L).build();
         DySignRequest<GetShopCategoryParam> request = DySignRequest.<GetShopCategoryParam>builder()
-                .accessToken("f6ca36f3-6c17-450b-9254-93467a1d9f88")
+                .accessToken(ACCESS_TOKEN)
                 .businessParam(param).method(MethodConstant.SHOP_GET_SHOP_CATEGORY).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<List<CategoryInfo>>> shopCategory = SHOP_API.getShopCategory(paramMap);
