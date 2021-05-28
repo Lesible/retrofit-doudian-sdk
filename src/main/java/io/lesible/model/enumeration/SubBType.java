@@ -20,7 +20,7 @@ public enum SubBType {
     /**
      * 小程序
      */
-    MINI_APP(2),
+    APPLET(2),
 
     /**
      * h5

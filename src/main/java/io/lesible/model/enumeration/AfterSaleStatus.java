@@ -1,59 +1,86 @@
 package io.lesible.model.enumeration;
 
+import java.util.Arrays;
+
 /**
- * 售后状态
- * <p> @date: 2021-04-21 18:06</p>
+ * <p> @date: 2021-05-27 17:43</p>
  *
  * @author 何嘉豪
  */
 public enum AfterSaleStatus {
 
     /**
-     * 全部
+     * 售后初始化
      */
-    ALL("all"),
+    INIT(0),
 
     /**
-     * 售后中
+     * 售后申请
      */
-    IN_AFTER_SALE("in_aftersale"),
+    APPLY(6),
 
     /**
-     * 退款中
+     * 售后退货中
      */
-    REFUND("refund"),
+    RETURNING(7),
 
     /**
-     * 退款成功
+     * 拒绝售后申请
      */
-    REFUND_SUCCESS("refund_success"),
+    APPLY_REJECT(27),
 
     /**
-     * 退款失败
+     * 售后成功
      */
-    REFUND_FAIL("refund_fail"),
+    SUCCESS(12),
 
     /**
-     * 换货成功
+     * 售后失败
      */
-    EXCHANGE_SUCCESS("exchange_success"),
+    FAIL(28),
 
     /**
-     * 售后关闭
+     * 售后已发货
      */
-    AFTER_SALE_CLOSE("aftersale_close");
+    DELIVERED(11),
 
     /**
-     * 实际状态值
+     * 退货后拒绝退款
      */
-    private final String status;
+    REFUND_REJECT(29),
 
-    AfterSaleStatus(String status) {
-        this.status = status;
+    /**
+     * 售后换货商家发货
+     */
+    EXCHANGE_SHIP(13),
+
+    /**
+     * 售后换货商家收货
+     */
+    EXCHANGE_RECEIPT(14),
+
+    /**
+     * 取消成功
+     */
+    SUCCESS_CANCEL(51),
+
+    /**
+     * 逆向交易完成
+     */
+    REVERSE_TRADE_FINISHED(53);
+
+    private final int afterSaleStatus;
+
+    AfterSaleStatus(int afterSaleStatus) {
+        this.afterSaleStatus = afterSaleStatus;
     }
 
-    public String value() {
-        return status;
+    public static AfterSaleStatus get(int afterSaleStatus) {
+        return Arrays.stream(values()).filter(it -> it.value() == afterSaleStatus)
+                .findAny().orElse(null);
     }
 
+    public int value() {
+        return afterSaleStatus;
+    }
 }

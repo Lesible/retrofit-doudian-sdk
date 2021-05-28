@@ -1,11 +1,11 @@
-package io.lesible.model.response.order;
+package io.lesible.model.enumeration;
 
 /**
  * <p> @date: 2021-04-22 17:33</p>
  *
  * @author 何嘉豪
  */
-public enum PreSellType {
+public enum PreSaleType {
     /**
      * 非预售
      */
@@ -23,7 +23,7 @@ public enum PreSellType {
 
     private final int preSellType;
 
-    PreSellType(int preSellType) {
+    PreSaleType(int preSellType) {
         this.preSellType = preSellType;
     }
 

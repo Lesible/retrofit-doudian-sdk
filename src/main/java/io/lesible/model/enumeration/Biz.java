@@ -1,68 +1,40 @@
 package io.lesible.model.enumeration;
 
+import java.util.Arrays;
+
 /**
- * <p> @date: 2021-04-22 14:29</p>
+ * <p> @date: 2021-05-28 15:23</p>
  *
  * @author 何嘉豪
  */
 public enum Biz {
-
     /**
-     * 鲁班广告
+     * 鲁班
      */
     LUBAN(1),
 
     /**
-     * 联盟
+     * 小店
      */
-    LEAGUE(2),
+    SMALL_STORE(2),
 
     /**
-     * 商城
+     * 好好学习
      */
-    MALL(4),
+    STUDY_HARD(3);
 
-    /**
-     * 自主经营
-     */
-    SELF_BIZ(8),
+    private final int biz;
 
-    /**
-     * 线索通
-     */
-    XIANSUOTONG(10),
-
-    /**
-     * 抖音门店
-     */
-    DOUDIAN(12),
-
-    /**
-     * 抖+
-     */
-    DOU_PULS(14),
-
-    /**
-     * 穿山甲
-     */
-    PANGOLIN(15);
-
-    private final int bizType;
-
-    Biz(int bizType) {
-        this.bizType = bizType;
+    Biz(int biz) {
+        this.biz = biz;
     }
 
-    public static Biz get(int bizType) {
-        for (Biz value : values()) {
-            if (value.value() == bizType) {
-                return value;
-            }
-        }
-        return null;
+    public static Biz get(int biz) {
+        return Arrays.stream(values()).filter(it -> it.value() == biz)
+                .findAny().orElse(null);
     }
 
     public int value() {
-        return bizType;
+        return biz;
     }
 }

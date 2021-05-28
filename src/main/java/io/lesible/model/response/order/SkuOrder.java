@@ -140,9 +140,86 @@ public class SkuOrder {
     private String subBTypeDesc;
 
     /**
+     * 流量来源
+     *
+     * @see io.lesible.model.enumeration.FlowSource
+     */
+    private String sendPay;
+
+    /**
+     * 流量来源描述
+     */
+    private String sendPayDesc;
+
+    /**
+     * 直播主播 id (达人)
+     */
+    private String authorId;
+
+    /**
+     * 直播主播名称
+     */
+    private String authorName;
+
+
+    /**
+     * 下单来源
+     *
+     * @see io.lesible.model.enumeration.ThemeType
+     */
+    private String themeType;
+
+    /**
+     * 下单来源描述
+     */
+    private String themeTypeDesc;
+
+    /**
      * 小程序id
      */
     private Long appId;
+
+    /**
+     * 直播间 id
+     */
+    private Long roomId;
+
+    /**
+     * 内容 id
+     */
+    private String contentId;
+
+    /**
+     * 视频 id
+     */
+    private String videoId;
+
+    /**
+     * 流量来源 id
+     */
+    private String originId;
+
+    /**
+     * 广告 id
+     */
+    private Long cid;
+
+    /**
+     * c端流量来源业务类型
+     *
+     * @see io.lesible.model.enumeration.CBiz
+     */
+    private Long cBiz;
+
+    /**
+     * c端流量来源业务类型描述
+     */
+    private String cBizDesc;
+
+    /**
+     * 广告展示页 id
+     */
+    private Long pageId;
 
     /**
      * 支付类型：0-货到付款 1-微信 2-支付宝
@@ -165,11 +242,6 @@ public class SkuOrder {
      * 支付金额（分）
      */
     private Long payAmount;
-
-    /**
-     * 快递费（分）
-     */
-    private Long postAmount;
 
     /**
      * 运费险金额
@@ -222,9 +294,9 @@ public class SkuOrder {
     private Long promotionPayAmount;
 
     /**
-     * 卖家应收金额
+     * 商家编码
      */
-    private Long shopReceivableAmount;
+    private String code;
 
     /**
      * 收件人电话
@@ -271,12 +343,10 @@ public class SkuOrder {
      */
     private Long productId;
 
-
     /**
      * 商品 skuId
      */
     private Long skuId;
-
 
     /**
      * 规格信息商品skuId
@@ -304,12 +374,12 @@ public class SkuOrder {
     private Long fourthCid;
 
     /**
-     * 外部 Sku id
+     * 外部 SkuId
      */
     private String outSkuId;
 
     /**
-     * sku外部供应商编码
+     * sku 外部供应商编码
      */
     private String supplierId;
 
@@ -373,31 +443,15 @@ public class SkuOrder {
      */
     private String sourcePlatform;
 
-    private String cBizDesc;
-    private Long cBiz;
-    private String sendPay;
-    private String authorId;
-    private Long cid;
-    private String authorName;
-    private Long roomId;
-    private String code;
-    private String themeTypeDesc;
-    private String originId;
-    private String themeType;
-    private Long pageId;
-    private String contentId;
-    private String sendPayDesc;
-    private String videoId;
-
-    /**
-     * 仓库信息
-     */
-    private List<Inventory> inventoryList;
-
     /**
      * 商品图片
      */
     private String productPic;
+
+    /**
+     * 是否评价 :1已评价，0未评价
+     */
+    private Integer isComment;
 
     /**
      * 商品名称
@@ -405,7 +459,28 @@ public class SkuOrder {
     private String productName;
 
     /**
-     * 是否评价 :1已评价，0未评价
+     * 仓库信息
      */
-    private Integer isComment;
+    private List<Inventory> inventoryList;
+
+    /**
+     * 快递费（分）
+     */
+    private Long postAmount;
+
+    /**
+     * 预售类型
+     * 0 现货类型
+     * 1 全款预售
+     * 2 阶梯发货
+     *
+     * @see io.lesible.model.enumeration.PreSaleType
+     */
+    private Integer preSaleType;
+
+    /**
+     * 卖家应收金额
+     */
+    private Long shopReceivableAmount;
+
 }

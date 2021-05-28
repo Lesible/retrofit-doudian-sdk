@@ -1,5 +1,6 @@
 package io.lesible.model.response.order;
 
+import io.lesible.model.enumeration.CBiz;
 import lombok.Data;
 
 import java.util.List;
@@ -44,7 +45,7 @@ public class ShopOrderDetail {
     /**
      * 业务来源：1-鲁班 2-小店 3-好好学习等
      *
-     * @see io.lesible.model.enumeration.Biz
+     * @see CBiz
      */
     private Integer biz;
 

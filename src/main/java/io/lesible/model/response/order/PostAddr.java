@@ -26,6 +26,11 @@ public class PostAddr {
     private InnerAddress street;
 
     /**
+     *
+     */
+    private String encryptDetail;
+
+    /**
      * 详细地址
      */
     private String detail;

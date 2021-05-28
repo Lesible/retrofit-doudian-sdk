@@ -161,6 +161,8 @@ public class ShopOrderInfo {
 
     /**
      * 支付类型：0-货到付款 1-微信 2-支付宝
+     *
+     * @see io.lesible.model.enumeration.PayType
      */
     private Integer payType;
 
@@ -205,11 +207,6 @@ public class ShopOrderInfo {
     private Long promotionAmount;
 
     /**
-     * 是否评价 :1已评价，0未评价
-     */
-    private Integer isComment;
-
-    /**
      * 店铺优惠金额
      */
     private Long promotionShopAmount;
@@ -239,10 +236,6 @@ public class ShopOrderInfo {
      */
     private Long promotionPayAmount;
 
-    /**
-     * 卖家应收金额
-     */
-    private Long shopReceivableAmount;
 
     /**
      * 收件人电话
@@ -280,8 +273,23 @@ public class ShopOrderInfo {
     private List<SkuOrder> skuOrderList;
 
     /**
+     * 订金预售阶段单
+     */
+    private List<OrderPhase> orderPhaseList;
+
+    /**
      * 卖家订单标记 小旗子star取值0～5，分别表示 灰紫青绿橙红
      */
     private Integer sellerRemarkStars;
+
+    /**
+     * 卖家应收金额
+     */
+    private Long shopReceivableAmount;
+
+    /**
+     * 是否评价 :1已评价，0未评价
+     */
+    private Integer isComment;
 
 }

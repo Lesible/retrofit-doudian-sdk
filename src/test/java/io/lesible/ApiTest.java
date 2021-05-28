@@ -18,10 +18,7 @@ import io.lesible.model.request.shop.GetShopCategoryParam;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.auth.AccessTokenInfo;
 import io.lesible.model.response.comment.CommentPageInfo;
-import io.lesible.model.response.order.OldOrderPageInfo;
-import io.lesible.model.response.order.OldShopOrderDetailInfo;
-import io.lesible.model.response.order.OrderPageInfo;
-import io.lesible.model.response.order.ShopOrderDetailInfo;
+import io.lesible.model.response.order.*;
 import io.lesible.model.response.product.ProductDetail;
 import io.lesible.model.response.product.ProductInfo;
 import io.lesible.model.response.product.ProductPageInfo;
@@ -37,6 +34,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -134,16 +132,28 @@ public class ApiTest {
 
     @Test
     public void orderSearchList() throws IOException {
+        ZoneOffset defaultZoneOffset = ZoneOffset.of("+8");
+        LocalDateTime yesterday = LocalDateTime.now().minusDays(1L);
+        long end = yesterday.toEpochSecond(defaultZoneOffset);
+        LocalDateTime localDateTime = yesterday.minusHours(1L);
+        long begin = localDateTime.toEpochSecond(defaultZoneOffset);
         OrderSearchListParam param = OrderSearchListParam.builder()
-                .page(0).size(2)
-                .createTimeEnd(1619319026L - 30 * 24 * 60 * 60L)
+                .page(0).size(1)
+                .createTimeStart(begin)
+                .createTimeEnd(end)
                 .build();
         DySignRequest<OrderSearchListParam> request = DySignRequest.<OrderSearchListParam>builder()
-                .accessToken("24f8e942-3423-417d-8a8c-f24fa27f84e5")
+                .accessToken("f6ca36f3-6c17-450b-9254-93467a1d9f88")
                 .businessParam(param).method(MethodConstant.ORDER_SEARCH_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<OrderPageInfo>> dyResultCall = ORDER_API.searchList(paramMap);
         DyResult<OrderPageInfo> body = dyResultCall.execute().body();
+        for (ShopOrderInfo shopOrderInfo : body.getData().getShopOrderList()) {
+            List<Object> orderPhaseList = shopOrderInfo.getOrderPhaseList();
+            if (orderPhaseList != null && orderPhaseList.size() > 0) {
+                log.info("orderPhaseList: {}", orderPhaseList);
+            }
+        }
         log.info("body: {}", body);
     }
 

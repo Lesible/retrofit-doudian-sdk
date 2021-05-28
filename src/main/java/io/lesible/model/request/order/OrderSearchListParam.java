@@ -40,7 +40,7 @@ public class OrderSearchListParam {
      * 全部,售后中,退款中,退款成功,退款失败,换货成功,售后关闭
      * 使用枚举类去赋值
      *
-     * @see AfterSaleStatus
+     * @see AfterSaleStatusDesc
      */
     private String afterSaleStatusDesc;
 
