@@ -1,18 +1,24 @@
 package io.lesible.model.request.shop;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * <p> @date: 2021-05-25 09:55</p>
+ * <p> @date: 2021-05-25 15:06</p>
  *
  * @author 何嘉豪
  */
 @Data
 @Builder
 @NoArgsConstructor
-public class BrandListParam {
+@AllArgsConstructor
+public class ShopGetShopCategoryParam {
 
+    /**
+     * 类目 id
+     */
+    private Long cid;
 
 }

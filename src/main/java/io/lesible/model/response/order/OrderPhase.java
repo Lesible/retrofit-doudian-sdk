@@ -44,7 +44,7 @@ public class OrderPhase {
     /**
      * 阶段定价
      */
-    private Long parsePayablePrice;
+    private Long phasePayablePrice;
 
     /**
      * 支付类型
@@ -107,6 +107,5 @@ public class OrderPhase {
      * sku 单价
      */
     private Long skuPrice;
-
 
 }

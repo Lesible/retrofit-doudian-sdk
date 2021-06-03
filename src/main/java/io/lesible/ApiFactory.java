@@ -22,6 +22,11 @@ public class ApiFactory {
                 .baseUrl(apiFactoryConfig.getBaseUrl()).build();
     }
 
+    /**
+     * 自定义 retrofit 客户端需要添加 FastJsonConverterFactory
+     *
+     * @param retrofit retrofit 客户端设置
+     */
     public ApiFactory(Retrofit retrofit) {
         this.retrofit = retrofit;
     }

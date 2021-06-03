@@ -2,24 +2,29 @@ package io.lesible;
 
 import com.alibaba.fastjson.JSON;
 import io.lesible.api.*;
-import io.lesible.config.ApiFactoryConfig;
+import io.lesible.converter.FastJsonConverterFactory;
+import io.lesible.model.Authorization;
 import io.lesible.model.constant.MethodConstant;
-import io.lesible.model.enumeration.InventoryType;
 import io.lesible.model.request.DySignRequest;
 import io.lesible.model.request.comment.CommentListParam;
 import io.lesible.model.request.comment.CommentReplyParam;
+import io.lesible.model.request.marketing.MarketingGetShopCouponMetaListParam;
 import io.lesible.model.request.order.OrderDetailParam;
 import io.lesible.model.request.order.OrderListParam;
 import io.lesible.model.request.order.OrderOrderDetailParam;
 import io.lesible.model.request.order.OrderSearchListParam;
 import io.lesible.model.request.product.ProductDetailParam;
 import io.lesible.model.request.product.ProductListParam;
-import io.lesible.model.request.shop.BrandListParam;
-import io.lesible.model.request.shop.GetShopCategoryParam;
+import io.lesible.model.request.shop.ShopBrandListParam;
+import io.lesible.model.request.shop.ShopGetShopCategoryParam;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.auth.AccessTokenInfo;
 import io.lesible.model.response.comment.CommentPageInfo;
-import io.lesible.model.response.order.*;
+import io.lesible.model.response.marketing.ShopCouponMetaListInfo;
+import io.lesible.model.response.order.OldOrderPageInfo;
+import io.lesible.model.response.order.OldShopOrderDetailInfo;
+import io.lesible.model.response.order.OrderPageInfo;
+import io.lesible.model.response.order.ShopOrderDetailInfo;
 import io.lesible.model.response.product.ProductDetail;
 import io.lesible.model.response.product.ProductInfo;
 import io.lesible.model.response.product.ProductPageInfo;
@@ -27,9 +32,13 @@ import io.lesible.model.response.shop.BrandInfo;
 import io.lesible.model.response.shop.CategoryInfo;
 import io.lesible.util.ParamUtil;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.ConnectionPool;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import retrofit2.Call;
+import retrofit2.Retrofit;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -39,6 +48,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -50,25 +60,33 @@ import java.util.stream.Collectors;
 public class ApiTest {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-    private static final String ACCESS_TOKEN = "f6ca36f3-6c17-450b-9254-93467a1d9f88";
+    private static final String ACCESS_TOKEN = "d3bbb82e-4ca2-4b40-8a8f-3bd6cfc4d7ed";
     private static OrderApi ORDER_API;
     private static ProductApi PRODUCT_API;
     private static CommentApi COMMENT_API;
     private static AuthApi AUTH_API;
     private static ShopApi SHOP_API;
+    private static MarketingApi MARKETING_API;
 
     @BeforeAll
     public static void initApiFactory() {
-        ApiFactoryConfig apiFactoryConfig = new ApiFactoryConfig();
-        apiFactoryConfig.setBaseUrl("https://openapi-fxg.jinritemai.com/");
-        apiFactoryConfig.setDefaultKey("6873668517658347022");
-        apiFactoryConfig.setDefaultSecret("601f6adf-f7df-42bf-8789-1b3a90979c50");
-        ApiFactory API_FACTORY = new ApiFactory(apiFactoryConfig);
+        Authorization authorization = new Authorization("6873668517658347022", "601f6adf-f7df-42bf-8789-1b3a90979c50");
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectionPool(new ConnectionPool(50, 30, TimeUnit.SECONDS))
+//                .addInterceptor(interceptor)
+                .build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://openapi-fxg.jinritemai.com/")
+                .addConverterFactory(FastJsonConverterFactory.create())
+                .client(client).build();
+        ApiFactory API_FACTORY = new ApiFactory(retrofit, authorization);
         ORDER_API = API_FACTORY.generateApi(OrderApi.class);
         PRODUCT_API = API_FACTORY.generateApi(ProductApi.class);
         COMMENT_API = API_FACTORY.generateApi(CommentApi.class);
         AUTH_API = API_FACTORY.generateApi(AuthApi.class);
         SHOP_API = API_FACTORY.generateApi(ShopApi.class);
+        MARKETING_API = API_FACTORY.generateApi(MarketingApi.class);
     }
 
     @Test
@@ -135,10 +153,10 @@ public class ApiTest {
     @Test
     public void orderSearchList() throws IOException {
         ZoneOffset defaultZoneOffset = ZoneOffset.of("+8");
-        LocalDateTime yesterday = LocalDateTime.now().minusDays(1L);
-        long end = yesterday.toEpochSecond(defaultZoneOffset);
-        LocalDateTime localDateTime = yesterday.minusHours(1L);
-        long begin = localDateTime.toEpochSecond(defaultZoneOffset);
+        LocalDateTime yesterday = LocalDateTime.now().minusHours(1L);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        long end = localDateTime.toEpochSecond(defaultZoneOffset);
+        long begin = yesterday.toEpochSecond(defaultZoneOffset);
         OrderSearchListParam param = OrderSearchListParam.builder()
                 .page(0).size(1)
                 .createTimeStart(begin)
@@ -150,24 +168,12 @@ public class ApiTest {
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<OrderPageInfo>> dyResultCall = ORDER_API.searchList(paramMap);
         DyResult<OrderPageInfo> body = dyResultCall.execute().body();
-        List<ShopOrderInfo> shopOrderList = body.getData().getShopOrderList();
-        for (ShopOrderInfo shopOrderInfo : shopOrderList) {
-            List<SkuOrder> skuOrderList = shopOrderInfo.getSkuOrderList();
-            for (SkuOrder skuOrder : skuOrderList) {
-                List<Inventory> inventoryList = skuOrder.getInventoryList();
-                for (Inventory inventory : inventoryList) {
-                    if (InventoryType.get(inventory.getInventoryType()) == null) {
-                        log.info("{}:{}", inventory.getInventoryType(), inventory.getInventoryTypeDesc());
-                    }
-                }
-            }
-        }
         log.info("body: {}", body);
     }
 
     @Test
     public void orderOrderDetail() throws IOException {
-        OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId("4793994778726551289").build();
+        OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId("4804309035305596274").build();
         DySignRequest<OrderOrderDetailParam> request = DySignRequest.<OrderOrderDetailParam>builder()
                 .accessToken(ACCESS_TOKEN)
                 .businessParam(param).method(MethodConstant.ORDER_ORDER_DETAIL).build();
@@ -175,8 +181,6 @@ public class ApiTest {
         Call<DyResult<ShopOrderDetailInfo>> dyResultCall = ORDER_API.orderDetail(paramMap);
         DyResult<ShopOrderDetailInfo> orderDetailInfo = dyResultCall.execute().body();
         log.info("orderDetailInfo: {}", orderDetailInfo);
-        String json = JSON.toJSONString(orderDetailInfo);
-        log.info("json: {}", json);
     }
 
     @Test
@@ -247,8 +251,8 @@ public class ApiTest {
     @Test
     public void brandList() throws IOException {
         //f6ca36f3-6c17-450b-9254-93467a1d9f88
-        BrandListParam param = BrandListParam.builder().build();
-        DySignRequest<BrandListParam> request = DySignRequest.<BrandListParam>builder()
+        ShopBrandListParam param = ShopBrandListParam.builder().build();
+        DySignRequest<ShopBrandListParam> request = DySignRequest.<ShopBrandListParam>builder()
                 .accessToken(ACCESS_TOKEN)
                 .businessParam(param).method(MethodConstant.SHOP_BRAND_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
@@ -260,13 +264,26 @@ public class ApiTest {
     @Test
     public void getShopCategory() throws IOException {
         //f6ca36f3-6c17-450b-9254-93467a1d9f88
-        GetShopCategoryParam param = GetShopCategoryParam.builder().cid(0L).build();
-        DySignRequest<GetShopCategoryParam> request = DySignRequest.<GetShopCategoryParam>builder()
+        ShopGetShopCategoryParam param = ShopGetShopCategoryParam.builder().cid(0L).build();
+        DySignRequest<ShopGetShopCategoryParam> request = DySignRequest.<ShopGetShopCategoryParam>builder()
                 .accessToken(ACCESS_TOKEN)
                 .businessParam(param).method(MethodConstant.SHOP_GET_SHOP_CATEGORY).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<List<CategoryInfo>>> shopCategory = SHOP_API.getShopCategory(paramMap);
         DyResult<List<CategoryInfo>> result = shopCategory.execute().body();
+        log.info("result: {}", result);
+    }
+
+    @Test
+    public void getShopCouponMetaList() throws IOException {
+        MarketingGetShopCouponMetaListParam param = MarketingGetShopCouponMetaListParam.builder()
+                .couponMetaId(3428704890636122168L).offset(0).type().limit(5).isShow(1).build();
+        DySignRequest<MarketingGetShopCouponMetaListParam> request = DySignRequest.<MarketingGetShopCouponMetaListParam>builder()
+                .accessToken(ACCESS_TOKEN)
+                .businessParam(param).method(MethodConstant.MARKETING_GET_SHOP_COUPON_META_LIST).build();
+        Map<String, String> paramMap = ParamUtil.buildParamMap(request);
+        Call<DyResult<ShopCouponMetaListInfo>> body = MARKETING_API.getShopCouponMetaList(paramMap);
+        DyResult<ShopCouponMetaListInfo> result = body.execute().body();
         log.info("result: {}", result);
     }
 

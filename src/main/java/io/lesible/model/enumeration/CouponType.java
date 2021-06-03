@@ -23,6 +23,11 @@ public enum CouponType {
     PLATFORM_FULL_DISCOUNT_COUPON(3),
 
     /**
+     * 商家折扣券
+     */
+    SHOP_DISCOUNT_COUPON(23),
+
+    /**
      * 商家直减券
      */
     SHOP_DIRECT_DISCOUNT_COUPON(22),

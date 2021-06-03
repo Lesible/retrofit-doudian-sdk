@@ -59,4 +59,14 @@ public class MethodConstant {
      */
     public static final String SHOP_GET_SHOP_CATEGORY = "shop.getShopCategory";
 
+    /**
+     * 查询已创建的优惠券列表
+     */
+    public static final String MARKETING_GET_SHOP_COUPON_META_LIST = "marketing.GetShopCouponMetaList";
+
+    /**
+     * 创建优惠券
+     */
+    public static final String MARKETING_CREATE_COUPON = "marketing.createCoupon";
+
 }

@@ -58,6 +58,7 @@ public class ParamUtil {
         // 校验请求
         checkRequest(dySignRequest);
         String paramJson = JSON.toJSONString(dySignRequest.getBusinessParam(), SERIALIZE_CONFIG);
+        log.info("paramJson: {}", paramJson);
         // 使用 treeMap,保证参数的字母顺序
         Map<String, String> paramMap = new TreeMap<>();
         // 不传入 appKey, secret 就使用默认的

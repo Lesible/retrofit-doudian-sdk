@@ -287,5 +287,9 @@ public class ShopOrderDetail {
      */
     private Integer sellerRemarkStars;
 
+    /**
+     * 订金预售阶段单
+     */
+    private List<OrderPhase> orderPhaseList;
 
 }
