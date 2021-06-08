@@ -1,6 +1,6 @@
 package io.lesible.model.response.product;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.lesible.model.enumeration.CheckStatus;
 import lombok.Data;
 
@@ -112,7 +112,7 @@ public class ProductDetail {
      *
      * @see io.lesible.model.enumeration.PreSaleType
      */
-    @JSONField(name = "presell_type")
+    @JsonProperty("presell_type")
     private Integer preSellType;
 
     /**

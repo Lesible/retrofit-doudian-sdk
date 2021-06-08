@@ -1,10 +1,13 @@
 package io.lesible.model.enumeration;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * <p> @date: 2021-04-23 18:08</p>
  *
  * @author 何嘉豪
  */
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum CouponType {
 
     /**

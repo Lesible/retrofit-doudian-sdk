@@ -1,5 +1,7 @@
 package io.lesible.model.enumeration;
 
+import java.util.Arrays;
+
 /**
  * <p> @date: 2021-04-22 11:50</p>
  *
@@ -26,4 +28,10 @@ public enum AbnormalOrder {
     public int value() {
         return abnormalOrderType;
     }
+
+    public static AbnormalOrder get(int abnormalOrderType) {
+        return Arrays.stream(values()).filter(it -> it.abnormalOrderType == abnormalOrderType)
+                .findAny().orElse(null);
+    }
+
 }

@@ -1,8 +1,6 @@
 package io.lesible.util;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.PropertyNamingStrategy;
-import com.alibaba.fastjson.serializer.SerializeConfig;
+import io.lesible.ApiFactory;
 import io.lesible.model.request.DySignRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -47,17 +45,10 @@ public class ParamUtil {
      */
     private static final int REFRESH_ACCESS_TOKEN = 2;
 
-    // 全局 下划线 转换
-    private static final SerializeConfig SERIALIZE_CONFIG = new SerializeConfig();
-
-    static {
-        SERIALIZE_CONFIG.propertyNamingStrategy = PropertyNamingStrategy.SnakeCase;
-    }
-
     public static Map<String, String> buildParamMap(DySignRequest<?> dySignRequest) {
         // 校验请求
         checkRequest(dySignRequest);
-        String paramJson = JSON.toJSONString(dySignRequest.getBusinessParam(), SERIALIZE_CONFIG);
+        String paramJson = JsonUtil.jsonValue(dySignRequest.getBusinessParam(), ApiFactory.OBJECT_MAPPER);
         log.info("paramJson: {}", paramJson);
         // 使用 treeMap,保证参数的字母顺序
         Map<String, String> paramMap = new TreeMap<>();

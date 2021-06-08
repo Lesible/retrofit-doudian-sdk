@@ -1,8 +1,6 @@
 package io.lesible;
 
-import com.alibaba.fastjson.JSON;
 import io.lesible.api.*;
-import io.lesible.converter.FastJsonConverterFactory;
 import io.lesible.model.Authorization;
 import io.lesible.model.constant.MethodConstant;
 import io.lesible.model.request.DySignRequest;
@@ -30,6 +28,7 @@ import io.lesible.model.response.product.ProductInfo;
 import io.lesible.model.response.product.ProductPageInfo;
 import io.lesible.model.response.shop.BrandInfo;
 import io.lesible.model.response.shop.CategoryInfo;
+import io.lesible.util.JsonUtil;
 import io.lesible.util.ParamUtil;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.ConnectionPool;
@@ -39,6 +38,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import retrofit2.Call;
 import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -60,7 +60,7 @@ import java.util.stream.Collectors;
 public class ApiTest {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-    private static final String ACCESS_TOKEN = "d3bbb82e-4ca2-4b40-8a8f-3bd6cfc4d7ed";
+    private static final String ACCESS_TOKEN = "2f0136ed-67ea-4d53-857b-7dd6e739f3ce";
     private static OrderApi ORDER_API;
     private static ProductApi PRODUCT_API;
     private static CommentApi COMMENT_API;
@@ -78,7 +78,7 @@ public class ApiTest {
 //                .addInterceptor(interceptor)
                 .build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://openapi-fxg.jinritemai.com/")
-                .addConverterFactory(FastJsonConverterFactory.create())
+                .addConverterFactory(JacksonConverterFactory.create(ApiFactory.OBJECT_MAPPER))
                 .client(client).build();
         ApiFactory API_FACTORY = new ApiFactory(retrofit, authorization);
         ORDER_API = API_FACTORY.generateApi(OrderApi.class);
@@ -218,7 +218,7 @@ public class ApiTest {
             Call<DyResult<OldShopOrderDetailInfo>> dyResultCall = ORDER_API.detail(paramMap);
             DyResult<OldShopOrderDetailInfo> oldShopOrderDetail = dyResultCall.execute().body();
             log.info("oldShopOrderDetail: {}", oldShopOrderDetail);
-            log.info("oldShopOrderDetail: {}", JSON.toJSONString(oldShopOrderDetail));
+            log.info("oldShopOrderDetail: {}", JsonUtil.jsonValue(oldShopOrderDetail));
         }
     }
 
@@ -232,7 +232,7 @@ public class ApiTest {
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<CommentPageInfo>> dyResultCall = COMMENT_API.list(paramMap);
         DyResult<CommentPageInfo> commentPageInfo = dyResultCall.execute().body();
-        log.info("commentPageInfo: {}", JSON.toJSONString(commentPageInfo));
+        log.info("commentPageInfo: {}", JsonUtil.jsonValue(commentPageInfo));
     }
 
     @Test
@@ -277,7 +277,7 @@ public class ApiTest {
     @Test
     public void getShopCouponMetaList() throws IOException {
         MarketingGetShopCouponMetaListParam param = MarketingGetShopCouponMetaListParam.builder()
-                .couponMetaId(3428704890636122168L).offset(0).type().limit(5).isShow(1).build();
+                .couponMetaId(3428704890636122168L).offset(0).limit(5).isShow(1).build();
         DySignRequest<MarketingGetShopCouponMetaListParam> request = DySignRequest.<MarketingGetShopCouponMetaListParam>builder()
                 .accessToken(ACCESS_TOKEN)
                 .businessParam(param).method(MethodConstant.MARKETING_GET_SHOP_COUPON_META_LIST).build();
@@ -286,5 +286,6 @@ public class ApiTest {
         DyResult<ShopCouponMetaListInfo> result = body.execute().body();
         log.info("result: {}", result);
     }
+
 
 }

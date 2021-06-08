@@ -1,5 +1,7 @@
 package io.lesible.model.enumeration;
 
+import java.util.Arrays;
+
 /**
  * 售后状态
  * <p> @date: 2021-04-21 18:06</p>
@@ -46,14 +48,19 @@ public enum AfterSaleStatusDesc {
     /**
      * 实际状态值
      */
-    private final String status;
+    private final String statusDesc;
 
-    AfterSaleStatusDesc(String status) {
-        this.status = status;
+    AfterSaleStatusDesc(String statusDesc) {
+        this.statusDesc = statusDesc;
+    }
+
+    public static AfterSaleStatusDesc get(String statusDesc) {
+        return Arrays.stream(values()).filter(it -> it.statusDesc.equals(statusDesc))
+                .findAny().orElse(null);
     }
 
     public String value() {
-        return status;
+        return statusDesc;
     }
 
 }

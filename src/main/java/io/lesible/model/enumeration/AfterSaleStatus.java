@@ -75,12 +75,12 @@ public enum AfterSaleStatus {
         this.afterSaleStatus = afterSaleStatus;
     }
 
-    public static AfterSaleStatus get(int afterSaleStatus) {
-        return Arrays.stream(values()).filter(it -> it.value() == afterSaleStatus)
+    public static AfterSaleStatus get(Integer afterSaleStatus) {
+        return Arrays.stream(values()).filter(it -> it.afterSaleStatus == (afterSaleStatus))
                 .findAny().orElse(null);
     }
 
-    public int value() {
+    public Integer value() {
         return afterSaleStatus;
     }
 }

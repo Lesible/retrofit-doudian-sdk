@@ -1,6 +1,6 @@
 package io.lesible.model.request.order;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.lesible.model.enumeration.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -52,9 +52,9 @@ public class OrderSearchListParam {
     /**
      * 预售类型
      *
-     * @see io.lesible.model.response.order.PreSellType
+     * @see io.lesible.model.enumeration.PreSaleType
      */
-    @JSONField(name = "presell_type")
+    @JsonProperty("presell_type")
     private Integer preSellType;
 
     /**
