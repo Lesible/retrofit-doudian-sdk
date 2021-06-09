@@ -2,8 +2,10 @@ package io.lesible;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import io.lesible.config.ApiFactoryConfig;
 import io.lesible.model.Authorization;
 import io.lesible.model.request.DySignRequest;
@@ -21,9 +23,9 @@ public class ApiFactory {
     public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     static {
+        OBJECT_MAPPER.configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
+        OBJECT_MAPPER.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
         OBJECT_MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-
-        OBJECT_MAPPER.setConfig()
         OBJECT_MAPPER.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
     }
 
