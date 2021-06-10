@@ -1,5 +1,7 @@
 package io.lesible.model.enumeration;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import java.util.Arrays;
 
 /**
@@ -59,12 +61,13 @@ public enum PayType {
         this.payType = payType;
     }
 
-    public int value() {
+    @JsonValue
+    public int getValue() {
         return payType;
     }
 
     public PayType get(int payType) {
-        return Arrays.stream(values()).filter(it -> it.value() == payType)
+        return Arrays.stream(values()).filter(it -> it.payType == payType)
                 .findAny().orElse(null);
     }
 }

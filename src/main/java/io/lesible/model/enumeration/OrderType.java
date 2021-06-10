@@ -1,5 +1,7 @@
 package io.lesible.model.enumeration;
 
+import java.util.Arrays;
+
 /**
  * <p> @date: 2021-04-22 11:38</p>
  *
@@ -37,15 +39,11 @@ public enum OrderType {
     }
 
     public static OrderType get(int orderType) {
-        for (OrderType value : values()) {
-            if (value.value() == orderType) {
-                return value;
-            }
-        }
-        return null;
+        return Arrays.stream(values()).filter(it -> it.orderType == orderType)
+                .findAny().orElse(null);
     }
 
-    public int value() {
+    public int getValue() {
         return orderType;
     }
 }

@@ -1,5 +1,7 @@
 package io.lesible.model.enumeration;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import java.util.Arrays;
 
 /**
@@ -33,11 +35,12 @@ public enum ThemeType {
     }
 
     public static ThemeType get(int themeType) {
-        return Arrays.stream(values()).filter(it -> it.value() == themeType)
+        return Arrays.stream(values()).filter(it -> it.themeType == themeType)
                 .findAny().orElse(null);
     }
 
-    private int value() {
+    @JsonValue
+    private int getValue() {
         return themeType;
     }
 }

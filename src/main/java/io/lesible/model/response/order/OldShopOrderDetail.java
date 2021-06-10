@@ -1,5 +1,6 @@
 package io.lesible.model.response.order;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class OldShopOrderDetail {
     private Integer orderType;
     private String postReceiver;
     private String createTime;
+    @JsonProperty("c_biz")
     private Integer cBiz;
     private String logisticsCode;
     private Long platformDirectReductionPlatformAmount;
@@ -42,6 +44,7 @@ public class OldShopOrderDetail {
     private String receiptTime;
     private String logisticsTime;
     private String cosRatio;
+    @JsonProperty("sub_b_type")
     private Integer subBType;
     private Long logisticsId;
     private Integer sellerRemarkStars;
@@ -50,6 +53,7 @@ public class OldShopOrderDetail {
     private String postTel;
     private Integer payType;
     private Integer processType;
+    @JsonProperty("b_type")
     private String bType;
     private Long orderTotalAmount;
     private Long couponAmount;
@@ -59,11 +63,23 @@ public class OldShopOrderDetail {
     private String cancelReason;
     private Integer shippedNum;
     private String sellerWords;
+    @JsonProperty("c_type")
     private String cType;
     private String postCode;
     private Integer tradeType;
     private Long promotionPayAmount;
     private List<OldLogistics> logisticsList;
     private String priceHasTaxType;
+    private String encryptPostReceiver;
+    private String encryptPostTel;
+    private Long identityCardId;
+    private Integer identityCheckState;
+    private List<OrderPhase> orderPhaseList;
+    private Object orderTag;
+    private Long talentCouponDiscount;
+    private Long talentCouponId;
+    private Long talentCouponMetaId;
+    private Long totalCanUseCount;
+    private String useFrequencyMark;
 
 }

@@ -1,5 +1,9 @@
 package io.lesible.model.enumeration;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import java.util.Arrays;
+
 /**
  * 渠道类型
  * <p> @date: 2021-04-21 17:56</p>
@@ -91,13 +95,20 @@ public enum BType {
     /**
      * 实际类型值
      */
-    private final int type;
+    private final int bType;
 
-    BType(int type) {
-        this.type = type;
+    BType(int bType) {
+        this.bType = bType;
     }
 
-    public int value() {
-        return type;
+    public static BType get(int bType) {
+        return Arrays.stream(values()).filter(it -> it.bType == bType)
+                .findAny().orElse(null);
     }
+
+    @JsonValue
+    public int getValue() {
+        return bType;
+    }
+
 }

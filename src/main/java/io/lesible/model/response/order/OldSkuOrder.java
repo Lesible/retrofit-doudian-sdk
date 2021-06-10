@@ -1,5 +1,6 @@
 package io.lesible.model.response.order;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -44,6 +45,7 @@ public class OldSkuOrder {
     private String code;
     private String logisticsTime;
     private String cosRatio;
+    @JsonProperty("sub_b_type")
     private Integer subBType;
     private Long logisticsId;
     private Integer sellerRemarkStars;
@@ -53,6 +55,7 @@ public class OldSkuOrder {
     private String postTel;
     private Integer payType;
     private Integer processType;
+    @JsonProperty("b_type")
     private String bType;
     private Long platformFullAmount;
     private Long couponAmount;
@@ -70,6 +73,25 @@ public class OldSkuOrder {
     private Integer preSaleType;
     private List<CampaignInfo> campaignInfo;
     private String sellerWords;
+    @JsonProperty("c_type")
     private String cType;
     private String postCode;
+    private String encryptPostReceiver;
+    private String encryptPostTel;
+
+    private String itemInventory;
+
+    private String openId;
+
+    private Object orderTag;
+
+    private Integer scspWhType;
+
+    private Long talentCouponDiscount;
+
+    private Long talentCouponId;
+
+    private Long talentCouponMetaId;
+
+    private Integer tradeType;
 }

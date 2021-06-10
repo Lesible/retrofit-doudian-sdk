@@ -1,5 +1,7 @@
 package io.lesible.model.enumeration;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * <p> @date: 2021-04-22 14:01</p>
  *
@@ -60,7 +62,8 @@ public enum OrderStatus {
         this.orderStatus = orderStatus;
     }
 
-    public String value() {
+    @JsonValue
+    public String getValue() {
         return orderStatus;
     }
 }

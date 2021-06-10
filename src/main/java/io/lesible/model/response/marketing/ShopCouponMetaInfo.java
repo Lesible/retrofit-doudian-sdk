@@ -1,11 +1,41 @@
 package io.lesible.model.response.marketing;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.lesible.model.enumeration.CouponPeriodType;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 public class ShopCouponMetaInfo {
+
+    CouponPeriodType aa;
+    /**
+     * 优惠券批次 id
+     */
+    private String couponMetaId;
+    /**
+     * 生效时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime startTime;
+    /**
+     * 过期时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime expireTime;
+    /**
+     * 类型
+     * 1. 固定有效期类型
+     * 2. 浮动有效期类型
+     *
+     * @see io.lesible.model.enumeration.CouponPeriodType
+     */
+    private Integer periodType;
+
     private Integer validPeriod;
-    private String endApplyTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime endApplyTime;
     private String description;
     private Integer discount;
     private String opName;
@@ -14,22 +44,32 @@ public class ShopCouponMetaInfo {
     private String couponName;
     private String typeDetail;
     private Integer maxApplyTimes;
-    private String updateTime;
     private Integer payType;
     private Integer credit;
     private Integer maxDiscountLimit;
-    private String createTime;
-    private String expireTime;
+
+
+    /**
+     * 创建时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createTime;
+
+    /**
+     * 更新时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updateTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime startApplyTime;
+
     private Integer isShow;
     private String url;
-    private String couponMetaId;
     private Integer shopId;
-    private String startTime;
     private Integer totalAmount;
     private Integer usedAmount;
     private Integer leftAmount;
-    private String startApplyTime;
-    private Integer periodType;
     private Integer dayMaxApplyTimes;
     private Integer status;
 }

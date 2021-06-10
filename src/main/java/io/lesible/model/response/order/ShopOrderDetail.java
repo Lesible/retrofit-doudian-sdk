@@ -1,6 +1,6 @@
 package io.lesible.model.response.order;
 
-import io.lesible.model.enumeration.CBiz;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public class ShopOrderDetail {
     /**
      * 业务来源：1-鲁班 2-小店 3-好好学习等
      *
-     * @see CBiz
+     * @see io.lesible.model.enumeration.Biz
      */
     private Integer biz;
 
@@ -138,21 +138,25 @@ public class ShopOrderDetail {
      *
      * @see io.lesible.model.enumeration.BType
      */
+    @JsonProperty("b_type")
     private Integer bType;
 
     /**
      * 下单端描述
      */
+    @JsonProperty("b_type_desc")
     private String bTypeDesc;
 
     /**
      * 下单场景：0 未知 1 app 2 小程序 3 H5
      */
+    @JsonProperty("sub_b_type")
     private Integer subBType;
 
     /**
      * 下单场景描述
      */
+    @JsonProperty("sub_b_type_desc")
     private String subBTypeDesc;
 
     /**
@@ -288,8 +292,29 @@ public class ShopOrderDetail {
     private Integer sellerRemarkStars;
 
     /**
+     * 抖店 openId
+     */
+    private String doudianOpenId;
+
+    /**
+     * 加密收货人姓名
+     */
+    private String encryptPostReceiver;
+
+    /**
+     * 加密收货人电话
+     */
+    private String encryptPostTel;
+
+    /**
      * 订金预售阶段单
      */
     private List<OrderPhase> orderPhaseList;
+
+    /**
+     * c端流量来源业务类型描述
+     */
+    @JsonProperty("c_biz_desc")
+    private String cBizDesc;
 
 }

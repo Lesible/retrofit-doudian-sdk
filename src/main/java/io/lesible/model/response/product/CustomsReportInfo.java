@@ -1,5 +1,6 @@
 package io.lesible.model.response.product;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
@@ -11,6 +12,11 @@ import lombok.Data;
 public class CustomsReportInfo {
 
     private String unit;
+
+    /**
+     * 抖音不给文档
+     */
+    @JsonProperty("g_model")
     private String gModel;
     private Integer firstMeasureQty;
     private Integer secondMeasureQty;

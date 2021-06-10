@@ -131,12 +131,18 @@ public class ParamUtil {
      * 根据 code 获取 accessToken
      *
      * @param code 授权码
-     * @return map
+     * @return 请求参数
      */
     public static Map<String, String> buildGetAccessTokenMap(String code) {
         return buildAuthMap(code, GET_ACCESS_TOKEN);
     }
 
+    /**
+     * 根据 refreshToken 获取 token
+     *
+     * @param refreshToken 刷新 token
+     * @return 请求参数
+     */
     public static Map<String, String> buildRefreshTokenMap(String refreshToken) {
         return buildAuthMap(refreshToken, REFRESH_ACCESS_TOKEN);
     }

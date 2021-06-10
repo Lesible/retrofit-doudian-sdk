@@ -1,5 +1,7 @@
 package io.lesible.model.enumeration;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import java.util.Arrays;
 
 /**
@@ -59,19 +61,19 @@ public enum CBiz {
      */
     OUTSOURCE_SERVICE_MARKET(18);
 
-
     private final int cBiz;
 
     CBiz(int cBiz) {
         this.cBiz = cBiz;
     }
 
-    public static CBiz get(int bizType) {
-        return Arrays.stream(values()).filter(it -> it.value() == bizType)
+    public static CBiz get(int cBiz) {
+        return Arrays.stream(values()).filter(it -> it.cBiz == cBiz)
                 .findAny().orElse(null);
     }
 
-    public int value() {
+    @JsonValue
+    public int getValue() {
         return cBiz;
     }
 }

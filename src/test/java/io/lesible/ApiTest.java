@@ -24,12 +24,12 @@ import io.lesible.model.response.order.OldShopOrderDetailInfo;
 import io.lesible.model.response.order.OrderPageInfo;
 import io.lesible.model.response.order.ShopOrderDetailInfo;
 import io.lesible.model.response.product.ProductDetail;
-import io.lesible.model.response.product.ProductInfo;
 import io.lesible.model.response.product.ProductPageInfo;
 import io.lesible.model.response.shop.BrandInfo;
 import io.lesible.model.response.shop.CategoryInfo;
 import io.lesible.util.JsonUtil;
 import io.lesible.util.ParamUtil;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
@@ -40,16 +40,12 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
-import java.io.IOException;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 /**
  * <p> @date: 2021-04-20 19:07</p>
@@ -61,6 +57,7 @@ public class ApiTest {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private static final String ACCESS_TOKEN = "2f0136ed-67ea-4d53-857b-7dd6e739f3ce";
+    //    private static final String ACCESS_TOKEN = "2b3f08cc-6d8f-451b-9142-8f46b17d5151";
     private static OrderApi ORDER_API;
     private static ProductApi PRODUCT_API;
     private static CommentApi COMMENT_API;
@@ -75,7 +72,7 @@ public class ApiTest {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectionPool(new ConnectionPool(50, 30, TimeUnit.SECONDS))
-//                .addInterceptor(interceptor)
+                .addInterceptor(interceptor)
                 .build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://openapi-fxg.jinritemai.com/")
                 .addConverterFactory(JacksonConverterFactory.create(ApiFactory.OBJECT_MAPPER))
@@ -104,24 +101,36 @@ public class ApiTest {
         log.info("stringStringMap: {}", stringStringMap);
     }
 
+    /**
+     * 获取授权
+     */
     @Test
-    public void oauth2AccessToken() throws IOException {
+    @SneakyThrows
+    public void oauth2AccessToken() {
         Map<String, String> paramMap = ParamUtil.buildGetAccessTokenMap("c5c4a4ad-34c6-4667-bd7c-0d17df13fea5");
         Call<DyResult<AccessTokenInfo>> call = AUTH_API.accessToken(paramMap);
         DyResult<AccessTokenInfo> body = call.execute().body();
         log.info("body: {}", body);
     }
 
+    /**
+     * 刷新 token
+     */
     @Test
-    public void oauth2RefreshToken() throws IOException {
+    @SneakyThrows
+    public void oauth2RefreshToken() {
         Map<String, String> paramMap = ParamUtil.buildRefreshTokenMap("02129cad-7b6d-4652-ac86-36ae677a5473");
         Call<DyResult<AccessTokenInfo>> call = AUTH_API.refreshToken(paramMap);
         DyResult<AccessTokenInfo> body = call.execute().body();
         log.info("body: {}", body);
     }
 
+    /**
+     * 商品列表查询
+     */
     @Test
-    public void productList() throws IOException {
+    @SneakyThrows
+    public void productList() {
         ProductListParam productListParam = new ProductListParam();
         productListParam.setPage("0");
         productListParam.setSize("5");
@@ -132,15 +141,17 @@ public class ApiTest {
         Call<DyResult<ProductPageInfo>> dyResultCall = PRODUCT_API.list(paramMap);
         DyResult<ProductPageInfo> body = dyResultCall.execute().body();
         assert body != null;
-        String collect = body.getData().getData().stream().map(ProductInfo::getProductId)
-                .map(String::valueOf).collect(Collectors.joining(","));
-        log.info("collect: {}", collect);
+        log.info("body: {}", body);
     }
 
+    /**
+     * 商品详情查询
+     */
     @Test
-    public void productDetail() throws IOException {
+    @SneakyThrows
+    public void productDetail() {
         ProductDetailParam productDetailParam = new ProductDetailParam();
-        productDetailParam.setProductId("3476346241309393327");
+        productDetailParam.setProductId("3485798704252859582");
         DySignRequest<ProductDetailParam> request = DySignRequest.<ProductDetailParam>builder()
                 .accessToken(ACCESS_TOKEN).businessParam(productDetailParam)
                 .method(MethodConstant.PRODUCT_DETAIL).build();
@@ -150,15 +161,19 @@ public class ApiTest {
         log.info("body: {}", body);
     }
 
+    /**
+     * 订单列表查询
+     */
     @Test
-    public void orderSearchList() throws IOException {
+    @SneakyThrows
+    public void orderSearchList() {
         ZoneOffset defaultZoneOffset = ZoneOffset.of("+8");
-        LocalDateTime yesterday = LocalDateTime.now().minusHours(1L);
+        LocalDateTime yesterday = LocalDateTime.now().minusDays(2L);
         LocalDateTime localDateTime = LocalDateTime.now();
         long end = localDateTime.toEpochSecond(defaultZoneOffset);
         long begin = yesterday.toEpochSecond(defaultZoneOffset);
         OrderSearchListParam param = OrderSearchListParam.builder()
-                .page(0).size(1)
+                .page(0).size(100)
                 .createTimeStart(begin)
                 .createTimeEnd(end)
                 .build();
@@ -171,9 +186,13 @@ public class ApiTest {
         log.info("body: {}", body);
     }
 
+    /**
+     * 订单详情查询
+     */
     @Test
-    public void orderOrderDetail() throws IOException {
-        OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId("4804309035305596274").build();
+    @SneakyThrows
+    public void orderOrderDetail() {
+        OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId("4806897676511976972").build();
         DySignRequest<OrderOrderDetailParam> request = DySignRequest.<OrderOrderDetailParam>builder()
                 .accessToken(ACCESS_TOKEN)
                 .businessParam(param).method(MethodConstant.ORDER_ORDER_DETAIL).build();
@@ -183,18 +202,20 @@ public class ApiTest {
         log.info("orderDetailInfo: {}", orderDetailInfo);
     }
 
+    /**
+     * 订单列表查询 即将废弃
+     */
     @Test
-    public void orderList() throws IOException {
-        long second = 1620360200L;
-        Instant instant = Instant.ofEpochSecond(second);
-//        LocalDateTime start = LocalDateTime.of(2021, 5, 7, 12, 0);
-        LocalDateTime start = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+    @SneakyThrows
+    public void orderList() {
+        LocalDateTime start = LocalDateTime.of(2021, 5, 7, 12, 0);
+//        LocalDateTime start = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
         String startTime = DATE_TIME_FORMATTER.format(start);
-        String endTime = DATE_TIME_FORMATTER.format(start.plusMinutes(1L));
+        String endTime = DATE_TIME_FORMATTER.format(start.plusDays(1L));
         log.info("endTime: {}", endTime);
         log.info("startTime: {}", startTime);
         OrderListParam param = OrderListParam.builder()
-                .page(100).size(100).orderBy("update_time")
+                .page(0).size(1).orderBy("update_time")
                 .startTime(startTime).endTime(endTime).isDesc(1)
                 .build();
         DySignRequest<OrderListParam> request = DySignRequest.<OrderListParam>builder()
@@ -206,9 +227,13 @@ public class ApiTest {
         log.info("orderListResult: {}", orderListResult);
     }
 
+    /**
+     * 订单详情查询 即将废弃
+     */
     @Test
-    public void orderDetail() throws IOException {
-        String orderIds = "4798740575840939691A";
+    @SneakyThrows
+    public void orderDetail() {
+        String orderIds = "4806897676511976972A";
         for (String s : orderIds.split(",")) {
             OrderDetailParam param = OrderDetailParam.builder().orderId(s).build();
             DySignRequest<OrderDetailParam> request = DySignRequest.<OrderDetailParam>builder()
@@ -222,8 +247,12 @@ public class ApiTest {
         }
     }
 
+    /**
+     * 评价列表查询
+     */
     @Test
-    public void commentList() throws IOException {
+    @SneakyThrows
+    public void commentList() {
         CommentListParam param = CommentListParam.builder()
                 .orderBy("update_time").isDesc("-1").build();
         DySignRequest<CommentListParam> request = DySignRequest.<CommentListParam>builder()
@@ -235,8 +264,12 @@ public class ApiTest {
         log.info("commentPageInfo: {}", JsonUtil.jsonValue(commentPageInfo));
     }
 
+    /**
+     * 回复评价
+     */
     @Test
-    public void commentReply() throws IOException {
+    @SneakyThrows
+    public void commentReply() {
         CommentReplyParam param = CommentReplyParam.builder().commentId("137844687636578599")
                 .content("谢谢您的光临,能让您满意真是太好了").build();
         DySignRequest<CommentReplyParam> request = DySignRequest.<CommentReplyParam>builder()
@@ -248,8 +281,12 @@ public class ApiTest {
         log.info("commentReplay: {}", commentReplay);
     }
 
+    /**
+     * 品牌列表查询
+     */
     @Test
-    public void brandList() throws IOException {
+    @SneakyThrows
+    public void brandList() {
         //f6ca36f3-6c17-450b-9254-93467a1d9f88
         ShopBrandListParam param = ShopBrandListParam.builder().build();
         DySignRequest<ShopBrandListParam> request = DySignRequest.<ShopBrandListParam>builder()
@@ -261,8 +298,12 @@ public class ApiTest {
         log.info("result: {}", result);
     }
 
+    /**
+     * 商品类目列表查询
+     */
     @Test
-    public void getShopCategory() throws IOException {
+    @SneakyThrows
+    public void getShopCategory() {
         //f6ca36f3-6c17-450b-9254-93467a1d9f88
         ShopGetShopCategoryParam param = ShopGetShopCategoryParam.builder().cid(0L).build();
         DySignRequest<ShopGetShopCategoryParam> request = DySignRequest.<ShopGetShopCategoryParam>builder()
@@ -274,10 +315,15 @@ public class ApiTest {
         log.info("result: {}", result);
     }
 
+    /**
+     * 优惠券列表查询
+     */
     @Test
-    public void getShopCouponMetaList() throws IOException {
+    @SneakyThrows
+    public void getShopCouponMetaList() {
         MarketingGetShopCouponMetaListParam param = MarketingGetShopCouponMetaListParam.builder()
-                .couponMetaId(3428704890636122168L).offset(0).limit(5).isShow(1).build();
+                .couponMetaId(3428704890636122168L).offset(0).limit(5).startApplyTime("2021-08-06 00:00")
+                .limit(5).isShow(1).build();
         DySignRequest<MarketingGetShopCouponMetaListParam> request = DySignRequest.<MarketingGetShopCouponMetaListParam>builder()
                 .accessToken(ACCESS_TOKEN)
                 .businessParam(param).method(MethodConstant.MARKETING_GET_SHOP_COUPON_META_LIST).build();

@@ -1,5 +1,9 @@
 package io.lesible.model.enumeration;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import java.util.Arrays;
+
 /**
  * <p> @date: 2021-04-22 16:47</p>
  *
@@ -43,7 +47,13 @@ public enum CheckStatus {
         this.checkStatus = checkStatus;
     }
 
-    public String value() {
+    public static CheckStatus get(String checkStatus) {
+        return Arrays.stream(values()).filter(it -> it.checkStatus.equals(checkStatus))
+                .findAny().orElse(null);
+    }
+
+    @JsonValue
+    public String getValue() {
         return checkStatus;
     }
 }

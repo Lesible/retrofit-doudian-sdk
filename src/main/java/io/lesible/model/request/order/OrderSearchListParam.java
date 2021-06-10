@@ -1,7 +1,6 @@
 package io.lesible.model.request.order;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.lesible.model.enumeration.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,8 +30,9 @@ public class OrderSearchListParam {
      * 9 皮皮虾 11 抖音极速版 12 TikTok 13 musically 14 穿山甲 15 火山极速版 16 服务市场
      * 使用枚举类去赋值
      *
-     * @see BType
+     * @see io.lesible.model.enumeration.BType
      */
+    @JsonProperty("b_type")
     private Integer bType;
 
     /**
@@ -40,7 +40,7 @@ public class OrderSearchListParam {
      * 全部,售后中,退款中,退款成功,退款失败,换货成功,售后关闭
      * 使用枚举类去赋值
      *
-     * @see AfterSaleStatusDesc
+     * @see io.lesible.model.enumeration.AfterSaleStatusDesc
      */
     private String afterSaleStatusDesc;
 
@@ -77,7 +77,7 @@ public class OrderSearchListParam {
      * 异常订单
      * 使用枚举类去赋值
      *
-     * @see AbnormalOrder
+     * @see io.lesible.model.enumeration.AbnormalOrder
      */
     private Integer abnormalOrder;
 
@@ -85,7 +85,7 @@ public class OrderSearchListParam {
      * 交易类型
      * 使用枚举类去赋值
      *
-     * @see TradeType
+     * @see io.lesible.model.enumeration.TradeType
      */
     private Integer tradeType;
 
@@ -135,14 +135,14 @@ public class OrderSearchListParam {
         /**
          * 订单状态，","分隔多个状态
          *
-         * @see OrderStatus
+         * @see io.lesible.model.enumeration.OrderStatus
          */
         private String orderStatus;
 
         /**
          * 主流程状态，","分隔多个状态
          *
-         * @see OrderStatus
+         * @see io.lesible.model.enumeration.OrderStatus
          */
         private String mainStatus;
 

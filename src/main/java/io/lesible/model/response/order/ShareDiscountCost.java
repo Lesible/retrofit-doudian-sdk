@@ -13,11 +13,11 @@ public class ShareDiscountCost {
     /**
      * 平台承担金额
      */
-    private Integer platformCost;
+    private Long platformCost;
 
     /**
      * 商家承担金额
      */
-    private Integer shopCost;
+    private Long shopCost;
 
 }

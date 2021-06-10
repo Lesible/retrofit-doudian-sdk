@@ -1,5 +1,9 @@
 package io.lesible.model.enumeration;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import java.util.Arrays;
+
 /**
  * <p> @date: 2021-04-22 12:00</p>
  *
@@ -23,7 +27,13 @@ public enum TradeType {
         this.tradeType = tradeType;
     }
 
-    public int value() {
+    public static TradeType get(int tradeType) {
+        return Arrays.stream(values()).filter(it -> it.tradeType == tradeType)
+                .findAny().orElse(null);
+    }
+
+    @JsonValue
+    public int getValue() {
         return tradeType;
     }
 }

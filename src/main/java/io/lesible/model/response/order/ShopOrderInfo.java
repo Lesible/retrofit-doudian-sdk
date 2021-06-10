@@ -1,5 +1,6 @@
 package io.lesible.model.response.order;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -135,11 +136,13 @@ public class ShopOrderInfo {
      *
      * @see io.lesible.model.enumeration.BType
      */
+    @JsonProperty("b_type")
     private Integer bType;
 
     /**
      * 下单端描述
      */
+    @JsonProperty("b_type_desc")
     private String bTypeDesc;
 
     /**
@@ -147,11 +150,13 @@ public class ShopOrderInfo {
      *
      * @see io.lesible.model.enumeration.SubBType
      */
+    @JsonProperty("sub_b_type")
     private Integer subBType;
 
     /**
      * 下单场景描述
      */
+    @JsonProperty("sub_b_type_desc")
     private String subBTypeDesc;
 
     /**
@@ -291,5 +296,21 @@ public class ShopOrderInfo {
      * 是否评价 :1已评价，0未评价
      */
     private Integer isComment;
+
+    /**
+     * 抖店 openId
+     */
+    private String doudianOpenId;
+
+    /**
+     * 加密收货人姓名
+     */
+    private String encryptPostReceiver;
+
+    /**
+     * 加密收货人电话
+     */
+    private String encryptPostTel;
+
 
 }

@@ -1,9 +1,11 @@
 package io.lesible.model.request.marketing;
 
-import io.lesible.model.enumeration.CouponType;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 /**
  * <p> @date: 2021-06-03 11:56</p>
@@ -11,6 +13,7 @@ import lombok.NoArgsConstructor;
  * @author 何嘉豪
  */
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class MarketingGetShopCouponMetaListParam {
@@ -61,64 +64,18 @@ public class MarketingGetShopCouponMetaListParam {
      */
     private Integer isShow;
 
-    public static MarketingGetShopCouponMetaListParamBuilder builder() {
-        return new MarketingGetShopCouponMetaListParamBuilder();
-    }
+    /**
+     * 开始领取时间
+     */
+    private String startApplyTime;
 
-    @Data
-    public static class MarketingGetShopCouponMetaListParamBuilder {
-        private Long couponMetaId;
-        private String startTime;
-        private String expireTime;
-        private String couponName;
-        private Integer type;
-        private Integer offset;
-        private Integer limit;
-        private Integer isShow;
+    /**
+     * 结束领取时间
+     */
+    private String endApplyTime;
 
-        public MarketingGetShopCouponMetaListParamBuilder couponMetaId(Long couponMetaId) {
-            this.couponMetaId = couponMetaId;
-            return this;
-        }
+    private List<Integer> types;
 
-        public MarketingGetShopCouponMetaListParamBuilder startTime(String startTime) {
-            this.startTime = startTime;
-            return this;
-        }
+    private List<Integer> statuses;
 
-        public MarketingGetShopCouponMetaListParamBuilder expireTime(String expireTime) {
-            this.expireTime = expireTime;
-            return this;
-        }
-
-        public MarketingGetShopCouponMetaListParamBuilder couponName(String couponName) {
-            this.couponName = couponName;
-            return this;
-        }
-
-        public MarketingGetShopCouponMetaListParamBuilder type(CouponType type) {
-            this.type = type.value();
-            return this;
-        }
-
-        public MarketingGetShopCouponMetaListParamBuilder offset(Integer offset) {
-            this.offset = offset;
-            return this;
-        }
-
-        public MarketingGetShopCouponMetaListParamBuilder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
-        public MarketingGetShopCouponMetaListParamBuilder isShow(Integer isShow) {
-            this.isShow = isShow;
-            return this;
-        }
-
-        public MarketingGetShopCouponMetaListParam build() {
-            return new MarketingGetShopCouponMetaListParam(this.couponMetaId, this.startTime, this.expireTime, this.couponName, this.type, this.offset, this.limit, this.isShow);
-        }
-
-    }
 }

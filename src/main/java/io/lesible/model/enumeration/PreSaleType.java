@@ -1,5 +1,9 @@
 package io.lesible.model.enumeration;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import java.util.Arrays;
+
 /**
  * <p> @date: 2021-04-22 17:33</p>
  *
@@ -21,13 +25,19 @@ public enum PreSaleType {
      */
     ECHELON_INVENTORY(2);
 
-    private final int preSellType;
+    private final int preSaleType;
 
-    PreSaleType(int preSellType) {
-        this.preSellType = preSellType;
+    PreSaleType(int preSaleType) {
+        this.preSaleType = preSaleType;
     }
 
-    public int value() {
-        return preSellType;
+    public static PreSaleType get(int preSaleType) {
+        return Arrays.stream(values()).filter(it -> it.preSaleType == preSaleType)
+                .findAny().orElse(null);
+    }
+
+    @JsonValue
+    public int getValue() {
+        return preSaleType;
     }
 }

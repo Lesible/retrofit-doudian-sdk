@@ -22,4 +22,22 @@ public class AfterSaleInfo {
      */
     private Integer afterSaleStatus;
 
+    /**
+     * 售后类型
+     * <p>
+     * 0售后退货退款，1售后仅退款，2售前仅退款
+     *
+     * @see io.lesible.model.enumeration.AfterSaleType
+     */
+    private Integer afterSaleType;
+
+    /**
+     * 退款状态
+     * <p>
+     * 没文档 上个屁枚举
+     *
+     * @see io.lesible.model.enumeration.RefundStatus
+     */
+    private Integer refundStatus;
+
 }

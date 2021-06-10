@@ -1,5 +1,9 @@
 package io.lesible.model.enumeration;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import java.util.Arrays;
+
 /**
  * <p> @date: 2021-04-22 14:44</p>
  *
@@ -36,7 +40,13 @@ public enum SubBType {
         this.subBType = subBType;
     }
 
-    public int value() {
+    public static SubBType get(int subBType) {
+        return Arrays.stream(values()).filter(it -> it.subBType == subBType)
+                .findAny().orElse(null);
+    }
+
+    @JsonValue
+    public int getValue() {
         return subBType;
     }
 }

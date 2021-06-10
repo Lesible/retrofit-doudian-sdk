@@ -44,11 +44,11 @@ public enum InventoryType {
     }
 
     public static InventoryType get(int inventoryType) {
-        return Arrays.stream(values()).filter(it -> it.value() == inventoryType)
+        return Arrays.stream(values()).filter(it -> it.inventoryType == inventoryType)
                 .findAny().orElse(null);
     }
 
-    public int value() {
+    public int getValue() {
         return inventoryType;
     }
 }

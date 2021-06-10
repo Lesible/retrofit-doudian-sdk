@@ -1,5 +1,7 @@
 package io.lesible.model.enumeration;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import java.util.Arrays;
 
 /**
@@ -25,7 +27,8 @@ public enum AbnormalOrder {
         this.abnormalOrderType = abnormalOrderType;
     }
 
-    public int value() {
+    @JsonValue
+    public int getValue() {
         return abnormalOrderType;
     }
 

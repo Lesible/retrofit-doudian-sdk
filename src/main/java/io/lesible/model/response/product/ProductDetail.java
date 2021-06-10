@@ -1,7 +1,7 @@
 package io.lesible.model.response.product;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.lesible.model.enumeration.CheckStatus;
 import lombok.Data;
 
 import java.util.Date;
@@ -73,7 +73,7 @@ public class ProductDetail {
     /**
      * 商品审核状态：1未提审 2审核中 3审核通过 4审核驳回 5封禁 7审核通过，待上架状态
      *
-     * @see CheckStatus
+     * @see io.lesible.model.enumeration.CheckStatus
      */
     private Integer checkStatus;
 
@@ -128,11 +128,13 @@ public class ProductDetail {
     /**
      * 创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
      * 更新时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
     private Date updateTime;
 
     /**
@@ -196,4 +198,10 @@ public class ProductDetail {
     private LogisticsInfo logisticsInfo;
 
     private Integer appointDeliveryDay;
+
+    /**
+     * 痘印没有给文档
+     */
+    private Long spuId;
+
 }

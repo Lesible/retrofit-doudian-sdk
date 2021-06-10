@@ -1,13 +1,14 @@
 package io.lesible.model.enumeration;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import java.util.Arrays;
 
 /**
  * <p> @date: 2021-04-23 18:08</p>
  *
  * @author 何嘉豪
  */
-@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum CouponType {
 
     /**
@@ -77,15 +78,12 @@ public enum CouponType {
     }
 
     public static CouponType get(int couponType) {
-        for (CouponType value : values()) {
-            if (value.value() == couponType) {
-                return value;
-            }
-        }
-        return null;
+        return Arrays.stream(values()).filter(it -> it.couponType == couponType)
+                .findAny().orElse(null);
     }
 
-    public int value() {
+    @JsonValue
+    public int getValue() {
         return couponType;
     }
 }

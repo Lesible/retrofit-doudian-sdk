@@ -1,5 +1,6 @@
 package io.lesible.model.response.order;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -120,11 +121,13 @@ public class SkuOrder {
      *
      * @see io.lesible.model.enumeration.BType
      */
+    @JsonProperty("b_type")
     private Integer bType;
 
     /**
      * 下单端描述
      */
+    @JsonProperty("b_type_desc")
     private String bTypeDesc;
 
     /**
@@ -132,11 +135,13 @@ public class SkuOrder {
      *
      * @see io.lesible.model.enumeration.SubBType
      */
+    @JsonProperty("sub_b_type")
     private Integer subBType;
 
     /**
      * 下单场景描述
      */
+    @JsonProperty("sub_b_type_desc")
     private String subBTypeDesc;
 
     /**
@@ -144,12 +149,14 @@ public class SkuOrder {
      *
      * @see io.lesible.model.enumeration.FlowSource
      */
-    private String sendPay;
+    @JsonProperty("send_pay")
+    private String flowSend;
 
     /**
      * 流量来源描述
      */
-    private String sendPayDesc;
+    @JsonProperty("send_pay_desc")
+    private String flowSendDesc;
 
     /**
      * 直播主播 id (达人)
@@ -209,11 +216,13 @@ public class SkuOrder {
      *
      * @see io.lesible.model.enumeration.CBiz
      */
-    private Long cBiz;
+    @JsonProperty("c_biz")
+    private Integer cBiz;
 
     /**
      * c端流量来源业务类型描述
      */
+    @JsonProperty("c_biz_desc")
     private String cBizDesc;
 
     /**
@@ -479,8 +488,38 @@ public class SkuOrder {
     private Integer preSaleType;
 
     /**
+     * 售后信息
+     */
+    private AfterSaleInfo afterSaleInfo;
+
+    /**
      * 卖家应收金额
      */
     private Long shopReceivableAmount;
+
+    /**
+     * 活动信息
+     */
+    private List<CampaignInfo> campaignInfo;
+
+    /**
+     * 加密收货人姓名
+     */
+    private String encryptPostReceiver;
+
+    /**
+     * 加密收货人电话
+     */
+    private String encryptPostTel;
+
+    /**
+     * 优惠信息
+     */
+    private PromotionDetail promotionDetail;
+
+    /**
+     * 商品单标签
+     */
+    private List<SkuOrderTagUI> skuOrderTagUi;
 
 }
