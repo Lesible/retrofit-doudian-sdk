@@ -1,7 +1,5 @@
 package io.lesible.model.enumeration;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /**
  * <p> @date: 2021-06-09 20:45</p>
  *
@@ -29,9 +27,8 @@ public enum AfterSaleType {
     AfterSaleType(int afterSaleType) {
         this.afterSaleType = afterSaleType;
     }
-
-    @JsonValue
-    private int getValue() {
+    
+    private int getAfterSaleType() {
         return afterSaleType;
     }
 }

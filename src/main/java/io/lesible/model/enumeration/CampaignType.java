@@ -1,7 +1,5 @@
 package io.lesible.model.enumeration;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import java.util.Arrays;
 
 /**
@@ -46,9 +44,8 @@ public enum CampaignType {
         return Arrays.stream(values()).filter(it -> it.campaignType == campaignType)
                 .findAny().orElse(null);
     }
-
-    @JsonValue
-    public int getValue() {
+    
+    public int getCampaignType() {
         return campaignType;
     }
 }

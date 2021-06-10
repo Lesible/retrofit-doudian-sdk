@@ -1,5 +1,6 @@
 package io.lesible.model.request.marketing;
 
+import io.lesible.model.enumeration.CouponType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -47,7 +48,7 @@ public class MarketingGetShopCouponMetaListParam {
      *
      * @see io.lesible.model.enumeration.CouponType
      */
-    private Integer type;
+    private CouponType type;
     /**
      * 偏移
      */
@@ -74,7 +75,7 @@ public class MarketingGetShopCouponMetaListParam {
      */
     private String endApplyTime;
 
-    private List<Integer> types;
+    private List<CouponType> types;
 
     private List<Integer> statuses;
 

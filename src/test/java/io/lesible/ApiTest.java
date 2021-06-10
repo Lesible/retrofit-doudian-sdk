@@ -3,6 +3,7 @@ package io.lesible;
 import io.lesible.api.*;
 import io.lesible.model.Authorization;
 import io.lesible.model.constant.MethodConstant;
+import io.lesible.model.enumeration.CouponType;
 import io.lesible.model.request.DySignRequest;
 import io.lesible.model.request.comment.CommentListParam;
 import io.lesible.model.request.comment.CommentReplyParam;
@@ -29,6 +30,9 @@ import io.lesible.model.response.shop.BrandInfo;
 import io.lesible.model.response.shop.CategoryInfo;
 import io.lesible.util.JsonUtil;
 import io.lesible.util.ParamUtil;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.ConnectionPool;
@@ -316,6 +320,23 @@ public class ApiTest {
     }
 
     /**
+     * 优惠券创建
+     */
+    @Test
+    @SneakyThrows
+    public void createCoupon() {
+        MarketingGetShopCouponMetaListParam param = MarketingGetShopCouponMetaListParam.builder()
+                .couponMetaId(3428704890636122168L).offset(0).limit(5).startApplyTime("2021-08-06 00:00")
+                .limit(5).isShow(1).build();
+        DySignRequest<MarketingGetShopCouponMetaListParam> request = DySignRequest.<MarketingGetShopCouponMetaListParam>builder()
+                .accessToken(ACCESS_TOKEN)
+                .businessParam(param).method(MethodConstant.MARKETING_GET_SHOP_COUPON_META_LIST).build();
+        Map<String, String> paramMap = ParamUtil.buildParamMap(request);
+        Call<DyResult<ShopCouponMetaListInfo>> body = MARKETING_API.getShopCouponMetaList(paramMap);
+        DyResult<ShopCouponMetaListInfo> result = body.execute().body();
+    }
+
+    /**
      * 优惠券列表查询
      */
     @Test
@@ -333,5 +354,22 @@ public class ApiTest {
         log.info("result: {}", result);
     }
 
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    static class MyTest {
+
+        private String name;
+
+        private CouponType couponType;
+
+        public static void main(String[] args) {
+            String test = JsonUtil.jsonValue(new MyTest("test", CouponType.CHANNEL_FULL_DISCOUNT_COUPON));
+            log.info("test: {}", test);
+            MyTest myTest = JsonUtil.parseJson(test, MyTest.class);
+            log.info("myTest: {}", myTest);
+        }
+    }
 
 }

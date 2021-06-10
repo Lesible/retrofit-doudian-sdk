@@ -1,7 +1,5 @@
 package io.lesible.model.enumeration;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import java.util.Arrays;
 
 /**
@@ -32,8 +30,7 @@ public enum TradeType {
                 .findAny().orElse(null);
     }
 
-    @JsonValue
-    public int getValue() {
+    public int getTradeType() {
         return tradeType;
     }
 }

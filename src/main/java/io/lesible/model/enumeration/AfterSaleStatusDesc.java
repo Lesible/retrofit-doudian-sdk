@@ -1,7 +1,5 @@
 package io.lesible.model.enumeration;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import java.util.Arrays;
 
 /**
@@ -50,20 +48,19 @@ public enum AfterSaleStatusDesc {
     /**
      * 实际状态值
      */
-    private final String statusDesc;
+    private final String afterSaleStatusDesc;
 
-    AfterSaleStatusDesc(String statusDesc) {
-        this.statusDesc = statusDesc;
+    AfterSaleStatusDesc(String afterSaleStatusDesc) {
+        this.afterSaleStatusDesc = afterSaleStatusDesc;
     }
 
-    public static AfterSaleStatusDesc get(String statusDesc) {
-        return Arrays.stream(values()).filter(it -> it.statusDesc.equals(statusDesc))
+    public static AfterSaleStatusDesc get(String afterStatusDesc) {
+        return Arrays.stream(values()).filter(it -> it.afterSaleStatusDesc.equals(afterStatusDesc))
                 .findAny().orElse(null);
     }
 
-    @JsonValue
-    public String getValue() {
-        return statusDesc;
+    public String getAfterSaleStatusDesc() {
+        return afterSaleStatusDesc;
     }
 
 }

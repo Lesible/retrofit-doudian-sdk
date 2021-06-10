@@ -1,7 +1,5 @@
 package io.lesible.model.enumeration;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import java.util.Arrays;
 
 /**
@@ -60,9 +58,8 @@ public enum PayType {
     PayType(int payType) {
         this.payType = payType;
     }
-
-    @JsonValue
-    public int getValue() {
+    
+    public int getPayType() {
         return payType;
     }
 

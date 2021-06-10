@@ -48,7 +48,7 @@ public enum InventoryType {
                 .findAny().orElse(null);
     }
 
-    public int getValue() {
+    public int getInventoryType() {
         return inventoryType;
     }
 }

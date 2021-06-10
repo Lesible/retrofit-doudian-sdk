@@ -1,7 +1,11 @@
 package io.lesible.model.response.marketing;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.lesible.model.enumeration.CouponApplyScene;
 import io.lesible.model.enumeration.CouponPeriodType;
+import io.lesible.model.enumeration.CouponType;
+import io.lesible.model.enumeration.PromoteType;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -9,7 +13,6 @@ import java.time.LocalDateTime;
 @Data
 public class ShopCouponMetaInfo {
 
-    CouponPeriodType aa;
     /**
      * 优惠券批次 id
      */
@@ -31,23 +34,97 @@ public class ShopCouponMetaInfo {
      *
      * @see io.lesible.model.enumeration.CouponPeriodType
      */
-    private Integer periodType;
+    private CouponPeriodType periodType;
 
+    /**
+     * 浮动有效期 天数
+     */
     private Integer validPeriod;
+
+    /**
+     * 开始领取时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime startApplyTime;
+
+    /**
+     * 结束领取时间
+     */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endApplyTime;
-    private String description;
-    private Integer discount;
-    private String opName;
-    private Integer threshold;
-    private Integer type;
-    private String couponName;
-    private String typeDetail;
-    private Integer maxApplyTimes;
-    private Integer payType;
-    private Integer credit;
-    private Integer maxDiscountLimit;
 
+    /**
+     * 优惠券名称
+     */
+    private String couponName;
+
+    /**
+     * 优惠券描述
+     */
+    private String description;
+
+    /**
+     * 领完返回的 url
+     */
+    private String url;
+
+    /**
+     * 店铺名
+     */
+    private String opName;
+
+    /**
+     * 满减券的前置金额
+     */
+    private Long threshold;
+
+    /**
+     * 扣减金额
+     */
+    private Long credit;
+
+    /**
+     * 总库存
+     */
+    private Integer totalAmount;
+
+    /**
+     * 当前剩余库存
+     */
+    private Integer leftAmount;
+
+    /**
+     * 单个用户最多领取数量
+     */
+    private Integer maxApplyTimes;
+
+    /**
+     * 单日最多领取数量(未使用)
+     */
+    private Integer dayMaxApplyTimes;
+
+    /**
+     * 优惠券类型
+     *
+     * @see io.lesible.model.enumeration.CouponType
+     */
+    @JsonProperty("type")
+    private CouponType couponType;
+
+    /**
+     * 限制信息,取决于 type
+     */
+    private String typeDetail;
+
+    /**
+     * 折扣
+     */
+    private Integer discount;
+
+    /**
+     * 优惠券状态
+     */
+    private Integer status;
 
     /**
      * 创建时间
@@ -61,15 +138,40 @@ public class ShopCouponMetaInfo {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime startApplyTime;
+    /**
+     * 最大折扣金额 折扣券使用
+     */
+    private Integer maxDiscountLimit;
 
-    private Integer isShow;
-    private String url;
-    private Integer shopId;
-    private Integer totalAmount;
+    /**
+     * 使用数
+     */
     private Integer usedAmount;
-    private Integer leftAmount;
-    private Integer dayMaxApplyTimes;
-    private Integer status;
+
+    /**
+     * 支持使用的支付类型
+     * 0: 货到付款
+     * 1: 在线支付
+     * 2: 货到付款.在线支付都支持
+     *
+     * @see io.lesible.model.enumeration.CouponApplyScene
+     */
+    @JsonProperty("pay_type")
+    private CouponApplyScene couponApplyScene;
+
+    /**
+     * 0: 全网店铺推广
+     * 1: 自有渠道推广
+     *
+     * @see io.lesible.model.enumeration.PromoteType
+     */
+    @JsonProperty("is_show")
+    private PromoteType promoteType;
+
+    /**
+     * 店铺 id
+     * 2319538
+     */
+    private Integer shopId;
+
 }

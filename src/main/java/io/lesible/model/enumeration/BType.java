@@ -1,7 +1,5 @@
 package io.lesible.model.enumeration;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import java.util.Arrays;
 
 /**
@@ -105,9 +103,8 @@ public enum BType {
         return Arrays.stream(values()).filter(it -> it.bType == bType)
                 .findAny().orElse(null);
     }
-
-    @JsonValue
-    public int getValue() {
+    
+    public int getBType() {
         return bType;
     }
 

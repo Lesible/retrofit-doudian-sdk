@@ -1,7 +1,16 @@
 package io.lesible.model.enumeration;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
@@ -9,6 +18,8 @@ import java.util.Arrays;
  *
  * @author 何嘉豪
  */
+@JsonSerialize(using = CouponType.CouponTypeSerializer.class)
+@JsonDeserialize(using = CouponType.CouponTypeDeserializer.class)
 public enum CouponType {
 
     /**
@@ -82,8 +93,34 @@ public enum CouponType {
                 .findAny().orElse(null);
     }
 
-    @JsonValue
-    public int getValue() {
+    public int getCouponType() {
         return couponType;
     }
+
+    static class CouponTypeDeserializer extends StdDeserializer<CouponType> {
+
+        public CouponTypeDeserializer() {
+            super(CouponType.class);
+        }
+
+        @Override
+        public CouponType deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
+            JsonNode node = p.getCodec().readTree(p);
+            int couponType = node.asInt();
+            return CouponType.get(couponType);
+        }
+    }
+
+    static class CouponTypeSerializer extends StdSerializer<CouponType> {
+
+        public CouponTypeSerializer() {
+            super(CouponType.class);
+        }
+
+        @Override
+        public void serialize(CouponType value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+            gen.writeNumber(value.couponType);
+        }
+    }
+
 }

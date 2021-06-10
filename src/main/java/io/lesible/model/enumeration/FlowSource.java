@@ -1,7 +1,5 @@
 package io.lesible.model.enumeration;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import java.util.Arrays;
 
 /**
@@ -61,8 +59,7 @@ public enum FlowSource {
                 .findAny().orElse(null);
     }
 
-    @JsonValue
-    public int getValue() {
+    public int getFlowType() {
         return flowType;
     }
 }

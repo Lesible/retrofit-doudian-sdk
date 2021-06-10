@@ -1,7 +1,5 @@
 package io.lesible.model.enumeration;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import java.util.Arrays;
 
 /**
@@ -52,8 +50,7 @@ public enum CheckStatus {
                 .findAny().orElse(null);
     }
 
-    @JsonValue
-    public String getValue() {
+    public String getCheckStatus() {
         return checkStatus;
     }
 }

@@ -43,7 +43,7 @@ public enum OrderType {
                 .findAny().orElse(null);
     }
 
-    public int getValue() {
+    public int getOrderType() {
         return orderType;
     }
 }
