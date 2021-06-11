@@ -38,6 +38,9 @@ public interface MarketingApi {
 
     /**
      * 查询指定优惠券详情信息
+     *
+     * @param queryMap 查询参数列表
+     * @return 优惠券详情信息
      */
     @POST("marketing/GetCouponDetail")
     Call<DyResult<CouponMetaDetailRes>> getCouponDetail(@QueryMap Map<String, String> queryMap);

@@ -20,6 +20,8 @@ public interface ShopApi {
 
     /**
      * 获取店铺的已授权品牌列表
+     *
+     * @param queryMap 查询参数列表
      */
     @POST("shop/brandList")
     Call<DyResult<List<BrandInfo>>> brandList(@QueryMap Map<String, String> queryMap);
@@ -27,6 +29,8 @@ public interface ShopApi {
 
     /**
      * 获取店铺的已授权品牌列表
+     *
+     * @param queryMap 查询参数列表
      */
     @POST("shop/getShopCategory")
     Call<DyResult<List<CategoryInfo>>> getShopCategory(@QueryMap Map<String, String> queryMap);
