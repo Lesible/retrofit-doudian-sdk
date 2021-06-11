@@ -3,11 +3,9 @@ package io.lesible.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.ReferenceType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -83,19 +81,6 @@ public class JsonUtil {
 
     public static <K, V> Map<K, V> parseMap(String json, Class<K> kClazz, Class<V> vClazz) {
         return parseMap(json, OBJECT_MAPPER, kClazz, vClazz);
-    }
-
-    public static void main(String[] args) {
-        String json = "{\"sub_b_type\":\"test\"}";
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
-        TTT ttt = parseJson(json, objectMapper, TTT.class);
-        System.out.println(ttt);
-    }
-
-    @Data
-    private static class TTT {
-        private String subBType;
     }
 
 }

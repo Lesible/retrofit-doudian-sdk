@@ -1,5 +1,16 @@
 package io.lesible.model.enumeration;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
@@ -7,6 +18,8 @@ import java.util.Arrays;
  *
  * @author 何嘉豪
  */
+@JsonSerialize(using = CouponApplyScene.CouponApplySceneSerializer.class)
+@JsonDeserialize(using = CouponApplyScene.CouponApplySceneDeserializer.class)
 public enum CouponApplyScene {
 
     /**
@@ -22,7 +35,8 @@ public enum CouponApplyScene {
     /**
      * 两种场景都支持
      */
-    MIXED(2);
+    MIXED(2),
+    ;
 
     private final int couponApplyScene;
 
@@ -37,6 +51,33 @@ public enum CouponApplyScene {
 
     public int getCouponApplyScene() {
         return couponApplyScene;
+    }
+
+    static class CouponApplySceneSerializer extends StdSerializer<CouponApplyScene> {
+
+        public CouponApplySceneSerializer() {
+            super(CouponApplyScene.class);
+        }
+
+        @Override
+        public void serialize(CouponApplyScene value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+            gen.writeNumber(value.couponApplyScene);
+        }
+
+    }
+
+    static class CouponApplySceneDeserializer extends StdDeserializer<CouponApplyScene> {
+
+        public CouponApplySceneDeserializer() {
+            super(CouponApplyScene.class);
+        }
+
+        @Override
+        public CouponApplyScene deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
+            JsonNode node = p.getCodec().readTree(p);
+            int couponApplyScene = node.asInt();
+            return CouponApplyScene.get(couponApplyScene);
+        }
     }
 }
 

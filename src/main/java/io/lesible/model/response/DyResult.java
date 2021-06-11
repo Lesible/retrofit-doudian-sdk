@@ -9,10 +9,16 @@ import lombok.Data;
  * @author 何嘉豪
  */
 @Data
-public class DyResult<R> {
+public class DyResult<T> {
 
-    private R data;
+    /**
+     * 返回数据
+     */
+    private T data;
 
+    /**
+     * 日志 id
+     */
     private String logId;
 
     /**

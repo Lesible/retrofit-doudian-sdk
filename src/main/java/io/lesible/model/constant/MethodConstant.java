@@ -65,8 +65,28 @@ public class MethodConstant {
     public static final String MARKETING_GET_SHOP_COUPON_META_LIST = "marketing.GetShopCouponMetaList";
 
     /**
+     * 查询指定优惠券详情信息
+     */
+    public static final String MARKETING_GET_COUPON_DETAIL = "marketing.GetCouponDetail";
+
+    /**
      * 创建优惠券
      */
     public static final String MARKETING_CREATE_COUPON = "marketing.createCoupon";
+
+    /**
+     * 启用/作废优惠券
+     */
+    public static final String MARKETING_ABLE_COUPON_META = "marketing.AbleCouponMeta";
+
+    /**
+     * 修改优惠券库存
+     */
+    public static final String MARKETING_ADJUST_SHOP_COUPON4_META = "marketing.AdjustShopCouponMeta";
+
+    /**
+     * 发放优惠券
+     */
+    public static final String MARKETING_APPLY_COUPON = "marketing.ApplyCoupon";
 
 }

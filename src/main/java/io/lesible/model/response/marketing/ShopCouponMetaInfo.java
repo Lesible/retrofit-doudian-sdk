@@ -141,12 +141,12 @@ public class ShopCouponMetaInfo {
     /**
      * 最大折扣金额 折扣券使用
      */
-    private Integer maxDiscountLimit;
+    private Long maxDiscountLimit;
 
     /**
      * 使用数
      */
-    private Integer usedAmount;
+    private Long usedAmount;
 
     /**
      * 支持使用的支付类型
@@ -154,7 +154,7 @@ public class ShopCouponMetaInfo {
      * 1: 在线支付
      * 2: 货到付款.在线支付都支持
      *
-     * @see io.lesible.model.enumeration.CouponApplyScene
+     * @see CouponApplyScene
      */
     @JsonProperty("pay_type")
     private CouponApplyScene couponApplyScene;
@@ -172,6 +172,6 @@ public class ShopCouponMetaInfo {
      * 店铺 id
      * 2319538
      */
-    private Integer shopId;
+    private Long shopId;
 
 }

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ShopCouponMetaListInfo {
+public class ShopCouponMetaListRes {
 
     /**
      * 优惠券数量

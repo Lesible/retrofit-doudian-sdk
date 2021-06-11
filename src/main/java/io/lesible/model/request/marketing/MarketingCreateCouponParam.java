@@ -1,8 +1,11 @@
 package io.lesible.model.request.marketing;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.lesible.model.enumeration.CouponApplyScene;
 import io.lesible.model.enumeration.CouponPeriodType;
 import io.lesible.model.enumeration.CouponType;
+import io.lesible.model.enumeration.PromoteType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,7 +34,8 @@ public class MarketingCreateCouponParam {
      *
      * @see io.lesible.model.enumeration.CouponType
      */
-    private CouponType type;
+    @JsonProperty("type")
+    private CouponType couponType;
 
     /**
      * 类型
@@ -78,27 +82,31 @@ public class MarketingCreateCouponParam {
     private Integer totalAmount;
 
     /**
-     * 限制信息,取决于 type
+     * 根据 type 传不同参数
+     * <p>
+     * 商家券使用 shopId
+     * <p>
+     * 商品券使用多个商品 id ',' 间隔
      */
     private String typeDetail;
 
     /**
-     * 折扣
+     * 折扣券折扣 8.5 折传 85
      */
     private Integer discount;
 
     /**
      * 最大折扣金额 折扣券使用
      */
-    private Integer maxDiscountLimit;
+    private Long maxDiscountLimit;
 
     /**
-     * 满减券的前置金额
+     * 满减券门槛
      */
     private Long threshold;
 
     /**
-     * 扣减金额
+     * 满减券/直减券金额
      */
     private Long credit;
 
@@ -114,7 +122,8 @@ public class MarketingCreateCouponParam {
      * 1: 在线支付
      * 2: 货到付款.在线支付都支持
      */
-    private Integer payType;
+    @JsonProperty("pay_type")
+    private CouponApplyScene couponApplyScene;
 
     /**
      * 领完返回的 url
@@ -125,6 +134,14 @@ public class MarketingCreateCouponParam {
      * 0: 全网店铺推广
      * 1: 自有渠道推广
      */
-    private Integer isShow;
+    @JsonProperty("is_show")
+    private PromoteType promoteType;
+
+    /**
+     * 文档没有的
+     * <p>
+     * 店铺名称
+     */
+    private String opName;
 
 }
