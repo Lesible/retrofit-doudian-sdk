@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class ApiFactoryInitializer {
 
-    public static final String GLOBAL_TOKEN = "2f0136ed-67ea-4d53-857b-7dd6e739f3ce";
-    //        private static final String ACCESS_TOKEN = "2b3f08cc-6d8f-451b-9142-8f46b17d5151";
+    //    public static final String GLOBAL_TOKEN = "2f0136ed-67ea-4d53-857b-7dd6e739f3ce";
+    public static final String GLOBAL_TOKEN = "2b3f08cc-6d8f-451b-9142-8f46b17d5151";
     public static OrderApi ORDER_API;
     public static ProductApi PRODUCT_API;
     public static CommentApi COMMENT_API;
