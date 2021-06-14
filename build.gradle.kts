@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+
 plugins {
     kotlin("jvm") version "1.5.10"
 }
@@ -19,6 +20,7 @@ repositories {
 }
 
 dependencies {
+    implementation("com.squareup.retrofit2:retrofit:${retrofitVersion}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
