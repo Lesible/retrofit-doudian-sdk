@@ -17,14 +17,17 @@ import java.util.concurrent.TimeUnit;
  */
 public class ApiFactoryInitializer {
 
-    public static final String GLOBAL_TOKEN = "2f0136ed-67ea-4d53-857b-7dd6e739f3ce";
-    //        private static final String ACCESS_TOKEN = "2b3f08cc-6d8f-451b-9142-8f46b17d5151";
+    // 900000021
+    public static final String GLOBAL_TOKEN = "b694c740-3b09-4f80-b8ca-688b58d261b7 ";
+    // 900000001
+//    public static final String GLOBAL_TOKEN = "7aa1abb3-b501-45fb-806a-6a3a61e51f65";
     public static OrderApi ORDER_API;
     public static ProductApi PRODUCT_API;
     public static CommentApi COMMENT_API;
     public static AuthApi AUTH_API;
     public static ShopApi SHOP_API;
     public static MarketingApi MARKETING_API;
+    public static BillingApi BILLING_API;
 
     static {
         Authorization authorization = new Authorization("6873668517658347022", "601f6adf-f7df-42bf-8789-1b3a90979c50");
@@ -32,7 +35,7 @@ public class ApiFactoryInitializer {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectionPool(new ConnectionPool(50, 30, TimeUnit.SECONDS))
-                .addInterceptor(interceptor)
+//                .addInterceptor(interceptor)
                 .build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://openapi-fxg.jinritemai.com/")
                 .addConverterFactory(JacksonConverterFactory.create(ApiFactory.OBJECT_MAPPER))
@@ -44,6 +47,7 @@ public class ApiFactoryInitializer {
         AUTH_API = API_FACTORY.generateApi(AuthApi.class);
         SHOP_API = API_FACTORY.generateApi(ShopApi.class);
         MARKETING_API = API_FACTORY.generateApi(MarketingApi.class);
+        BILLING_API = API_FACTORY.generateApi(BillingApi.class);
     }
 
 

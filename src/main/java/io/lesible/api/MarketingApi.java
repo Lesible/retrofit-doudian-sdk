@@ -2,7 +2,6 @@ package io.lesible.api;
 
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.marketing.*;
-import jdk.jfr.Experimental;
 import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
@@ -15,7 +14,6 @@ import java.util.Map;
  *
  * @author 何嘉豪
  */
-@Experimental
 public interface MarketingApi {
 
     /**
