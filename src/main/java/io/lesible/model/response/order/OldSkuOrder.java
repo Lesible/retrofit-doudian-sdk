@@ -78,7 +78,7 @@ public class OldSkuOrder {
     private String postCode;
     private String encryptPostReceiver;
     private String encryptPostTel;
-
+    private List<OrderPhase> orderPhaseList;
     private String itemInventory;
 
     private String openId;
@@ -94,4 +94,6 @@ public class OldSkuOrder {
     private Long talentCouponMetaId;
 
     private Integer tradeType;
+
+    private Boolean priceHasTaxType;
 }

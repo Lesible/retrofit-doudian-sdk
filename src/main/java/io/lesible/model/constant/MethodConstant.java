@@ -89,4 +89,9 @@ public class MethodConstant {
      */
     public static final String MARKETING_APPLY_COUPON = "marketing.ApplyCoupon";
 
+    /**
+     * 查询联盟订单详细
+     */
+    public static final String ALLIANCE_GET_ORDER_LIST = "alliance.getOrderList";
+
 }
