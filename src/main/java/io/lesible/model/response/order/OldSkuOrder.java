@@ -49,6 +49,7 @@ public class OldSkuOrder {
     private Integer subBType;
     private Long logisticsId;
     private Integer sellerRemarkStars;
+    private Long totalCanUseCount;
     private Long updateTime;
     private List<ProductTag> productTag;
     private String isComment;
@@ -96,4 +97,8 @@ public class OldSkuOrder {
     private Integer tradeType;
 
     private Boolean priceHasTaxType;
+
+    private Object useFrequencyMark;
+
+    private Long taxAmount;
 }

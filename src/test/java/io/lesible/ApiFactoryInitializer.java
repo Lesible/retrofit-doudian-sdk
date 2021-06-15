@@ -17,8 +17,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class ApiFactoryInitializer {
 
+    //900000074
+//    public static final String GLOBAL_TOKEN = "7760925a-8350-4d1b-abda-3f343e1f6b21";
     // 900000021
-    public static final String GLOBAL_TOKEN = "b694c740-3b09-4f80-b8ca-688b58d261b7 ";
+    public static final String GLOBAL_TOKEN = "b694c740-3b09-4f80-b8ca-688b58d261b7";
     // 900000001
 //    public static final String GLOBAL_TOKEN = "7aa1abb3-b501-45fb-806a-6a3a61e51f65";
     public static OrderApi ORDER_API;
@@ -28,6 +30,7 @@ public class ApiFactoryInitializer {
     public static ShopApi SHOP_API;
     public static MarketingApi MARKETING_API;
     public static BillingApi BILLING_API;
+    public static UserApi USER_API;
 
     static {
         Authorization authorization = new Authorization("6873668517658347022", "601f6adf-f7df-42bf-8789-1b3a90979c50");
@@ -48,6 +51,7 @@ public class ApiFactoryInitializer {
         SHOP_API = API_FACTORY.generateApi(ShopApi.class);
         MARKETING_API = API_FACTORY.generateApi(MarketingApi.class);
         BILLING_API = API_FACTORY.generateApi(BillingApi.class);
+        USER_API = API_FACTORY.generateApi(UserApi.class);
     }
 
 

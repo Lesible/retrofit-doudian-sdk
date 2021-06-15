@@ -9,14 +9,17 @@ import io.lesible.model.request.order.OrderOrderDetailParam;
 import io.lesible.model.request.order.OrderSearchListParam;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.order.*;
+import io.lesible.util.JsonUtil;
 import io.lesible.util.ParamUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import retrofit2.Call;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -40,15 +43,18 @@ public class OrderApiTestCase {
     @Test
     @SneakyThrows
     public void orderSearchList() {
+        Instant instant = Instant.ofEpochSecond(1623204732);
+        LocalDateTime now = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
         ZoneOffset defaultZoneOffset = ZoneOffset.of("+8");
-        LocalDateTime yesterday = LocalDateTime.now().minusDays(2L);
-        LocalDateTime localDateTime = LocalDateTime.now();
-        long end = localDateTime.toEpochSecond(defaultZoneOffset);
-        long begin = yesterday.toEpochSecond(defaultZoneOffset);
+        LocalDateTime after = now.plusMinutes(30L);
+        long end = after.toEpochSecond(defaultZoneOffset);
+        long begin = now.toEpochSecond(defaultZoneOffset);
         OrderSearchListParam param = OrderSearchListParam.builder()
-                .page(0).size(100)
+                .page(0).size(1)
                 .createTimeStart(begin)
                 .createTimeEnd(end)
+                .orderBy("create_time")
+                .orderAsc(true)
                 .build();
         DySignRequest<OrderSearchListParam> request = DySignRequest.<OrderSearchListParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
@@ -56,7 +62,7 @@ public class OrderApiTestCase {
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<OrderPageInfo>> dyResultCall = orderApi.searchList(paramMap);
         DyResult<OrderPageInfo> body = dyResultCall.execute().body();
-        log.info("body: {}", body);
+        log.info("body: {}", JsonUtil.jsonValue(body.getData().getShopOrderList()));
     }
 
     /**
@@ -65,14 +71,14 @@ public class OrderApiTestCase {
     @Test
     @SneakyThrows
     public void orderOrderDetail() {
-        OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId("4711220017229913081").build();
+        OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId("4806538690270008944").build();
         DySignRequest<OrderOrderDetailParam> request = DySignRequest.<OrderOrderDetailParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(param).method(MethodConstant.ORDER_ORDER_DETAIL).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<ShopOrderDetailInfo>> dyResultCall = orderApi.orderDetail(paramMap);
         DyResult<ShopOrderDetailInfo> orderDetailInfo = dyResultCall.execute().body();
-        log.info("orderDetailInfo: {}", orderDetailInfo);
+        log.info("orderDetailInfo: {}", JsonUtil.jsonValue(orderDetailInfo));
     }
 
     /**
@@ -102,7 +108,7 @@ public class OrderApiTestCase {
         for (OldShopOrderInfo oldShopOrderInfo : list) {
             _orderDetail(oldShopOrderInfo.getOrderId());
         }
-        log.info("orderListResult: {}", orderListResult);
+        log.info("orderListResult: {}", JsonUtil.jsonValue(orderListResult.getData().getList().get(0)));
     }
 
     /**
@@ -111,7 +117,7 @@ public class OrderApiTestCase {
     @Test
     @SneakyThrows
     public void orderDetail() {
-        String orderIds = "4807375392841899047A";
+        String orderIds = "4789690701801620684A";
         for (String s : orderIds.split(",")) {
             _orderDetail(s);
         }
@@ -130,12 +136,9 @@ public class OrderApiTestCase {
         for (OldShopOrderDetail shopOrderDetail : list) {
             List<OldShopChildOrderDetail> child = shopOrderDetail.getChild();
             String orderIdTmp = shopOrderDetail.getOrderId();
-            for (OldShopChildOrderDetail oldShopChildOrderDetail : child) {
-                OldAllianceInfo allianceInfo = oldShopChildOrderDetail.getAllianceInfo();
-                if (allianceInfo != null) {
-                    log.info("orderIdTmp: {}", orderIdTmp);
-                    log.info("allianceInfo: {}", allianceInfo);
-                }
+            String logisticsCode = shopOrderDetail.getLogisticsCode();
+            if (StringUtils.isNotBlank(logisticsCode)) {
+                log.info("orderIdTmp: {}", orderIdTmp);
             }
         }
 //        log.info("oldShopOrderDetail: {}", oldShopOrderDetail);

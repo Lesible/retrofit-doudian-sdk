@@ -4,7 +4,7 @@ import io.lesible.model.response.DyResult;
 import io.lesible.model.response.shop.BrandInfo;
 import io.lesible.model.response.shop.CategoryInfo;
 import retrofit2.Call;
-import retrofit2.http.POST;
+import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public interface ShopApi {
      *
      * @param queryMap 查询参数列表
      */
-    @POST("shop/brandList")
+    @GET("shop/brandList")
     Call<DyResult<List<BrandInfo>>> brandList(@QueryMap Map<String, String> queryMap);
 
 
@@ -32,7 +32,7 @@ public interface ShopApi {
      *
      * @param queryMap 查询参数列表
      */
-    @POST("shop/getShopCategory")
+    @GET("shop/getShopCategory")
     Call<DyResult<List<CategoryInfo>>> getShopCategory(@QueryMap Map<String, String> queryMap);
 
 }

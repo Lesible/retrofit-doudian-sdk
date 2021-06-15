@@ -3,7 +3,7 @@ package io.lesible.api;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.billing.AllianceRet;
 import retrofit2.Call;
-import retrofit2.http.POST;
+import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
 
 import java.util.Map;
@@ -23,7 +23,7 @@ public interface BillingApi {
      * @param queryMap 查询参数列表
      * @return 联盟订单详情
      */
-    @POST("alliance/getOrderList")
+    @GET("alliance/getOrderList")
     Call<DyResult<AllianceRet>> list(@QueryMap Map<String, String> queryMap);
 
 }

@@ -94,4 +94,10 @@ public class MethodConstant {
      */
     public static final String ALLIANCE_GET_ORDER_LIST = "alliance.getOrderList";
 
+    /**
+     * 获取抖店 openId
+     */
+    public static final String USER_GET_DOUDIAN_OPEN_ID = "user.getDoudianOpenID";
+
+
 }
