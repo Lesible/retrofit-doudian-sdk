@@ -150,13 +150,13 @@ public class SkuOrder {
      * @see io.lesible.model.enumeration.FlowSource
      */
     @JsonProperty("send_pay")
-    private String flowSend;
+    private String flowSource;
 
     /**
      * 流量来源描述
      */
     @JsonProperty("send_pay_desc")
-    private String flowSendDesc;
+    private String flowSourceDesc;
 
     /**
      * 直播主播 id (达人)

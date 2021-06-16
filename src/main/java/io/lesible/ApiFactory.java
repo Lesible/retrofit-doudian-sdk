@@ -1,10 +1,7 @@
 package io.lesible;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.*;
 import io.lesible.config.ApiFactoryConfig;
 import io.lesible.model.Authorization;
 import io.lesible.model.request.DySignRequest;
@@ -21,7 +18,8 @@ public class ApiFactory {
     public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     static {
-//        OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        // 开发时注释, 字节动不动加字段
+        OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         OBJECT_MAPPER.findAndRegisterModules();
         OBJECT_MAPPER.configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
         OBJECT_MAPPER.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);

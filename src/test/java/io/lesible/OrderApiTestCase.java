@@ -43,7 +43,7 @@ public class OrderApiTestCase {
     @Test
     @SneakyThrows
     public void orderSearchList() {
-        Instant instant = Instant.ofEpochSecond(1623204732);
+        Instant instant = Instant.ofEpochSecond(1623807827);
         LocalDateTime now = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
         ZoneOffset defaultZoneOffset = ZoneOffset.of("+8");
         LocalDateTime after = now.plusMinutes(30L);
@@ -71,7 +71,7 @@ public class OrderApiTestCase {
     @Test
     @SneakyThrows
     public void orderOrderDetail() {
-        OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId("4806538690270008944").build();
+        OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId("4809128765995204074").build();
         DySignRequest<OrderOrderDetailParam> request = DySignRequest.<OrderOrderDetailParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(param).method(MethodConstant.ORDER_ORDER_DETAIL).build();
