@@ -21,4 +21,9 @@ public class GetDoudianOpenIDParam {
      */
     private String dyOpenId;
 
+    /**
+     * 小程序 appKey
+     */
+    private String dyClientKey;
+
 }

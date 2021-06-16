@@ -32,7 +32,8 @@ public class UserApiTestCase {
     @SneakyThrows
     public void getDoudianOpenID() {
         //f6ca36f3-6c17-450b-9254-93467a1d9f88
-        GetDoudianOpenIDParam param = GetDoudianOpenIDParam.builder().dyOpenId("2B.f0Ec-40smnyK7").build();
+        GetDoudianOpenIDParam param = GetDoudianOpenIDParam.builder().dyOpenId("2B.f0Ec-40smnyK7")
+                .dyClientKey("tt8227f49a1d0d8ab1").build();
         DySignRequest<GetDoudianOpenIDParam> request = DySignRequest.<GetDoudianOpenIDParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(param).method(MethodConstant.USER_GET_DOUDIAN_OPEN_ID).build();
