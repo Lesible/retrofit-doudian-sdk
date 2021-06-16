@@ -32,18 +32,21 @@ public enum CouponPeriodType {
      */
     FLOAT_PERIOD(2);
 
-    private final int periodType;
+    private final Integer periodType;
 
-    CouponPeriodType(int periodType) {
+    CouponPeriodType(Integer periodType) {
         this.periodType = periodType;
     }
 
-    public static CouponPeriodType get(int periodType) {
-        return Arrays.stream(values()).filter(it -> it.periodType == periodType)
+    public static CouponPeriodType get(Integer periodType) {
+        if (periodType == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.periodType.equals(periodType))
                 .findAny().orElse(null);
     }
 
-    private int getPeriodType() {
+    private Integer getPeriodType() {
         return periodType;
     }
 
@@ -70,7 +73,7 @@ public enum CouponPeriodType {
         @Override
         public CouponPeriodType deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
             JsonNode node = p.getCodec().readTree(p);
-            int couponPeriodType = node.asInt();
+            Integer couponPeriodType = node.asInt();
             return CouponPeriodType.get(couponPeriodType);
         }
     }

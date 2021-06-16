@@ -137,14 +137,14 @@ public class OrderSearchListParam {
          *
          * @see io.lesible.model.enumeration.OrderStatus
          */
-        private String orderStatus;
+        private Integer orderStatus;
 
         /**
          * 主流程状态，","分隔多个状态
          *
          * @see io.lesible.model.enumeration.OrderStatus
          */
-        private String mainStatus;
+        private Integer mainStatus;
 
     }
 }

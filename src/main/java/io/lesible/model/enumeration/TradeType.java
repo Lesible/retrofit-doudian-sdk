@@ -19,18 +19,21 @@ public enum TradeType {
      */
     DEPOSIT_PRE_SELL(2);
 
-    private final int tradeType;
+    private final Integer tradeType;
 
-    TradeType(int tradeType) {
+    TradeType(Integer tradeType) {
         this.tradeType = tradeType;
     }
 
-    public static TradeType get(int tradeType) {
-        return Arrays.stream(values()).filter(it -> it.tradeType == tradeType)
+    public static TradeType get(Integer tradeType) {
+        if (tradeType == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.tradeType.equals(tradeType))
                 .findAny().orElse(null);
     }
 
-    public int getTradeType() {
+    public Integer getTradeType() {
         return tradeType;
     }
 }

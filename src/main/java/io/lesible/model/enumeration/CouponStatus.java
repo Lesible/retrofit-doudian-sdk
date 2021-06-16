@@ -45,19 +45,22 @@ public enum CouponStatus {
     /**
      * 优惠券状态
      */
-    private final int couponStatus;
+    private final Integer couponStatus;
 
 
-    CouponStatus(int couponStatus) {
+    CouponStatus(Integer couponStatus) {
         this.couponStatus = couponStatus;
     }
 
-    public static CouponStatus get(int couponStatus) {
-        return Arrays.stream(values()).filter(it -> it.couponStatus == couponStatus)
+    public static CouponStatus get(Integer couponStatus) {
+        if (couponStatus == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.couponStatus.equals(couponStatus))
                 .findAny().orElse(null);
     }
 
-    public int getCouponStatus() {
+    public Integer getCouponStatus() {
         return couponStatus;
     }
 
@@ -82,7 +85,7 @@ public enum CouponStatus {
         @Override
         public CouponStatus deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
             JsonNode node = p.getCodec().readTree(p);
-            int couponStatus = node.asInt();
+            Integer couponStatus = node.asInt();
             return CouponStatus.get(couponStatus);
         }
     }

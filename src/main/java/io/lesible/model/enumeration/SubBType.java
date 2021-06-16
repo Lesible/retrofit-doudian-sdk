@@ -32,18 +32,21 @@ public enum SubBType {
     /**
      * 下单场景
      */
-    private final int subBType;
+    private final Integer subBType;
 
-    SubBType(int subBType) {
+    SubBType(Integer subBType) {
         this.subBType = subBType;
     }
 
-    public static SubBType get(int subBType) {
-        return Arrays.stream(values()).filter(it -> it.subBType == subBType)
+    public static SubBType get(Integer subBType) {
+        if (subBType == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.subBType.equals(subBType))
                 .findAny().orElse(null);
     }
 
-    public int getSubBType() {
+    public Integer getSubBType() {
         return subBType;
     }
 }

@@ -19,6 +19,6 @@ public class OrderOrderDetailParam {
     /**
      * 店铺订单号
      */
-    private String shopOrderId;
+    private Long shopOrderId;
 
 }

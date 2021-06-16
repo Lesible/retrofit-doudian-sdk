@@ -19,11 +19,11 @@ public class ProductDetailParam {
     /**
      * 商品id
      */
-    private String productId;
+    private Long productId;
 
     /**
      * "true"：读取草稿数据；"false"：读取上架数据
      */
-    private String showDraft;
+    private Boolean showDraft;
 
 }

@@ -34,18 +34,21 @@ public enum CampaignType {
      */
     GROUP(120);
 
-    private final int campaignType;
+    private final Integer campaignType;
 
-    CampaignType(int campaignType) {
+    CampaignType(Integer campaignType) {
         this.campaignType = campaignType;
     }
 
-    public static CampaignType get(int campaignType) {
-        return Arrays.stream(values()).filter(it -> it.campaignType == campaignType)
+    public static CampaignType get(Integer campaignType) {
+        if (campaignType == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.campaignType.equals(campaignType))
                 .findAny().orElse(null);
     }
-    
-    public int getCampaignType() {
+
+    public Integer getCampaignType() {
         return campaignType;
     }
 }

@@ -59,18 +59,21 @@ public enum CBiz {
      */
     OUTSOURCE_SERVICE_MARKET(18);
 
-    private final int cBiz;
+    private final Integer cBiz;
 
-    CBiz(int cBiz) {
+    CBiz(Integer cBiz) {
         this.cBiz = cBiz;
     }
 
-    public static CBiz get(int cBiz) {
-        return Arrays.stream(values()).filter(it -> it.cBiz == cBiz)
+    public static CBiz get(Integer cBiz) {
+        if (cBiz == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.cBiz.equals(cBiz))
                 .findAny().orElse(null);
     }
 
-    public int getCBiz() {
+    public Integer getCBiz() {
         return cBiz;
     }
 }

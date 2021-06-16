@@ -38,18 +38,21 @@ public enum CouponApplyScene {
     MIXED(2),
     ;
 
-    private final int couponApplyScene;
+    private final Integer couponApplyScene;
 
-    CouponApplyScene(int couponApplyScene) {
+    CouponApplyScene(Integer couponApplyScene) {
         this.couponApplyScene = couponApplyScene;
     }
 
-    public static CouponApplyScene get(int couponApplyScene) {
-        return Arrays.stream(values()).filter(it -> it.couponApplyScene == couponApplyScene)
+    public static CouponApplyScene get(Integer couponApplyScene) {
+        if (couponApplyScene == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.couponApplyScene.equals(couponApplyScene))
                 .findAny().orElse(null);
     }
 
-    public int getCouponApplyScene() {
+    public Integer getCouponApplyScene() {
         return couponApplyScene;
     }
 
@@ -75,7 +78,7 @@ public enum CouponApplyScene {
         @Override
         public CouponApplyScene deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
             JsonNode node = p.getCodec().readTree(p);
-            int couponApplyScene = node.asInt();
+            Integer couponApplyScene = node.asInt();
             return CouponApplyScene.get(couponApplyScene);
         }
     }

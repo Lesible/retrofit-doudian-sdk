@@ -2,6 +2,7 @@ package io.lesible;
 
 import io.lesible.api.ProductApi;
 import io.lesible.model.constant.MethodConstant;
+import io.lesible.model.enumeration.CheckStatus;
 import io.lesible.model.request.DySignRequest;
 import io.lesible.model.request.product.ProductDetailParam;
 import io.lesible.model.request.product.ProductListParam;
@@ -32,9 +33,8 @@ public class ProductApiTestCase {
     @Test
     @SneakyThrows
     public void productList() {
-        ProductListParam productListParam = new ProductListParam();
-        productListParam.setPage("0");
-        productListParam.setSize("5");
+        ProductListParam productListParam = ProductListParam.builder().page(0)
+                .size(5).checkStatus(CheckStatus.REVIEW_PASSED.getCheckStatus()).build();
         DySignRequest<ProductListParam> request = DySignRequest.<ProductListParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(productListParam).method(MethodConstant.PRODUCT_LIST).build();
@@ -51,8 +51,8 @@ public class ProductApiTestCase {
     @Test
     @SneakyThrows
     public void productDetail() {
-        ProductDetailParam productDetailParam = new ProductDetailParam();
-        productDetailParam.setProductId("3485798704252859582");
+        ProductDetailParam productDetailParam = ProductDetailParam.builder()
+                .productId(3485798704252859582L).showDraft(false).build();
         DySignRequest<ProductDetailParam> request = DySignRequest.<ProductDetailParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN).businessParam(productDetailParam)
                 .method(MethodConstant.PRODUCT_DETAIL).build();

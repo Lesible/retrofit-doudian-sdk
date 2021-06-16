@@ -26,18 +26,21 @@ public enum ThemeType {
      */
     ARTICLE(2);
 
-    private final int themeType;
+    private final Integer themeType;
 
-    ThemeType(int themeType) {
+    ThemeType(Integer themeType) {
         this.themeType = themeType;
     }
 
-    public static ThemeType get(int themeType) {
+    public static ThemeType get(Integer themeType) {
+        if (themeType == null) {
+            return null;
+        }
         return Arrays.stream(values()).filter(it -> it.themeType == themeType)
                 .findAny().orElse(null);
     }
-    
-    private int getThemeType() {
+
+    private Integer getThemeType() {
         return themeType;
     }
 }

@@ -93,18 +93,21 @@ public enum BType {
     /**
      * 实际类型值
      */
-    private final int bType;
+    private final Integer bType;
 
-    BType(int bType) {
+    BType(Integer bType) {
         this.bType = bType;
     }
 
-    public static BType get(int bType) {
-        return Arrays.stream(values()).filter(it -> it.bType == bType)
+    public static BType get(Integer bType) {
+        if (bType == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.bType.equals(bType))
                 .findAny().orElse(null);
     }
-    
-    public int getBType() {
+
+    public Integer getBType() {
         return bType;
     }
 

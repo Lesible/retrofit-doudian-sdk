@@ -32,18 +32,21 @@ public enum OrderType {
     /**
      * 订单类型
      */
-    private final int orderType;
+    private final Integer orderType;
 
-    OrderType(int orderType) {
+    OrderType(Integer orderType) {
         this.orderType = orderType;
     }
 
-    public static OrderType get(int orderType) {
-        return Arrays.stream(values()).filter(it -> it.orderType == orderType)
+    public static OrderType get(Integer orderType) {
+        if (orderType == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.orderType.equals(orderType))
                 .findAny().orElse(null);
     }
 
-    public int getOrderType() {
+    public Integer getOrderType() {
         return orderType;
     }
 }

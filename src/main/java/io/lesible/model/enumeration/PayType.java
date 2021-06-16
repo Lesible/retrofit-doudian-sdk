@@ -53,18 +53,21 @@ public enum PayType {
      */
     NEW_CARD(9);
 
-    private final int payType;
+    private final Integer payType;
 
-    PayType(int payType) {
+    PayType(Integer payType) {
         this.payType = payType;
     }
-    
-    public int getPayType() {
+
+    public Integer getPayType() {
         return payType;
     }
 
-    public PayType get(int payType) {
-        return Arrays.stream(values()).filter(it -> it.payType == payType)
+    public PayType get(Integer payType) {
+        if (payType == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.payType.equals(payType))
                 .findAny().orElse(null);
     }
 }

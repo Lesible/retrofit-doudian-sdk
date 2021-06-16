@@ -37,18 +37,21 @@ public enum InventoryType {
      */
     CAMPAIGN_ECHELON_INVENTORY(5);
 
-    private final int inventoryType;
+    private final Integer inventoryType;
 
-    InventoryType(int inventoryType) {
+    InventoryType(Integer inventoryType) {
         this.inventoryType = inventoryType;
     }
 
-    public static InventoryType get(int inventoryType) {
-        return Arrays.stream(values()).filter(it -> it.inventoryType == inventoryType)
+    public static InventoryType get(Integer inventoryType) {
+        if (inventoryType == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.inventoryType.equals(inventoryType))
                 .findAny().orElse(null);
     }
 
-    public int getInventoryType() {
+    public Integer getInventoryType() {
         return inventoryType;
     }
 }
