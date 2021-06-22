@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetDoudianOpenIDParam {
+public class UserGetDoudianOpenIDParam {
 
     /**
      * 抖音开放平台的 openId

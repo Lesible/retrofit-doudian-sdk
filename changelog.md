@@ -21,3 +21,8 @@
 1. 添加开放平台 openId 和 抖店 openId 互相转换的接口
 2. 添加获取精选联盟订单接口
 3. 字段添加
+
+### 1.0.7
+
+1. 修改类名
+2. DySignRequestBuilder 添加 Authorization 的参数 

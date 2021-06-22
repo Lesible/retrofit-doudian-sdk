@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -43,14 +44,14 @@ public class OrderApiTestCase {
     @Test
     @SneakyThrows
     public void orderSearchList() {
-        Instant instant = Instant.ofEpochSecond(1623807827);
+        Instant instant = new Date().toInstant();
         LocalDateTime now = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
         ZoneOffset defaultZoneOffset = ZoneOffset.of("+8");
-        LocalDateTime after = now.plusMinutes(30L);
-        long end = after.toEpochSecond(defaultZoneOffset);
-        long begin = now.toEpochSecond(defaultZoneOffset);
+        LocalDateTime after = now.minusDays(14L);
+        long end = now.toEpochSecond(defaultZoneOffset);
+        long begin = after.toEpochSecond(defaultZoneOffset);
         OrderSearchListParam param = OrderSearchListParam.builder()
-                .page(0).size(1)
+                .page(0).size(3)
                 .createTimeStart(begin)
                 .createTimeEnd(end)
                 .orderBy("create_time")
