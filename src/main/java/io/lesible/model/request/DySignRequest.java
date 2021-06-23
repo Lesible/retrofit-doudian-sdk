@@ -96,8 +96,10 @@ public class DySignRequest<T> {
         }
 
         public Builder<T> authorization(Authorization authorization) {
-            this.appKey = authorization.getAppKey();
-            this.appSecret = authorization.getAppSecret();
+            if (authorization != null) {
+                this.appKey = authorization.getAppKey();
+                this.appSecret = authorization.getAppSecret();
+            }
             return this;
         }
 
