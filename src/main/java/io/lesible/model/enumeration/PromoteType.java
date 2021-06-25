@@ -32,18 +32,21 @@ public enum PromoteType {
      */
     SELF_CHANNEL_PROMOTE(1);
 
-    private final int promoteType;
+    private final Integer promoteType;
 
-    PromoteType(int promoteType) {
+    PromoteType(Integer promoteType) {
         this.promoteType = promoteType;
     }
 
-    public static PromoteType get(int promoteType) {
-        return Arrays.stream(values()).filter(it -> it.promoteType == promoteType)
+    public static PromoteType get(Integer promoteType) {
+        if (promoteType == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.promoteType.equals(promoteType))
                 .findAny().orElse(null);
     }
 
-    public int getPromoteType() {
+    public Integer getPromoteType() {
         return promoteType;
     }
 
@@ -70,7 +73,7 @@ public enum PromoteType {
         @Override
         public PromoteType deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
             JsonNode node = p.getCodec().readTree(p);
-            int promoteType = node.asInt();
+            Integer promoteType = node.asInt();
             return PromoteType.get(promoteType);
         }
     }

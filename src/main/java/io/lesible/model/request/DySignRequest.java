@@ -95,6 +95,14 @@ public class DySignRequest<T> {
             return this;
         }
 
+        public Builder<T> authorization(Authorization authorization) {
+            if (authorization != null) {
+                this.appKey = authorization.getAppKey();
+                this.appSecret = authorization.getAppSecret();
+            }
+            return this;
+        }
+
         public Builder<T> accessToken(String accessToken) {
             this.accessToken = accessToken;
             return this;

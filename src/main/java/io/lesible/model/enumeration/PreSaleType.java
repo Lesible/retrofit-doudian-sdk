@@ -23,18 +23,21 @@ public enum PreSaleType {
      */
     ECHELON_INVENTORY(2);
 
-    private final int preSaleType;
+    private final Integer preSaleType;
 
-    PreSaleType(int preSaleType) {
+    PreSaleType(Integer preSaleType) {
         this.preSaleType = preSaleType;
     }
 
-    public static PreSaleType get(int preSaleType) {
-        return Arrays.stream(values()).filter(it -> it.preSaleType == preSaleType)
+    public static PreSaleType get(Integer preSaleType) {
+        if (preSaleType == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.preSaleType.equals(preSaleType))
                 .findAny().orElse(null);
     }
-    
-    public int getPreSaleType() {
+
+    public Integer getPreSaleType() {
         return preSaleType;
     }
 }

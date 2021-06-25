@@ -82,18 +82,21 @@ public enum CouponType {
      */
     ITEM_FULL_DISCOUNT_COUPON(43);
 
-    private final int couponType;
+    private final Integer couponType;
 
-    CouponType(int couponType) {
+    CouponType(Integer couponType) {
         this.couponType = couponType;
     }
 
-    public static CouponType get(int couponType) {
-        return Arrays.stream(values()).filter(it -> it.couponType == couponType)
+    public static CouponType get(Integer couponType) {
+        if (couponType == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.couponType.equals(couponType))
                 .findAny().orElse(null);
     }
 
-    public int getCouponType() {
+    public Integer getCouponType() {
         return couponType;
     }
 
@@ -106,7 +109,7 @@ public enum CouponType {
         @Override
         public CouponType deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
             JsonNode node = p.getCodec().readTree(p);
-            int couponType = node.asInt();
+            Integer couponType = node.asInt();
             return CouponType.get(couponType);
         }
     }

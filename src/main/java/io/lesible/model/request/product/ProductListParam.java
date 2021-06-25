@@ -20,23 +20,23 @@ public class ProductListParam {
     /**
      * 页码
      */
-    private String page;
+    private Integer page;
 
     /**
      * 每页大小
      */
-    private String size;
+    private Integer size;
 
     /**
      * 指定状态返回商品列表：0上架 1下架
      */
-    private String status;
+    private Integer status;
 
     /**
      * 指定审核状态返回商品列表：1未提审 2审核中 3审核通过 4审核驳回 5封禁 7审核通过，待上架状态
      *
      * @see io.lesible.model.enumeration.CheckStatus
      */
-    private String checkStatus;
+    private Integer checkStatus;
 
 }

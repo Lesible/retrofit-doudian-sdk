@@ -49,7 +49,7 @@ public class ParamUtil {
         // 校验请求
         checkRequest(dySignRequest);
         String paramJson = JsonUtil.jsonValue(dySignRequest.getBusinessParam(), ApiFactory.OBJECT_MAPPER);
-        log.info("paramJson: {}", paramJson);
+//        log.info("paramJson: {}", paramJson);
         // 使用 treeMap,保证参数的字母顺序
         Map<String, String> paramMap = new TreeMap<>();
         // 不传入 appKey, secret 就使用默认的
@@ -64,6 +64,7 @@ public class ParamUtil {
         String sign = generateSignStr(paramMap, StringUtils.isBlank(secret) ? DySignRequest.DEFAULT_AUTHORIZATION.getAppSecret() : secret);
         paramMap.put("sign", sign);
         paramMap.put("access_token", dySignRequest.getAccessToken());
+//        log.info("paramMap: {}", paramMap);
         return paramMap;
     }
 

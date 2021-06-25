@@ -69,17 +69,20 @@ public enum AfterSaleStatus {
      */
     REVERSE_TRADE_FINISHED(53);
 
-    private final int afterSaleStatus;
+    private final Integer afterSaleStatus;
 
-    AfterSaleStatus(int afterSaleStatus) {
+    AfterSaleStatus(Integer afterSaleStatus) {
         this.afterSaleStatus = afterSaleStatus;
     }
 
-    public static AfterSaleStatus get(int afterSaleStatus) {
-        return Arrays.stream(values()).filter(it -> it.afterSaleStatus == (afterSaleStatus))
+    public static AfterSaleStatus get(Integer afterSaleStatus) {
+        if (afterSaleStatus == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.afterSaleStatus.equals(afterSaleStatus))
                 .findAny().orElse(null);
     }
-    
+
     public Integer getAfterSaleStatus() {
         return afterSaleStatus;
     }

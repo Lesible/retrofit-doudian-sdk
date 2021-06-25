@@ -48,18 +48,21 @@ public enum FlowSource {
      */
     PANGOLIN(8);
 
-    private final int flowType;
+    private final Integer flowType;
 
-    FlowSource(int flowType) {
+    FlowSource(Integer flowType) {
         this.flowType = flowType;
     }
 
-    public static FlowSource get(int flowType) {
-        return Arrays.stream(values()).filter(it -> it.flowType == flowType)
+    public static FlowSource get(Integer flowType) {
+        if (flowType == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.flowType.equals(flowType))
                 .findAny().orElse(null);
     }
 
-    public int getFlowType() {
+    public Integer getFlowType() {
         return flowType;
     }
 }

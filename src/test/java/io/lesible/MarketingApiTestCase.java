@@ -78,7 +78,7 @@ public class MarketingApiTestCase {
     @SneakyThrows
     public void getCouponDetail() {
         MarketingGetCouponDetailParam param = MarketingGetCouponDetailParam.builder()
-                .couponMetaId(6972136631113482532L).build();
+                .couponMetaId(6972135647914066184L).build();
         DySignRequest<MarketingGetCouponDetailParam> request = DySignRequest
                 .<MarketingGetCouponDetailParam>builder().accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(param).method(MethodConstant.MARKETING_GET_COUPON_DETAIL).build();
@@ -128,7 +128,7 @@ public class MarketingApiTestCase {
     public void applyCoupon() {
         // 华胜的 doudian_open_id  1@#QlEMZy4wLjtuPBNlQSl3ZFTc4uBAfgexNFmQfxskmdrNHd+WQzmN5vF8g6VukV4uJQ==
         MarketingApplyCouponParam param = MarketingApplyCouponParam.builder()
-                .couponMetaId(6972135647914066184L).doudianOpenId("1@#QlEMZy4wLjtuPBNlQSl3ZFTc4uBAfgexNFmQfxskmdrNHd+WQzmN5vF8g6VukV4uJQ==")
+                .couponMetaId(6972135647914066184L).doudianOpenId("1@#Gk8XL628jfo/PwLUW2v7LHCzJzdAetQ4yx3cN7WYQ/PUHvSf7jueOLKOR+kumBOk4jmfqp/l")
                 .uniqueId(UniqueIdUtil.nextUniqueId()).build();
         DySignRequest<MarketingApplyCouponParam> request = DySignRequest
                 .<MarketingApplyCouponParam>builder().accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)

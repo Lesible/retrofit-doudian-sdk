@@ -32,9 +32,12 @@ public class AfterSaleInfo {
     private Integer afterSaleType;
 
     /**
-     * 退款状态
-     * <p>
-     * 没文档 上个屁枚举
+     * 退款类型 0: Origin, 原路退回
+     * 1: Offline, 线下退款
+     * 2: ImPreset,预付款退款
+     * 3: Pledge,保证金退款
+     * 4: None,无需退款
+     * 5: RefundTypeAll, 所有
      *
      * @see io.lesible.model.enumeration.RefundStatus
      */

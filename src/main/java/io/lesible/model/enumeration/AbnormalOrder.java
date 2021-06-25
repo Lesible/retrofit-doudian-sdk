@@ -19,19 +19,22 @@ public enum AbnormalOrder {
      */
     REVIEWING(2);
 
-    private final int abnormalOrderType;
+    private final Integer abnormalOrderType;
 
-    AbnormalOrder(int abnormalOrderType) {
+    AbnormalOrder(Integer abnormalOrderType) {
         this.abnormalOrderType = abnormalOrderType;
     }
 
-    public int getAbnormalOrderType() {
-        return abnormalOrderType;
+    public static AbnormalOrder get(Integer abnormalOrderType) {
+        if (abnormalOrderType == null) {
+            return null;
+        }
+        return Arrays.stream(values()).filter(it -> it.abnormalOrderType.equals(abnormalOrderType))
+                .findAny().orElse(null);
     }
 
-    public static AbnormalOrder get(int abnormalOrderType) {
-        return Arrays.stream(values()).filter(it -> it.abnormalOrderType == abnormalOrderType)
-                .findAny().orElse(null);
+    public Integer getAbnormalOrderType() {
+        return abnormalOrderType;
     }
 
 }

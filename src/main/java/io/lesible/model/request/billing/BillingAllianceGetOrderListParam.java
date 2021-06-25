@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AllianceGetOrderListParam {
+public class BillingAllianceGetOrderListParam {
 
     /**
      * 订单 id 列表
