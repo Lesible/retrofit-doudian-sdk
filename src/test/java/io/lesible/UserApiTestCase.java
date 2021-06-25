@@ -6,6 +6,7 @@ import io.lesible.model.request.DySignRequest;
 import io.lesible.model.request.user.UserGetDoudianOpenIDParam;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.user.DoudianOpenIdRet;
+import io.lesible.util.JsonUtil;
 import io.lesible.util.ParamUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +52,10 @@ public class UserApiTestCase {
                 log.error("调用异常", e);
             }
             return result;
-        }).filter(Objects::nonNull).map(DyResult::getData)
+        }).filter(Objects::nonNull).peek(it -> {
+            String json = JsonUtil.jsonValue(it);
+            log.info("json: {}", json);
+        }).map(DyResult::getData)
                 .map(DoudianOpenIdRet::getDoudianOpenId).collect(Collectors.toList());
         log.info("doudianOpenIds: {}", doudianOpenIds);
     }

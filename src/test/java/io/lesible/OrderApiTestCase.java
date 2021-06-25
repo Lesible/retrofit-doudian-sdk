@@ -13,7 +13,6 @@ import io.lesible.util.JsonUtil;
 import io.lesible.util.ParamUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import retrofit2.Call;
 
@@ -134,16 +133,16 @@ public class OrderApiTestCase {
         Call<DyResult<OldShopOrderDetailInfo>> dyResultCall = orderApi.detail(paramMap);
         DyResult<OldShopOrderDetailInfo> oldShopOrderDetail = dyResultCall.execute().body();
         List<OldShopOrderDetail> list = oldShopOrderDetail.getData().getList();
-        for (OldShopOrderDetail shopOrderDetail : list) {
-            List<OldShopChildOrderDetail> child = shopOrderDetail.getChild();
-            String orderIdTmp = shopOrderDetail.getOrderId();
-            String logisticsCode = shopOrderDetail.getLogisticsCode();
-            if (StringUtils.isNotBlank(logisticsCode)) {
-                log.info("orderIdTmp: {}", orderIdTmp);
-            }
-        }
-//        log.info("oldShopOrderDetail: {}", oldShopOrderDetail);
-//        log.info("oldShopOrderDetail: {}", JsonUtil.jsonValue(oldShopOrderDetail));
+//        for (OldShopOrderDetail shopOrderDetail : list) {
+//            List<OldShopChildOrderDetail> child = shopOrderDetail.getChild();
+//            String orderIdTmp = shopOrderDetail.getOrderId();
+//            String logisticsCode = shopOrderDetail.getLogisticsCode();
+//            if (StringUtils.isNotBlank(logisticsCode)) {
+//                log.info("orderIdTmp: {}", orderIdTmp);
+//            }
+//        }
+        log.info("oldShopOrderDetail: {}", oldShopOrderDetail);
+        log.info("oldShopOrderDetail: {}", JsonUtil.jsonValue(oldShopOrderDetail));
     }
 
 
