@@ -61,7 +61,11 @@ public class MarketingGetShopCouponMetaListParam {
 
     /**
      * 是否全网推广
-     * 0:全网推广 1.自有渠道
+     * -1 : 全部
+     * 0: 全网推广 1: 自有渠道
+     * 3: 新客专享 4: 定向券
+     * 5: 单品广告推广券 6:评价返券
+     * 9: 会员开卡礼
      */
     private Integer isShow;
 

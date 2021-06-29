@@ -13,12 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import retrofit2.Call;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * <p> @date: 2021-06-15 18:08</p>
@@ -36,28 +31,18 @@ public class UserApiTestCase {
     @Test
     @SneakyThrows
     public void getDoudianOpenID() {
-        List<String> openIds = Arrays.asList("234567765432", "123456654321");
-        List<String> doudianOpenIds = openIds.stream().map(it -> {
-            UserGetDoudianOpenIDParam param = UserGetDoudianOpenIDParam.builder().dyOpenId(it)
-                    .dyClientKey("tt8227f49a1d0d8ab1").build();
-            DySignRequest<UserGetDoudianOpenIDParam> request = DySignRequest.<UserGetDoudianOpenIDParam>builder()
-                    .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
-                    .businessParam(param).method(MethodConstant.USER_GET_DOUDIAN_OPEN_ID).build();
-            Map<String, String> paramMap = ParamUtil.buildParamMap(request);
-            Call<DyResult<DoudianOpenIdRet>> dyResultCall = userApi.getDoudianOpenID(paramMap);
-            DyResult<DoudianOpenIdRet> result = null;
-            try {
-                result = dyResultCall.execute().body();
-            } catch (IOException e) {
-                log.error("调用异常", e);
-            }
-            return result;
-        }).filter(Objects::nonNull).peek(it -> {
-            String json = JsonUtil.jsonValue(it);
-            log.info("json: {}", json);
-        }).map(DyResult::getData)
-                .map(DoudianOpenIdRet::getDoudianOpenId).collect(Collectors.toList());
-        log.info("doudianOpenIds: {}", doudianOpenIds);
+//        String dyOpenId = "6f2a9427-c9aa-4aa3-b9ff-e7b918dffcdb";
+//        String dyOpenId = "535a20b6-0eba-4c5b-bc44-96d1b00e56d0";
+        String dyOpenId = "2B.f0Ec-40smnyK7";
+        UserGetDoudianOpenIDParam param = UserGetDoudianOpenIDParam.builder().dyOpenId(dyOpenId)
+                .dyClientKey("tt8227f49a1d0d8ab1").build();
+        DySignRequest<UserGetDoudianOpenIDParam> request = DySignRequest.<UserGetDoudianOpenIDParam>builder()
+                .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
+                .businessParam(param).method(MethodConstant.USER_GET_DOUDIAN_OPEN_ID).build();
+        Map<String, String> paramMap = ParamUtil.buildParamMap(request);
+        Call<DyResult<DoudianOpenIdRet>> dyResultCall = userApi.getDoudianOpenID(paramMap);
+        DyResult<DoudianOpenIdRet> result = dyResultCall.execute().body();
+        log.info("result: {}", JsonUtil.jsonValue(result));
     }
 
 }

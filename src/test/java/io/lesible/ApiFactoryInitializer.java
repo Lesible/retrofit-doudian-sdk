@@ -22,7 +22,9 @@ public class ApiFactoryInitializer {
 //     900000021
 //    public static final String GLOBAL_TOKEN = "d74df066-420e-4bfd-b090-2d73dcc5c1f9";
 //     900000001
-    public static final String GLOBAL_TOKEN = "3c268308-0136-4b0b-8621-8c519966f0e7";
+    public static final String GLOBAL_TOKEN = "9946cc3d-2641-49ef-8b74-ce20d0e26394";
+    // 900000063
+//    public static final String GLOBAL_TOKEN = "27768e93-77b1-4d2e-96dc-40682fe6a958";
     public static OrderApi ORDER_API;
     public static ProductApi PRODUCT_API;
     public static CommentApi COMMENT_API;

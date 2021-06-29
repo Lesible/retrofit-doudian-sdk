@@ -7,6 +7,7 @@ import io.lesible.model.request.DySignRequest;
 import io.lesible.model.request.marketing.*;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.marketing.*;
+import io.lesible.util.JsonUtil;
 import io.lesible.util.ParamUtil;
 import io.lesible.util.UniqueIdUtil;
 import lombok.SneakyThrows;
@@ -60,15 +61,15 @@ public class MarketingApiTestCase {
     public void getShopCouponMetaList() {
         // 店铺 url https://haohuo.jinritemai.com/views/shop/index?id=tMOiCrl
         MarketingGetShopCouponMetaListParam param = MarketingGetShopCouponMetaListParam.builder()
-                .couponMetaId(3428704890636122168L).offset(0).limit(5).startApplyTime("2021-08-06 00:00")
-                .limit(5).isShow(1).build();
+                .offset(0).startApplyTime("2021-08-06 00:00")
+                .couponMetaId(0L).limit(100).isShow(-1).build();
         DySignRequest<MarketingGetShopCouponMetaListParam> request = DySignRequest
                 .<MarketingGetShopCouponMetaListParam>builder().accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(param).method(MethodConstant.MARKETING_GET_SHOP_COUPON_META_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<ShopCouponMetaListRes>> body = marketingApi.getShopCouponMetaList(paramMap);
         DyResult<ShopCouponMetaListRes> result = body.execute().body();
-        log.info("result: {}", result);
+        log.info("result: {}", JsonUtil.jsonValue(result));
     }
 
     /**

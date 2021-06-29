@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 plugins {
-    kotlin("jvm") version "1.5.10"
+    kotlin("jvm") version "1.5.20"
     java
 }
 
@@ -26,11 +26,11 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-jackson:2.7.2") {
         exclude(group = "com.fasterxml.jackson.core", module = "jackson-databind")
     }
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.3")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.3")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.3")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.10")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.10")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.3")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.11.3")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.3")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.20")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.20")
     implementation("commons-codec:commons-codec:1.15")
     implementation("org.apache.commons:commons-lang3:3.11")
     implementation("org.slf4j:slf4j-api:1.7.25")

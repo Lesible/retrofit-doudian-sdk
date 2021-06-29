@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.ReferenceType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -20,6 +21,10 @@ import java.util.Map;
 public class JsonUtil {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
+    static {
+        OBJECT_MAPPER.registerModule(new JavaTimeModule());
+    }
 
     public static String jsonValue(Object o, ObjectMapper objectMapper) {
         try {
