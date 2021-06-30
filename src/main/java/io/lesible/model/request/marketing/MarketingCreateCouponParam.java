@@ -44,7 +44,7 @@ public class MarketingCreateCouponParam {
      *
      * @see io.lesible.model.enumeration.CouponPeriodType
      */
-    private CouponPeriodType periodType;
+    private CouponPeriodType couponPeriodType;
 
     /**
      * periodType 是 FLOAT_PERIOD 时使用
