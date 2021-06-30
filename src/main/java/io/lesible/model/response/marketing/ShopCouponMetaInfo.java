@@ -124,7 +124,8 @@ public class ShopCouponMetaInfo {
     /**
      * 优惠券状态
      */
-    private Integer status;
+    @JsonProperty("status")
+    private CouponStatus couponStatus;
 
     /**
      * 创建时间
