@@ -40,7 +40,7 @@ public enum CouponType {
     /**
      * 商家折扣券
      */
-    SHOP_DISCOUNT_COUPON(23),
+    SHOP_DISCOUNT_COUPON(21),
 
     /**
      * 商家直减券
