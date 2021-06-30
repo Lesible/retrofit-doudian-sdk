@@ -2,10 +2,7 @@ package io.lesible.model.response.marketing;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.lesible.model.enumeration.CouponApplyScene;
-import io.lesible.model.enumeration.CouponPeriodType;
-import io.lesible.model.enumeration.CouponType;
-import io.lesible.model.enumeration.PromoteType;
+import io.lesible.model.enumeration.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -123,6 +120,8 @@ public class ShopCouponMetaInfo {
 
     /**
      * 优惠券状态
+     *
+     * @see io.lesible.model.enumeration.CouponStatus
      */
     @JsonProperty("status")
     private CouponStatus couponStatus;
