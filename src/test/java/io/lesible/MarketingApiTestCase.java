@@ -7,7 +7,6 @@ import io.lesible.model.request.DySignRequest;
 import io.lesible.model.request.marketing.*;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.marketing.*;
-import io.lesible.util.JsonUtil;
 import io.lesible.util.ParamUtil;
 import io.lesible.util.UniqueIdUtil;
 import lombok.SneakyThrows;
@@ -61,15 +60,15 @@ public class MarketingApiTestCase {
     public void getShopCouponMetaList() {
         // 店铺 url https://haohuo.jinritemai.com/views/shop/index?id=tMOiCrl
         MarketingGetShopCouponMetaListParam param = MarketingGetShopCouponMetaListParam.builder()
-                .offset(0).startApplyTime("2021-08-06 00:00")
-                .couponMetaId(0L).limit(100).isShow(-1).build();
+                .couponMetaId(3428704890636122168L).offset(0).limit(5)
+                .limit(5).isShow(1).build();
         DySignRequest<MarketingGetShopCouponMetaListParam> request = DySignRequest
                 .<MarketingGetShopCouponMetaListParam>builder().accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(param).method(MethodConstant.MARKETING_GET_SHOP_COUPON_META_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<ShopCouponMetaListRes>> body = marketingApi.getShopCouponMetaList(paramMap);
         DyResult<ShopCouponMetaListRes> result = body.execute().body();
-        log.info("result: {}", JsonUtil.jsonValue(result));
+        log.info("result: {}", result);
     }
 
     /**
@@ -79,7 +78,7 @@ public class MarketingApiTestCase {
     @SneakyThrows
     public void getCouponDetail() {
         MarketingGetCouponDetailParam param = MarketingGetCouponDetailParam.builder()
-                .couponMetaId(6972135647914066184L).build();
+                .couponMetaId(6972136631113482532L).build();
         DySignRequest<MarketingGetCouponDetailParam> request = DySignRequest
                 .<MarketingGetCouponDetailParam>builder().accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(param).method(MethodConstant.MARKETING_GET_COUPON_DETAIL).build();
@@ -129,7 +128,7 @@ public class MarketingApiTestCase {
     public void applyCoupon() {
         // 华胜的 doudian_open_id  1@#QlEMZy4wLjtuPBNlQSl3ZFTc4uBAfgexNFmQfxskmdrNHd+WQzmN5vF8g6VukV4uJQ==
         MarketingApplyCouponParam param = MarketingApplyCouponParam.builder()
-                .couponMetaId(6972135647914066184L).doudianOpenId("1@#Gk8XL628jfo/PwLUW2v7LHCzJzdAetQ4yx3cN7WYQ/PUHvSf7jueOLKOR+kumBOk4jmfqp/l")
+                .couponMetaId(6972135647914066184L).doudianOpenId("1@#QlEMZy4wLjtuPBNlQSl3ZFTc4uBAfgexNFmQfxskmdrNHd+WQzmN5vF8g6VukV4uJQ==")
                 .uniqueId(UniqueIdUtil.nextUniqueId()).build();
         DySignRequest<MarketingApplyCouponParam> request = DySignRequest
                 .<MarketingApplyCouponParam>builder().accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)

@@ -23,18 +23,6 @@ public class MethodConstant {
     public static final String ORDER_SEARCH_LIST = "order.searchList";
 
     /**
-     * 订单列表
-     */
-    @Deprecated
-    public static final String ORDER_LIST = "order.list";
-
-    /**
-     * 订单详情
-     */
-    @Deprecated
-    public static final String ORDER_DETAIL = "order.detail";
-
-    /**
      * 获取订单详情
      */
     public static final String ORDER_ORDER_DETAIL = "order.orderDetail";

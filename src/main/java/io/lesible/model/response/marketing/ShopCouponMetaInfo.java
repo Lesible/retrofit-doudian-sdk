@@ -16,7 +16,7 @@ public class ShopCouponMetaInfo {
     /**
      * 优惠券批次 id
      */
-    private String couponMetaId;
+    private Long couponMetaId;
     /**
      * 生效时间
      */
@@ -86,12 +86,12 @@ public class ShopCouponMetaInfo {
     /**
      * 总库存
      */
-    private Integer totalAmount;
+    private Long totalAmount;
 
     /**
      * 当前剩余库存
      */
-    private Integer leftAmount;
+    private Long leftAmount;
 
     /**
      * 单个用户最多领取数量
@@ -146,7 +146,7 @@ public class ShopCouponMetaInfo {
     /**
      * 使用数
      */
-    private Long usedAmount;
+    private Integer usedAmount;
 
     /**
      * 支持使用的支付类型
