@@ -38,7 +38,7 @@ public class MarketingApiTestCase {
         LocalDateTime ldt = LocalDateTime.of(2021, 6, 10, 0, 0);
         MarketingCreateCouponParam param = MarketingCreateCouponParam.builder()
                 .couponName("抖店 api 测试 3 号").couponType(CouponType.SHOP_DIRECT_DISCOUNT_COUPON)
-                .periodType(CouponPeriodType.FLOAT_PERIOD).validPeriod(5).typeDetail("2319538")
+                .couponPeriodType(CouponPeriodType.FLOAT_PERIOD).validPeriod(5).typeDetail("2319538")
                 .startApplyTime(ldt).endApplyTime(ldt.plusDays(14L)).startTime(ldt)
                 .expireTime(ldt.plusDays(14L)).totalAmount(5).url("").opName("暖糖糖的吃货铺")
                 .discount(100).maxDiscountLimit(0L).threshold(0L).credit(200L).maxApplyTimes(1)
