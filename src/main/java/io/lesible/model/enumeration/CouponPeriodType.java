@@ -46,7 +46,7 @@ public enum CouponPeriodType {
                 .findAny().orElse(null);
     }
 
-    private Integer getPeriodType() {
+    public Integer getPeriodType() {
         return periodType;
     }
 
