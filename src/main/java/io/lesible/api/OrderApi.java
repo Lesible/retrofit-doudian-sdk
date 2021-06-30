@@ -1,8 +1,6 @@
 package io.lesible.api;
 
 import io.lesible.model.response.DyResult;
-import io.lesible.model.response.order.OldOrderPageInfo;
-import io.lesible.model.response.order.OldShopOrderDetailInfo;
 import io.lesible.model.response.order.OrderPageInfo;
 import io.lesible.model.response.order.ShopOrderDetailInfo;
 import retrofit2.Call;
@@ -36,25 +34,4 @@ public interface OrderApi {
     @GET("order/orderDetail")
     Call<DyResult<ShopOrderDetailInfo>> orderDetail(@QueryMap Map<String, String> queryMap);
 
-    /**
-     * 订单列表,即将下线
-     *
-     * @param queryMap 查询参数列表
-     * @return 订单列表结果
-     * @see OrderApi#searchList(Map)
-     * @deprecated 抖音即将下线该 api
-     */
-    @Deprecated
-    @GET("order/list")
-    Call<DyResult<OldOrderPageInfo>> list(@QueryMap Map<String, String> queryMap);
-
-    /**
-     * 获取订单详情
-     *
-     * @param queryMap 查询参数列表
-     * @return 订单详情结果
-     */
-    @Deprecated
-    @GET("order/detail")
-    Call<DyResult<OldShopOrderDetailInfo>> detail(@QueryMap Map<String, String> queryMap);
 }

@@ -14,7 +14,7 @@ public class CouponMetaDetail {
     /**
      * 优惠券批次 id
      */
-    private String couponMetaId;
+    private Long couponMetaId;
 
     /**
      * 优惠券名称
@@ -57,12 +57,12 @@ public class CouponMetaDetail {
     /**
      * 单个用户最多领取数量
      */
-    private Integer maxApplyTimes;
+    private Long maxApplyTimes;
 
     /**
      * 折扣最高抵扣金额 折扣券使用
      */
-    private Integer maxDiscountLimit;
+    private Long maxDiscountLimit;
 
     /**
      * 优惠券可以使用的场景
@@ -95,12 +95,12 @@ public class CouponMetaDetail {
      * periodType 是 FLOAT_PERIOD 时使用
      * 浮动有效期 天数
      */
-    private Integer validPeriod;
+    private Long validPeriod;
 
     /**
      * 满减券门槛
      */
-    private Integer threshold;
+    private Long threshold;
 
     /**
      * 优惠券类型
@@ -141,7 +141,7 @@ public class CouponMetaDetail {
     /**
      * 总数量
      */
-    private Integer totalAmount;
+    private Long totalAmount;
 
     /**
      * 使用数
