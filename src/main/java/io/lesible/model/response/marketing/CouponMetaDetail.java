@@ -62,7 +62,7 @@ public class CouponMetaDetail {
     /**
      * 折扣最高抵扣金额 折扣券使用
      */
-    private Integer maxDiscountLimit;
+    private Long maxDiscountLimit;
 
     /**
      * 优惠券可以使用的场景
