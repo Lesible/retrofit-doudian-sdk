@@ -16,7 +16,6 @@ import retrofit2.Call;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
@@ -26,8 +25,6 @@ import java.util.Map;
  */
 @Slf4j
 public class OrderApiTestCase {
-
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
     private final OrderApi orderApi = ApiFactoryInitializer.ORDER_API;
 
