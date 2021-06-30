@@ -24,6 +24,7 @@ public class ShopCouponMetaInfo {
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime expireTime;
+
     /**
      * 类型
      * 1. 固定有效期类型
@@ -31,6 +32,7 @@ public class ShopCouponMetaInfo {
      *
      * @see io.lesible.model.enumeration.CouponPeriodType
      */
+    @JsonProperty("period_type")
     private CouponPeriodType couponPeriodType;
 
     /**
