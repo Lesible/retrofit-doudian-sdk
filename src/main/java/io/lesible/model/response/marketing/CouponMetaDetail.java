@@ -57,12 +57,12 @@ public class CouponMetaDetail {
     /**
      * 单个用户最多领取数量
      */
-    private Long maxApplyTimes;
+    private Integer maxApplyTimes;
 
     /**
      * 折扣最高抵扣金额 折扣券使用
      */
-    private Long maxDiscountLimit;
+    private Integer maxDiscountLimit;
 
     /**
      * 优惠券可以使用的场景
@@ -79,7 +79,7 @@ public class CouponMetaDetail {
     /**
      * 店铺 id
      */
-    private String shopId;
+    private Long shopId;
 
     /**
      * 店铺 logo
@@ -95,7 +95,7 @@ public class CouponMetaDetail {
      * periodType 是 FLOAT_PERIOD 时使用
      * 浮动有效期 天数
      */
-    private Long validPeriod;
+    private Integer validPeriod;
 
     /**
      * 满减券门槛
@@ -151,7 +151,8 @@ public class CouponMetaDetail {
     /**
      * 开始领取时间
      */
-    private String startApplyTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime startApplyTime;
 
     /**
      * 用户领取次数

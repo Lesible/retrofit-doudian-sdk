@@ -25,6 +25,8 @@ public class ApiFactoryInitializer {
     public static AuthApi AUTH_API;
     public static ShopApi SHOP_API;
     public static MarketingApi MARKETING_API;
+    public static BillingApi BILLING_API;
+    public static UserApi USER_API;
 
     static {
         Authorization authorization = new Authorization("6873668517658347022", "601f6adf-f7df-42bf-8789-1b3a90979c50");
@@ -44,6 +46,8 @@ public class ApiFactoryInitializer {
         AUTH_API = API_FACTORY.generateApi(AuthApi.class);
         SHOP_API = API_FACTORY.generateApi(ShopApi.class);
         MARKETING_API = API_FACTORY.generateApi(MarketingApi.class);
+        BILLING_API = API_FACTORY.generateApi(BillingApi.class);
+        USER_API = API_FACTORY.generateApi(UserApi.class);
     }
 
 

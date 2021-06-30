@@ -59,7 +59,7 @@ public class OrderApiTestCase {
     @Test
     @SneakyThrows
     public void orderOrderDetail() {
-        OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId("4807261687878395536").build();
+        OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId(4807261687878395536L).build();
         DySignRequest<OrderOrderDetailParam> request = DySignRequest.<OrderOrderDetailParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(param).method(MethodConstant.ORDER_ORDER_DETAIL).build();
