@@ -31,7 +31,7 @@ public class ShopCouponMetaInfo {
      *
      * @see io.lesible.model.enumeration.CouponPeriodType
      */
-    private CouponPeriodType periodType;
+    private CouponPeriodType couponPeriodType;
 
     /**
      * 浮动有效期 天数
