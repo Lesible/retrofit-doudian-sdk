@@ -20,7 +20,10 @@ class CouponTest {
         val set1 = CouponMetaDetail::class.memberProperties.map { it.name to it.returnType.javaType }.toMutableSet()
         val set2 = ShopCouponMetaInfo::class.memberProperties.map { it.name to it.returnType.javaType }.toSet()
         set1.addAll(set2)
+        val clazz =
+            set1.map { "private ${it.second.typeName.substringAfterLast(".")}  ${it.first}" }
+                .joinToString(postfix = ";", separator = ";\n") { it }
+        println(clazz)
         println(set1.map { it.first.camelToSnakeCase() })
-        println("set:$set1,size:${set1.size}")
     }
 }

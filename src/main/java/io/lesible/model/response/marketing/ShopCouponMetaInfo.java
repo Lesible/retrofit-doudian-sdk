@@ -2,10 +2,7 @@ package io.lesible.model.response.marketing;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.lesible.model.enumeration.CouponApplyScene;
-import io.lesible.model.enumeration.CouponPeriodType;
-import io.lesible.model.enumeration.CouponType;
-import io.lesible.model.enumeration.PromoteType;
+import io.lesible.model.enumeration.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -124,7 +121,8 @@ public class ShopCouponMetaInfo {
     /**
      * 优惠券状态
      */
-    private Integer status;
+    @JsonProperty("status")
+    private CouponStatus couponStatus;
 
     /**
      * 创建时间
@@ -154,7 +152,7 @@ public class ShopCouponMetaInfo {
      * 1: 在线支付
      * 2: 货到付款.在线支付都支持
      *
-     * @see CouponApplyScene
+     * @see io.lesible.model.enumeration.CouponApplyScene
      */
     @JsonProperty("pay_type")
     private CouponApplyScene couponApplyScene;
