@@ -77,9 +77,10 @@ public class CouponMetaDetail {
     private CouponPeriodType couponPeriodType;
 
     /**
-     * 店铺 id
+     * 店铺 id str
      */
-    private Long shopId;
+    @JsonProperty("shop_id")
+    private String shopIdStr;
 
     /**
      * 店铺 logo
