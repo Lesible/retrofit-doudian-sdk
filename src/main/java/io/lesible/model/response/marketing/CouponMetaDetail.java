@@ -77,7 +77,7 @@ public class CouponMetaDetail {
     private CouponPeriodType couponPeriodType;
 
     /**
-     * 店铺 id
+     * 店铺 id str
      */
     @JsonProperty("shop_id")
     private String shopIdStr;
