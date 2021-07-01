@@ -60,8 +60,8 @@ public class MarketingApiTestCase {
     public void getShopCouponMetaList() {
         // 店铺 url https://haohuo.jinritemai.com/views/shop/index?id=tMOiCrl
         MarketingGetShopCouponMetaListParam param = MarketingGetShopCouponMetaListParam.builder()
-                .couponMetaId(3449843721087126083L).offset(0).limit(5)
-                .limit(5).isShow(1).build();
+                .couponMetaId(0L).offset(24).limit(100)
+                .isShow(-1).build();
         DySignRequest<MarketingGetShopCouponMetaListParam> request = DySignRequest
                 .<MarketingGetShopCouponMetaListParam>builder().accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(param).method(MethodConstant.MARKETING_GET_SHOP_COUPON_META_LIST).build();
@@ -78,7 +78,7 @@ public class MarketingApiTestCase {
     @SneakyThrows
     public void getCouponDetail() {
         MarketingGetCouponDetailParam param = MarketingGetCouponDetailParam.builder()
-                .couponMetaId(6972136631113482532L).build();
+                .couponMetaId(6930546609260642572L).build();
         DySignRequest<MarketingGetCouponDetailParam> request = DySignRequest
                 .<MarketingGetCouponDetailParam>builder().accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(param).method(MethodConstant.MARKETING_GET_COUPON_DETAIL).build();

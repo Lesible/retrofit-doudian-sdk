@@ -8,6 +8,7 @@ import io.lesible.model.request.order.OrderSearchListParam;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.order.OrderPageInfo;
 import io.lesible.model.response.order.ShopOrderDetailInfo;
+import io.lesible.util.JsonUtil;
 import io.lesible.util.ParamUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -59,14 +60,14 @@ public class OrderApiTestCase {
     @Test
     @SneakyThrows
     public void orderOrderDetail() {
-        OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId(4807261687878395536L).build();
+        OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId(4765931093039267404L).build();
         DySignRequest<OrderOrderDetailParam> request = DySignRequest.<OrderOrderDetailParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(param).method(MethodConstant.ORDER_ORDER_DETAIL).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<ShopOrderDetailInfo>> dyResultCall = orderApi.orderDetail(paramMap);
         DyResult<ShopOrderDetailInfo> orderDetailInfo = dyResultCall.execute().body();
-        log.info("orderDetailInfo: {}", orderDetailInfo);
+        log.info("orderDetailInfo: {}", JsonUtil.jsonValue(orderDetailInfo));
     }
 
 }

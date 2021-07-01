@@ -70,7 +70,8 @@ public class ShopCouponMetaInfo {
     /**
      * 店铺名
      */
-    private String opName;
+    @JsonProperty("opName")
+    private String shopName;
 
     /**
      * 满减券的前置金额
