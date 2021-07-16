@@ -3,6 +3,7 @@ package io.lesible;
 import io.lesible.api.AuthApi;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.auth.AccessTokenInfo;
+import io.lesible.util.JsonUtil;
 import io.lesible.util.ParamUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -39,10 +40,10 @@ public class AuthApiTestCase {
     @Test
     @SneakyThrows
     public void oauth2RefreshToken() {
-        Map<String, String> paramMap = ParamUtil.buildRefreshTokenMap("02129cad-7b6d-4652-ac86-36ae677a5473");
+        Map<String, String> paramMap = ParamUtil.buildRefreshTokenMap("1b9d0222-1be8-49f3-82a0-8c919548124a");
         Call<DyResult<AccessTokenInfo>> call = authApi.refreshToken(paramMap);
         DyResult<AccessTokenInfo> body = call.execute().body();
-        log.info("body: {}", body);
+        log.info("body: {}", JsonUtil.jsonValue(body));
     }
 
 }

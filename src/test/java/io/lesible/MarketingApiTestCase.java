@@ -78,7 +78,7 @@ public class MarketingApiTestCase {
     @SneakyThrows
     public void getCouponDetail() {
         MarketingGetCouponDetailParam param = MarketingGetCouponDetailParam.builder()
-                .couponMetaId(6930546609260642572L).build();
+                .couponMetaId(3442022627936463169L).build();
         DySignRequest<MarketingGetCouponDetailParam> request = DySignRequest
                 .<MarketingGetCouponDetailParam>builder().accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(param).method(MethodConstant.MARKETING_GET_COUPON_DETAIL).build();

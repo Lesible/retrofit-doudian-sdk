@@ -70,7 +70,7 @@ public class ShopCouponMetaInfo {
     /**
      * 店铺名
      */
-    @JsonProperty("opName")
+    @JsonProperty("op_name")
     private String shopName;
 
     /**

@@ -34,4 +34,13 @@ public interface OrderApi {
     @GET("order/orderDetail")
     Call<DyResult<ShopOrderDetailInfo>> orderDetail(@QueryMap Map<String, String> queryMap);
 
+    /**
+     * 批量解密
+     *
+     * @param queryMap 查询参数列表
+     * @return 批量解密结果
+     */
+    @GET("order/batchDecrypt")
+    Call<String> batchDecrypt(@QueryMap Map<String, String> queryMap);
+
 }

@@ -33,9 +33,9 @@ public class UserApiTestCase {
     public void getDoudianOpenID() {
 //        String dyOpenId = "6f2a9427-c9aa-4aa3-b9ff-e7b918dffcdb";
 //        String dyOpenId = "535a20b6-0eba-4c5b-bc44-96d1b00e56d0";
-        String dyOpenId = "2B.f0Ec-40smnyK7";
+        String dyOpenId = "1ff2126e-6e7f-4902-a059-d3f16d47a465";
         UserGetDoudianOpenIDParam param = UserGetDoudianOpenIDParam.builder().dyOpenId(dyOpenId)
-                .dyClientKey("tt8227f49a1d0d8ab1").build();
+                .dyClientKey("ttc597b32a5aaf4f2701").build();
         DySignRequest<UserGetDoudianOpenIDParam> request = DySignRequest.<UserGetDoudianOpenIDParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(param).method(MethodConstant.USER_GET_DOUDIAN_OPEN_ID).build();

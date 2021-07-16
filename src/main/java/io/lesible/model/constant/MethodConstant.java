@@ -28,6 +28,11 @@ public class MethodConstant {
     public static final String ORDER_ORDER_DETAIL = "order.orderDetail";
 
     /**
+     * 批量解密接口
+     */
+    public static final String ORDER_BATCH_DECRYPT = "order.batchDecrypt";
+
+    /**
      * 获取店铺的评论列表
      */
     public static final String COMMENT_LIST = "comment.list";
@@ -86,6 +91,21 @@ public class MethodConstant {
      * 获取抖店 openId
      */
     public static final String USER_GET_DOUDIAN_OPEN_ID = "user.getDoudianOpenID";
+
+    /**
+     * 获取商品 sku 列表
+     */
+    public static final String SKU_LIST = "sku.list";
+
+    /**
+     * 修改 sku 价格
+     */
+    public static final String SKU_EDIT_PRICE = "sku.editPrice";
+
+    /**
+     * 修改 sku 库存
+     */
+    public static final String SKU_SYNC_STOCK = "sku.syncStock";
 
 
 }
