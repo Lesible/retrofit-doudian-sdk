@@ -30,7 +30,7 @@ public class JsonUtil {
         try {
             return objectMapper.writeValueAsString(o);
         } catch (JsonProcessingException e) {
-            log.error("转换 json 出错", e);
+            log.error("转换为 json 出错,对象信息:{}", o, e);
             return "{}";
         }
     }
@@ -43,7 +43,7 @@ public class JsonUtil {
         try {
             return objectMapper.readValue(json, clazz);
         } catch (JsonProcessingException e) {
-            log.error("解析 json 出错 ", e);
+            log.error("解析 json 出错,jsonStr:{}", json, e);
             return null;
         }
     }
@@ -52,7 +52,7 @@ public class JsonUtil {
         try {
             return objectMapper.readValue(json, javaType);
         } catch (JsonProcessingException e) {
-            log.error("解析 json 出错 ", e);
+            log.error("解析 json 出错,jsonStr:{}", json, e);
             return null;
         }
     }
@@ -61,7 +61,7 @@ public class JsonUtil {
         try {
             return objectMapper.readValue(json, referenceType);
         } catch (JsonProcessingException e) {
-            log.error("解析 json 出错 ", e);
+            log.error("解析 json 出错,jsonStr:{}", json, e);
             return null;
         }
     }

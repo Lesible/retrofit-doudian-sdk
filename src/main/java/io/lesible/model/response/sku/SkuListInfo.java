@@ -16,12 +16,12 @@ public class SkuListInfo {
     /**
      * 已废弃,无业务意义
      */
-    private Integer openUserId;
+    private Long openUserId;
 
     /**
      * sku 外部 id
      */
-    private Integer outSkuId;
+    private Long outSkuId;
 
     /**
      * sku 对应的商家编码
