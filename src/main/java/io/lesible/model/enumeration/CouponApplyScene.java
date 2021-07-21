@@ -35,8 +35,7 @@ public enum CouponApplyScene {
     /**
      * 两种场景都支持
      */
-    MIXED(2),
-    ;
+    MIXED(2);
 
     private final Integer couponApplyScene;
 

@@ -34,4 +34,13 @@ public interface ProductApi {
     @GET("product/detail")
     Call<DyResult<ProductDetail>> detail(@QueryMap Map<String, String> queryMap);
 
+    /**
+     * 修改商品详情
+     *
+     * @param queryMap 修改参数列表
+     * @return 修改结果
+     */
+    @GET("product/editV2")
+    Call<String> editV2(@QueryMap Map<String, String> queryMap);
+
 }

@@ -1,10 +1,12 @@
 package io.lesible;
 
 import io.lesible.api.ProductApi;
-import io.lesible.model.constant.MethodConstant;
+import io.lesible.common.constant.MethodConstants;
 import io.lesible.model.enumeration.CheckStatus;
+import io.lesible.model.enumeration.ProductType;
 import io.lesible.model.request.DySignRequest;
 import io.lesible.model.request.product.ProductDetailParam;
+import io.lesible.model.request.product.ProductEditV2Param;
 import io.lesible.model.request.product.ProductListParam;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.product.ProductDetail;
@@ -37,7 +39,7 @@ public class ProductApiTestCase {
                 .size(5).checkStatus(CheckStatus.REVIEW_PASSED.getCheckStatus()).build();
         DySignRequest<ProductListParam> request = DySignRequest.<ProductListParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
-                .businessParam(productListParam).method(MethodConstant.PRODUCT_LIST).build();
+                .businessParam(productListParam).method(MethodConstants.PRODUCT_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<ProductPageInfo>> dyResultCall = productApi.list(paramMap);
         DyResult<ProductPageInfo> body = dyResultCall.execute().body();
@@ -52,15 +54,32 @@ public class ProductApiTestCase {
     @SneakyThrows
     public void productDetail() {
         ProductDetailParam productDetailParam = ProductDetailParam.builder()
-                .productId(3485798704252859582L).showDraft(false).build();
+                .productId(3477885072382806635L).showDraft(false).build();
         DySignRequest<ProductDetailParam> request = DySignRequest.<ProductDetailParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN).businessParam(productDetailParam)
-                .method(MethodConstant.PRODUCT_DETAIL).build();
+                .method(MethodConstants.PRODUCT_DETAIL).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<ProductDetail>> dyResultCall = productApi.detail(paramMap);
         DyResult<ProductDetail> body = dyResultCall.execute().body();
         log.info("body: {}", body);
     }
 
+    /**
+     * 编辑商品信息
+     */
+    @Test
+    @SneakyThrows
+    public void productEditV2() {
+        ProductEditV2Param productDetailParam = ProductEditV2Param
+                .builder(3477885072382806635L, ProductType.NORMAL, "true")
+                .marketPrice(3980L).build();
+        DySignRequest<ProductEditV2Param> request = DySignRequest.<ProductEditV2Param>builder()
+                .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN).businessParam(productDetailParam)
+                .method(MethodConstants.PRODUCT_EDIT_V2).build();
+        Map<String, String> paramMap = ParamUtil.buildParamMap(request);
+        Call<String> dyResultCall = productApi.editV2(paramMap);
+        String body = dyResultCall.execute().body();
+        log.info("body: {}", body);
+    }
 
 }

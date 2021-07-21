@@ -21,7 +21,11 @@ public class ApiFactoryInitializer {
     //        public static final String GLOBAL_TOKEN = "6c2ec233-a271-4b74-a42c-8673cb028b51";
 //        public static final String GLOBAL_TOKEN = "84752931-68ff-4d22-989a-65b220587676";
 //public static final String GLOBAL_TOKEN = "d322a996-c014-4c6c-a848-d33508f95948";
-    public static final String GLOBAL_TOKEN = "b1781efd-40bc-4fe5-a153-1554f6723fa8";
+    // 窝小芽
+//    public static final String GLOBAL_TOKEN = "7a660b6e-35f6-461e-adb4-3ced59c74fda";
+    public static final String GLOBAL_TOKEN = "db911b9c-c9bc-433c-91b5-dd683b3ec545";
+
+
     public static OrderApi ORDER_API;
     public static ProductApi PRODUCT_API;
     public static CommentApi COMMENT_API;

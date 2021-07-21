@@ -48,13 +48,13 @@ public class SkuListInfo {
      * 二级规格 id,缺省为 0
      */
     @JsonProperty("spec_detail_id2")
-    private Integer secondSpecDetailId;
+    private Long secondSpecDetailId;
 
     /**
      * 三级规格 id,缺省为 0
      */
     @JsonProperty("spec_detail_id3")
-    private Integer thirdSpecDetailId;
+    private Long thirdSpecDetailId;
 
     /**
      * 一级规格名称

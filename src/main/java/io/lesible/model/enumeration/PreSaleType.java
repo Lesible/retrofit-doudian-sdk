@@ -1,5 +1,16 @@
 package io.lesible.model.enumeration;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
@@ -7,6 +18,8 @@ import java.util.Arrays;
  *
  * @author 何嘉豪
  */
+@JsonSerialize(using = PreSaleType.PreSaleTypeSerializer.class)
+@JsonDeserialize(using = ProductType.ProductTypeDeserializer.class)
 public enum PreSaleType {
     /**
      * 非预售
@@ -39,5 +52,31 @@ public enum PreSaleType {
 
     public Integer getPreSaleType() {
         return preSaleType;
+    }
+
+    static class PreSaleTypeDeserializer extends StdDeserializer<PreSaleType> {
+
+        public PreSaleTypeDeserializer() {
+            super(PreSaleType.class);
+        }
+
+        @Override
+        public PreSaleType deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
+            JsonNode node = p.getCodec().readTree(p);
+            Integer preSaleType = node.asInt();
+            return PreSaleType.get(preSaleType);
+        }
+    }
+
+    static class PreSaleTypeSerializer extends StdSerializer<PreSaleType> {
+
+        public PreSaleTypeSerializer() {
+            super(PreSaleType.class);
+        }
+
+        @Override
+        public void serialize(PreSaleType value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+            gen.writeNumber(value.preSaleType);
+        }
     }
 }

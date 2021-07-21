@@ -1,11 +1,11 @@
-package io.lesible.model.constant;
+package io.lesible.common.constant;
 
 /**
  * <p> @date: 2021-04-21 18:04</p>
  *
  * @author 何嘉豪
  */
-public class MethodConstant {
+public class MethodConstants {
 
     /**
      * 获取商品列表
@@ -16,6 +16,11 @@ public class MethodConstant {
      * 获取商品详情
      */
     public static final String PRODUCT_DETAIL = "product.detail";
+
+    /**
+     * 编辑商品详情
+     */
+    public static final String PRODUCT_EDIT_V2 = "product.editV2";
 
     /**
      * 订单列表查询
@@ -31,6 +36,11 @@ public class MethodConstant {
      * 批量解密接口
      */
     public static final String ORDER_BATCH_DECRYPT = "order.batchDecrypt";
+
+    /**
+     * 批量脱敏接口
+     */
+    public static final String ORDER_BATCH_SENSITIVE = "order.batchSensitive";
 
     /**
      * 获取店铺的评论列表

@@ -1,7 +1,7 @@
 package io.lesible;
 
 import io.lesible.api.UserApi;
-import io.lesible.model.constant.MethodConstant;
+import io.lesible.common.constant.MethodConstants;
 import io.lesible.model.request.DySignRequest;
 import io.lesible.model.request.user.UserGetDoudianOpenIDParam;
 import io.lesible.model.response.DyResult;
@@ -38,7 +38,7 @@ public class UserApiTestCase {
                 .dyClientKey("ttc597b32a5aaf4f2701").build();
         DySignRequest<UserGetDoudianOpenIDParam> request = DySignRequest.<UserGetDoudianOpenIDParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
-                .businessParam(param).method(MethodConstant.USER_GET_DOUDIAN_OPEN_ID).build();
+                .businessParam(param).method(MethodConstants.USER_GET_DOUDIAN_OPEN_ID).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<DoudianOpenIdRet>> dyResultCall = userApi.getDoudianOpenID(paramMap);
         DyResult<DoudianOpenIdRet> result = dyResultCall.execute().body();

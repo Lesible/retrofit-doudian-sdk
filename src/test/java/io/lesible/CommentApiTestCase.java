@@ -1,7 +1,7 @@
 package io.lesible;
 
 import io.lesible.api.CommentApi;
-import io.lesible.model.constant.MethodConstant;
+import io.lesible.common.constant.MethodConstants;
 import io.lesible.model.request.DySignRequest;
 import io.lesible.model.request.comment.CommentListParam;
 import io.lesible.model.request.comment.CommentReplyParam;
@@ -36,7 +36,7 @@ public class CommentApiTestCase {
                 .orderBy("update_time").isDesc("-1").build();
         DySignRequest<CommentListParam> request = DySignRequest.<CommentListParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
-                .businessParam(param).method(MethodConstant.COMMENT_LIST).build();
+                .businessParam(param).method(MethodConstants.COMMENT_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<CommentPageInfo>> dyResultCall = commentApi.list(paramMap);
         DyResult<CommentPageInfo> commentPageInfo = dyResultCall.execute().body();
@@ -53,7 +53,7 @@ public class CommentApiTestCase {
                 .content("谢谢您的光临,能让您满意真是太好了").build();
         DySignRequest<CommentReplyParam> request = DySignRequest.<CommentReplyParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
-                .businessParam(param).method(MethodConstant.COMMENT_REPLY).build();
+                .businessParam(param).method(MethodConstants.COMMENT_REPLY).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<Void>> dyResultCall = commentApi.reply(paramMap);
         DyResult<Void> commentReplay = dyResultCall.execute().body();

@@ -1,7 +1,7 @@
 package io.lesible;
 
 import io.lesible.api.BillingApi;
-import io.lesible.model.constant.MethodConstant;
+import io.lesible.common.constant.MethodConstants;
 import io.lesible.model.request.DySignRequest;
 import io.lesible.model.request.billing.BillingAllianceGetOrderListParam;
 import io.lesible.model.response.DyResult;
@@ -39,7 +39,7 @@ public class BillingApiTestCase {
                 .orderIds(orderIds).build();
         DySignRequest<BillingAllianceGetOrderListParam> request = DySignRequest.<BillingAllianceGetOrderListParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
-                .businessParam(param).method(MethodConstant.ALLIANCE_GET_ORDER_LIST).build();
+                .businessParam(param).method(MethodConstants.ALLIANCE_GET_ORDER_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<AllianceRet>> dyResultCall = billingApi.list(paramMap);
         DyResult<AllianceRet> allianceRet = dyResultCall.execute().body();
