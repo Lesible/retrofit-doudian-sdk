@@ -41,6 +41,6 @@ public interface ProductApi {
      * @return 修改结果
      */
     @GET("product/editV2")
-    Call<String> editV2(@QueryMap Map<String, String> queryMap);
+    Call<DyResult<Boolean>> editV2(@QueryMap Map<String, String> queryMap);
 
 }

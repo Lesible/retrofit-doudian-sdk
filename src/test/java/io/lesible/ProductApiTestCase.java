@@ -72,13 +72,13 @@ public class ProductApiTestCase {
     public void productEditV2() {
         ProductEditV2Param productDetailParam = ProductEditV2Param
                 .builder(3477885072382806635L, ProductType.NORMAL, "true")
-                .marketPrice(3980L).build();
+                .marketPrice(4280L).discountPrice(2010L).build();
         DySignRequest<ProductEditV2Param> request = DySignRequest.<ProductEditV2Param>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN).businessParam(productDetailParam)
                 .method(MethodConstants.PRODUCT_EDIT_V2).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
-        Call<String> dyResultCall = productApi.editV2(paramMap);
-        String body = dyResultCall.execute().body();
+        Call<DyResult<Boolean>> dyResultCall = productApi.editV2(paramMap);
+        DyResult<Boolean> body = dyResultCall.execute().body();
         log.info("body: {}", body);
     }
 
