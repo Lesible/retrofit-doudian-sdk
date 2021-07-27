@@ -35,7 +35,7 @@ public class AccessTokenInfo {
     /**
      * access_token接口调用凭证超时时间，单位（秒），默认有效期：7天
      */
-    private Integer expiresIn;
+    private Long expiresIn;
 
     /**
      * 用于刷新access_token的刷新令牌（有效期：14 天）

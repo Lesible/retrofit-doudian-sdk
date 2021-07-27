@@ -24,6 +24,7 @@ public class ShopCouponMetaInfo {
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime expireTime;
+
     /**
      * 类型
      * 1. 固定有效期类型
@@ -31,6 +32,7 @@ public class ShopCouponMetaInfo {
      *
      * @see io.lesible.model.enumeration.CouponPeriodType
      */
+    @JsonProperty("period_type")
     private CouponPeriodType couponPeriodType;
 
     /**
@@ -68,7 +70,8 @@ public class ShopCouponMetaInfo {
     /**
      * 店铺名
      */
-    private String opName;
+    @JsonProperty("op_name")
+    private String shopName;
 
     /**
      * 满减券的前置金额
@@ -120,6 +123,8 @@ public class ShopCouponMetaInfo {
 
     /**
      * 优惠券状态
+     *
+     * @see io.lesible.model.enumeration.CouponStatus
      */
     @JsonProperty("status")
     private CouponStatus couponStatus;
@@ -152,7 +157,7 @@ public class ShopCouponMetaInfo {
      * 1: 在线支付
      * 2: 货到付款.在线支付都支持
      *
-     * @see io.lesible.model.enumeration.CouponApplyScene
+     * @see CouponApplyScene
      */
     @JsonProperty("pay_type")
     private CouponApplyScene couponApplyScene;

@@ -1,5 +1,6 @@
 package io.lesible.model.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.lesible.common.ErrorCode;
 import lombok.Data;
 
@@ -9,6 +10,7 @@ import lombok.Data;
  * @author 何嘉豪
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DyResult<T> {
 
     /**

@@ -1,7 +1,7 @@
 package io.lesible;
 
 import io.lesible.api.MarketingApi;
-import io.lesible.model.constant.MethodConstant;
+import io.lesible.common.constant.MethodConstants;
 import io.lesible.model.enumeration.*;
 import io.lesible.model.request.DySignRequest;
 import io.lesible.model.request.marketing.*;
@@ -45,7 +45,7 @@ public class MarketingApiTestCase {
                 .couponApplyScene(CouponApplyScene.MIXED).promoteType(PromoteType.SELF_CHANNEL_PROMOTE).build();
         DySignRequest<MarketingCreateCouponParam> request = DySignRequest.<MarketingCreateCouponParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
-                .businessParam(param).method(MethodConstant.MARKETING_CREATE_COUPON).build();
+                .businessParam(param).method(MethodConstants.MARKETING_CREATE_COUPON).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<CreatedCouponRes>> body = marketingApi.createCoupon(paramMap);
         DyResult<CreatedCouponRes> result = body.execute().body();
@@ -60,11 +60,11 @@ public class MarketingApiTestCase {
     public void getShopCouponMetaList() {
         // 店铺 url https://haohuo.jinritemai.com/views/shop/index?id=tMOiCrl
         MarketingGetShopCouponMetaListParam param = MarketingGetShopCouponMetaListParam.builder()
-                .couponMetaId(3428704890636122168L).offset(0).limit(5)
-                .limit(5).isShow(1).build();
+                .couponMetaId(0L).offset(24).limit(100)
+                .isShow(-1).build();
         DySignRequest<MarketingGetShopCouponMetaListParam> request = DySignRequest
                 .<MarketingGetShopCouponMetaListParam>builder().accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
-                .businessParam(param).method(MethodConstant.MARKETING_GET_SHOP_COUPON_META_LIST).build();
+                .businessParam(param).method(MethodConstants.MARKETING_GET_SHOP_COUPON_META_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<ShopCouponMetaListRes>> body = marketingApi.getShopCouponMetaList(paramMap);
         DyResult<ShopCouponMetaListRes> result = body.execute().body();
@@ -78,10 +78,10 @@ public class MarketingApiTestCase {
     @SneakyThrows
     public void getCouponDetail() {
         MarketingGetCouponDetailParam param = MarketingGetCouponDetailParam.builder()
-                .couponMetaId(6972136631113482532L).build();
+                .couponMetaId(3442022627936463169L).build();
         DySignRequest<MarketingGetCouponDetailParam> request = DySignRequest
                 .<MarketingGetCouponDetailParam>builder().accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
-                .businessParam(param).method(MethodConstant.MARKETING_GET_COUPON_DETAIL).build();
+                .businessParam(param).method(MethodConstants.MARKETING_GET_COUPON_DETAIL).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<CouponMetaDetailRes>> body = marketingApi.getCouponDetail(paramMap);
         DyResult<CouponMetaDetailRes> result = body.execute().body();
@@ -99,7 +99,7 @@ public class MarketingApiTestCase {
                 .opName("什么?").build();
         DySignRequest<MarketingAbleCouponMetaParam> request = DySignRequest
                 .<MarketingAbleCouponMetaParam>builder().accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
-                .businessParam(param).method(MethodConstant.MARKETING_ABLE_COUPON_META).build();
+                .businessParam(param).method(MethodConstants.MARKETING_ABLE_COUPON_META).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<AbleCouponMetaRes>> body = marketingApi.ableCouponMeta(paramMap);
         DyResult<AbleCouponMetaRes> result = body.execute().body();
@@ -113,7 +113,7 @@ public class MarketingApiTestCase {
                 .couponMetaId(6972135647914066184L).currentTotalAmount(6L).build();
         DySignRequest<MarketingAdjustShopCouponMetaParam> request = DySignRequest.<MarketingAdjustShopCouponMetaParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
-                .businessParam(param).method(MethodConstant.MARKETING_ADJUST_SHOP_COUPON4_META).build();
+                .businessParam(param).method(MethodConstants.MARKETING_ADJUST_SHOP_COUPON4_META).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<Void>> dyResultCall = marketingApi.adjustShopCouponMeta(paramMap);
         DyResult<Void> result = dyResultCall.execute().body();
@@ -132,7 +132,7 @@ public class MarketingApiTestCase {
                 .uniqueId(UniqueIdUtil.nextUniqueId()).build();
         DySignRequest<MarketingApplyCouponParam> request = DySignRequest
                 .<MarketingApplyCouponParam>builder().accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
-                .businessParam(param).method(MethodConstant.MARKETING_APPLY_COUPON).build();
+                .businessParam(param).method(MethodConstants.MARKETING_APPLY_COUPON).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<ApplyCouponRes>> body = marketingApi.applyCoupon(paramMap);
         DyResult<ApplyCouponRes> result = body.execute().body();

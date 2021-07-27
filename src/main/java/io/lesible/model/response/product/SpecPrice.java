@@ -1,5 +1,6 @@
 package io.lesible.model.response.product;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -37,10 +38,24 @@ public class SpecPrice {
     private Integer promotionStockNum;
     private Integer lockStockNum;
     private Object stockNumMap;
-    private Long specDetailId1;
-    private Long specDetailId2;
+    /**
+     * 一级规格 id
+     */
+    @JsonProperty("spec_detail_id1")
+    private Long firstSpecDetailId;
+
+    /**
+     * 二级规格 id,缺省为 0
+     */
+    @JsonProperty("spec_detail_id2")
+    private Long secondSpecDetailId;
+
+    /**
+     * 三级规格 id,缺省为 0
+     */
+    @JsonProperty("spec_detail_id3")
+    private Long thirdSpecDetailId;
     private List<Long> specDetailIds;
-    private Long specDetailId3;
     private Integer price;
     private Integer promStepStockNum;
     private Integer promStockNum;

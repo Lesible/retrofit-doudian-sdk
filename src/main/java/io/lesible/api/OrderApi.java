@@ -1,6 +1,7 @@
 package io.lesible.api;
 
 import io.lesible.model.response.DyResult;
+import io.lesible.model.response.order.DeSensitiveResult;
 import io.lesible.model.response.order.OrderPageInfo;
 import io.lesible.model.response.order.ShopOrderDetailInfo;
 import retrofit2.Call;
@@ -33,5 +34,23 @@ public interface OrderApi {
      */
     @GET("order/orderDetail")
     Call<DyResult<ShopOrderDetailInfo>> orderDetail(@QueryMap Map<String, String> queryMap);
+
+    /**
+     * 批量解密
+     *
+     * @param queryMap 查询参数列表
+     * @return 批量解密结果
+     */
+    @GET("order/batchDecrypt")
+    Call<String> batchDecrypt(@QueryMap Map<String, String> queryMap);
+
+    /**
+     * 批量脱敏
+     *
+     * @param queryMap 查询参数列表
+     * @return 批量脱敏结果
+     */
+    @GET("order/batchSensitive")
+    Call<DyResult<DeSensitiveResult>> batchSensitive(@QueryMap Map<String, String> queryMap);
 
 }

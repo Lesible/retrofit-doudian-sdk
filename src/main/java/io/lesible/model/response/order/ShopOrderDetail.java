@@ -35,7 +35,7 @@ public class ShopOrderDetail {
     /**
      * 店铺订单号
      */
-    private String orderId;
+    private Long orderId;
 
     /**
      * 订单层级

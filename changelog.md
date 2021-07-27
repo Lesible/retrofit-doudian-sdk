@@ -25,4 +25,22 @@
 ### 1.0.7
 
 1. 修改类名
-2. DySignRequestBuilder 添加 Authorization 的参数 
+2. DySignRequestBuilder 添加 Authorization 的参数
+
+### 1.0.8
+
+1. 优惠券完善
+2. 部分成员变量修改
+
+### 1.0.9
+
+1. sku 接口添加
+
+### 1.0.10
+
+1. 修复 sku 列表类型问题
+2. 添加商品编辑接口
+
+### 1.0.11
+
+1. Json 工具类增强

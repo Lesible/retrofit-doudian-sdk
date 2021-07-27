@@ -1,7 +1,7 @@
 package io.lesible;
 
 import io.lesible.api.ShopApi;
-import io.lesible.model.constant.MethodConstant;
+import io.lesible.common.constant.MethodConstants;
 import io.lesible.model.request.DySignRequest;
 import io.lesible.model.request.shop.ShopBrandListParam;
 import io.lesible.model.request.shop.ShopGetShopCategoryParam;
@@ -37,7 +37,7 @@ public class ShopApiTestCase {
         ShopBrandListParam param = ShopBrandListParam.builder().build();
         DySignRequest<ShopBrandListParam> request = DySignRequest.<ShopBrandListParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
-                .businessParam(param).method(MethodConstant.SHOP_BRAND_LIST).build();
+                .businessParam(param).method(MethodConstants.SHOP_BRAND_LIST).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<List<BrandInfo>>> dyResultCall = shopApi.brandList(paramMap);
         DyResult<List<BrandInfo>> result = dyResultCall.execute().body();
@@ -54,7 +54,7 @@ public class ShopApiTestCase {
         ShopGetShopCategoryParam param = ShopGetShopCategoryParam.builder().cid(0L).build();
         DySignRequest<ShopGetShopCategoryParam> request = DySignRequest.<ShopGetShopCategoryParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
-                .businessParam(param).method(MethodConstant.SHOP_GET_SHOP_CATEGORY).build();
+                .businessParam(param).method(MethodConstants.SHOP_GET_SHOP_CATEGORY).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<List<CategoryInfo>>> shopCategory = shopApi.getShopCategory(paramMap);
         DyResult<List<CategoryInfo>> result = shopCategory.execute().body();
