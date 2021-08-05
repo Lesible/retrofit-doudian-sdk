@@ -1,6 +1,7 @@
 package io.lesible.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.ReferenceType;
@@ -27,6 +28,10 @@ public class JsonUtil {
 
     static {
         OBJECT_MAPPER.registerModule(new JavaTimeModule());
+        OBJECT_MAPPER.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
+    }
+
+    private JsonUtil() {
     }
 
     public static String jsonValue(Object o, ObjectMapper objectMapper) {
