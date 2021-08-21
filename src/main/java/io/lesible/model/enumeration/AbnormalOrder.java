@@ -12,7 +12,7 @@ public enum AbnormalOrder {
     /**
      * 异常取消
      */
-    abnormal_CANCEL(1),
+    ABNORMAL_CANCEL(1),
 
     /**
      * 风控审核中
