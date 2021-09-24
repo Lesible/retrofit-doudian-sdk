@@ -9,11 +9,9 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 /**
  * <p> @date: 2021-06-08 20:11</p>
@@ -74,6 +72,21 @@ public class JsonUtil {
         }
     }
 
+    public static <T> T parseJson(String json, ObjectMapper objectMapper, Class<?> parametrized, Class<?>... parameterClasses) {
+        try {
+            String name = parametrized.getSimpleName();
+            if (parameterClasses != null && parameterClasses.length > 0) {
+                name += Arrays.stream(parameterClasses).map(Class::getSimpleName).collect(Collectors.joining("_"));
+            }
+            JavaType javaType = TYPE_MAPPING.computeIfAbsent(name, it ->
+                    objectMapper.getTypeFactory().constructParametricType(parametrized, parameterClasses));
+            return objectMapper.readValue(json, javaType);
+        } catch (JsonProcessingException e) {
+            log.error("解析 json 出错,jsonStr:{}", json, e);
+            return null;
+        }
+    }
+
     public static <T> List<T> parseList(String json, ObjectMapper objectMapper, Class<T> clazz) {
         String name = clazz.getSimpleName();
         JavaType javaType = TYPE_MAPPING.computeIfAbsent(name, it -> {
@@ -92,17 +105,20 @@ public class JsonUtil {
         return parseJson(json, objectMapper, mapType);
     }
 
-
-    public static <T> T parseJson(String json, Class<T> clazz) {
-        return parseJson(json, OBJECT_MAPPER, clazz);
-    }
-
     public static <T> T parseJson(String json, JavaType javaType) {
         return parseJson(json, OBJECT_MAPPER, javaType);
     }
 
     public static <T> T parseJson(String json, ReferenceType referenceType) {
         return parseJson(json, OBJECT_MAPPER, referenceType);
+    }
+
+    public static <T> T parseJson(String json, Class<T> clazz) {
+        return parseJson(json, OBJECT_MAPPER, clazz);
+    }
+
+    public static <T> T parseJson(String json, Class<T> parametrized, Class<?>... parameterClasses) {
+        return parseJson(json, OBJECT_MAPPER, parametrized, parameterClasses);
     }
 
     public static <T> List<T> parseList(String json, Class<T> clazz) {

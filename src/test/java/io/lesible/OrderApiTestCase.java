@@ -39,9 +39,9 @@ public class OrderApiTestCase {
     @SneakyThrows
     public void orderSearchList() {
         ZoneOffset defaultZoneOffset = ZoneOffset.of("+8");
-//        LocalDateTime oldTime = LocalDateTime.of(2019, 7, 1, 0, 0);
-//        LocalDateTime newTime = LocalDateTime.of(2021, 4, 1, 0, 0);
-        LocalDateTime oldTime = LocalDateTime.now().minusDays(10L);
+        LocalDateTime oldTime = LocalDateTime.of(2021, 8, 15, 0, 0);
+//        LocalDateTime newTime = LocalDateTime.of(2020, 4, 1, 0, 0);
+//        LocalDateTime oldTime = LocalDateTime.now().minusDays(10L);
         LocalDateTime newTime = LocalDateTime.now();
         long begin = oldTime.toEpochSecond(defaultZoneOffset);
         log.info("begin: {}", begin);
@@ -51,7 +51,7 @@ public class OrderApiTestCase {
                 .updateTimeStart(begin)
                 .updateTimeEnd(end)
                 .page(0).size(1)
-                .orderBy("update_time")
+                .orderBy("create_time")
                 .orderAsc(true)
                 .build();
         DySignRequest<OrderSearchListParam> request = DySignRequest.<OrderSearchListParam>builder()
@@ -60,7 +60,7 @@ public class OrderApiTestCase {
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<OrderPageInfo>> dyResultCall = orderApi.searchList(paramMap);
         DyResult<OrderPageInfo> body = dyResultCall.execute().body();
-        log.info("body: {}", body);
+        log.info("body: {}", JsonUtil.jsonValue(body));
     }
 
     /**
@@ -69,15 +69,29 @@ public class OrderApiTestCase {
     @Test
     @SneakyThrows
     public void orderOrderDetail() {
-        OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId(4826945492938749295L).build();
+        List<Long> orderIds = Arrays.asList(
+                4841363049602362748L,
+                4841363092564333888L,
+                4841363148390216968L,
+                4841363182743183172L,
+                4841363152679409018L,
+                4841363156974231528L,
+                4841363191332300624L,
+                4841363174155998295L,
+                4841363139809195872L,
+                4841363109734170263L);
+        for (Long orderId : orderIds) {
+            OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId(orderId).build();
 //        Authorization auth = new Authorization("6840999917109446151", "dbcb95bb-9aff-4dff-9caa-3be62008b773");
-        DySignRequest<OrderOrderDetailParam> request = DySignRequest.<OrderOrderDetailParam>builder()
-                .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
-                .businessParam(param).method(MethodConstants.ORDER_ORDER_DETAIL).build();
-        Map<String, String> paramMap = ParamUtil.buildParamMap(request);
-        Call<DyResult<ShopOrderDetailInfo>> dyResultCall = orderApi.orderDetail(paramMap);
-        DyResult<ShopOrderDetailInfo> orderDetailInfo = dyResultCall.execute().body();
-        log.info("orderDetailInfo: {}", JsonUtil.jsonValue(orderDetailInfo));
+            DySignRequest<OrderOrderDetailParam> request = DySignRequest.<OrderOrderDetailParam>builder()
+                    .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
+                    .businessParam(param).method(MethodConstants.ORDER_ORDER_DETAIL).build();
+            Map<String, String> paramMap = ParamUtil.buildParamMap(request);
+            Call<DyResult<ShopOrderDetailInfo>> dyResultCall = orderApi.orderDetail(paramMap);
+            DyResult<ShopOrderDetailInfo> orderDetailInfo = dyResultCall.execute().body();
+            log.info("orderId: {}", orderId);
+            log.info("orderDetailInfo: {}", JsonUtil.jsonValue(orderDetailInfo));
+        }
     }
 
     /**

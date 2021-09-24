@@ -20,7 +20,7 @@ public enum ErrorCode {
     /**
      * 无权限
      */
-    No_PERMISSION(2),
+    NO_PERMISSION(2),
 
     /**
      * 缺少参数
