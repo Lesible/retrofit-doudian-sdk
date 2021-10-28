@@ -23,7 +23,7 @@ public class ApiFactoryInitializer {
 //public static final String GLOBAL_TOKEN = "d322a996-c014-4c6c-a848-d33508f95948";
     // 窝小芽
 //    public static final String GLOBAL_TOKEN = "7a660b6e-35f6-461e-adb4-3ced59c74fda";
-    public static final String GLOBAL_TOKEN = "db911b9c-c9bc-433c-91b5-dd683b3ec545";
+    public static final String GLOBAL_TOKEN = "13212a03-01cd-48e7-8e9a-cfb53675b55c";
 
 
     public static OrderApi ORDER_API;
