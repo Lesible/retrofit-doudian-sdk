@@ -1,9 +1,9 @@
 package io.lesible;
 
+import com.sumwhy.util.JsonUtil;
 import io.lesible.api.AuthApi;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.auth.AccessTokenInfo;
-import io.lesible.util.JsonUtil;
 import io.lesible.util.ParamUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

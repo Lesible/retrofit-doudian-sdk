@@ -1,5 +1,6 @@
 package io.lesible;
 
+import com.sumwhy.util.JsonUtil;
 import io.lesible.api.SkuApi;
 import io.lesible.common.constant.MethodConstants;
 import io.lesible.model.request.DySignRequest;
@@ -8,7 +9,6 @@ import io.lesible.model.request.sku.SkuListParam;
 import io.lesible.model.request.sku.SkuSyncStockParam;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.sku.SkuListInfo;
-import io.lesible.util.JsonUtil;
 import io.lesible.util.ParamUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

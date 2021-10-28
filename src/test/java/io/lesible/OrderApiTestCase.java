@@ -1,5 +1,6 @@
 package io.lesible;
 
+import com.sumwhy.util.JsonUtil;
 import io.lesible.api.OrderApi;
 import io.lesible.common.constant.MethodConstants;
 import io.lesible.model.request.DySignRequest;
@@ -9,7 +10,6 @@ import io.lesible.model.response.order.DeSensitiveResult;
 import io.lesible.model.response.order.OrderPageInfo;
 import io.lesible.model.response.order.ShopOrderDetail;
 import io.lesible.model.response.order.ShopOrderDetailInfo;
-import io.lesible.util.JsonUtil;
 import io.lesible.util.ParamUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +19,7 @@ import retrofit2.Call;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -69,7 +70,7 @@ public class OrderApiTestCase {
     @Test
     @SneakyThrows
     public void orderOrderDetail() {
-        List<Long> orderIds = Arrays.asList(
+        List<Long> orderIds = Collections.singletonList(
                 4857754448688776525L);
         for (Long orderId : orderIds) {
             OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId(orderId).build();

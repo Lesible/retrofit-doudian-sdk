@@ -1,5 +1,6 @@
 package io.lesible;
 
+import com.sumwhy.util.JsonUtil;
 import io.lesible.api.CommentApi;
 import io.lesible.common.constant.MethodConstants;
 import io.lesible.model.request.DySignRequest;
@@ -7,7 +8,6 @@ import io.lesible.model.request.comment.CommentListParam;
 import io.lesible.model.request.comment.CommentReplyParam;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.comment.CommentPageInfo;
-import io.lesible.util.JsonUtil;
 import io.lesible.util.ParamUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
