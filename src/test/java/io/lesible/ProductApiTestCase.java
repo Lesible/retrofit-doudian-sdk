@@ -1,5 +1,6 @@
 package io.lesible;
 
+import com.sumwhy.util.JsonUtil;
 import io.lesible.api.ProductApi;
 import io.lesible.common.constant.MethodConstants;
 import io.lesible.model.enumeration.CheckStatus;
@@ -10,22 +11,27 @@ import io.lesible.model.request.product.ProductEditV2Param;
 import io.lesible.model.request.product.ProductListParam;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.product.ProductDetail;
+import io.lesible.model.response.product.ProductInfo;
 import io.lesible.model.response.product.ProductPageInfo;
 import io.lesible.util.ParamUtil;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p> @date: 2021-06-11 15:10</p>
  *
  * @author 何嘉豪
  */
-@Slf4j
 public class ProductApiTestCase {
+
+    private static final Logger log = LoggerFactory.getLogger(ProductApiTestCase.class);
 
     private final ProductApi productApi = ApiFactoryInitializer.PRODUCT_API;
 
@@ -36,7 +42,7 @@ public class ProductApiTestCase {
     @SneakyThrows
     public void productList() {
         ProductListParam productListParam = ProductListParam.builder().page(0)
-                .size(5).checkStatus(CheckStatus.REVIEW_PASSED.getCheckStatus()).build();
+                .size(30).checkStatus(CheckStatus.REVIEW_PASSED.getCheckStatus()).build();
         DySignRequest<ProductListParam> request = DySignRequest.<ProductListParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(productListParam).method(MethodConstants.PRODUCT_LIST).build();
@@ -44,7 +50,11 @@ public class ProductApiTestCase {
         Call<DyResult<ProductPageInfo>> dyResultCall = productApi.list(paramMap);
         DyResult<ProductPageInfo> body = dyResultCall.execute().body();
         assert body != null;
-        log.info("body: {}", body);
+        List<String> productIds = body.getData().getData().stream()
+                .map(ProductInfo::getProductId)
+                .map(it -> "'" + it + "'").collect(Collectors.toList());
+        log.info("productIds: {}", productIds);
+//        log.info("body: {}", JsonUtil.jsonValue(body));
     }
 
     /**
@@ -54,14 +64,14 @@ public class ProductApiTestCase {
     @SneakyThrows
     public void productDetail() {
         ProductDetailParam productDetailParam = ProductDetailParam.builder()
-                .productId(3477885072382806635L).showDraft(false).build();
+                .productId(3514121413378359607L).build();
         DySignRequest<ProductDetailParam> request = DySignRequest.<ProductDetailParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN).businessParam(productDetailParam)
                 .method(MethodConstants.PRODUCT_DETAIL).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<ProductDetail>> dyResultCall = productApi.detail(paramMap);
         DyResult<ProductDetail> body = dyResultCall.execute().body();
-        log.info("body: {}", body);
+        log.info("body: {}", JsonUtil.jsonValue(body));
     }
 
     /**

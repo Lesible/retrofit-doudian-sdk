@@ -53,4 +53,9 @@ public interface OrderApi {
     @GET("order/batchSensitive")
     Call<DyResult<DeSensitiveResult>> batchSensitive(@QueryMap Map<String, String> queryMap);
 
+    /**
+     * 批量获取索引串接口
+     */
+    @GET("order/BatchSearchIndex")
+    Call<String> batchSearchIndex(@QueryMap Map<String, String> queryMap);
 }

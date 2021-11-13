@@ -43,6 +43,11 @@ public class MethodConstants {
     public static final String ORDER_BATCH_SENSITIVE = "order.batchSensitive";
 
     /**
+     * 批量获取索引串接口
+     */
+    public static final String ORDER_BATCH_SEARCH_INDEX = "order.batchSearchIndex";
+
+    /**
      * 获取店铺的评论列表
      */
     public static final String COMMENT_LIST = "comment.list";

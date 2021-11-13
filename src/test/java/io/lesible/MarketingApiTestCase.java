@@ -60,7 +60,7 @@ public class MarketingApiTestCase {
     public void getShopCouponMetaList() {
         // 店铺 url https://haohuo.jinritemai.com/views/shop/index?id=tMOiCrl
         MarketingGetShopCouponMetaListParam param = MarketingGetShopCouponMetaListParam.builder()
-                .couponMetaId(0L).offset(24).limit(100)
+                .couponMetaId(0L).offset(0).limit(100)
                 .isShow(-1).build();
         DySignRequest<MarketingGetShopCouponMetaListParam> request = DySignRequest
                 .<MarketingGetShopCouponMetaListParam>builder().accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
@@ -128,7 +128,8 @@ public class MarketingApiTestCase {
     public void applyCoupon() {
         // 华胜的 doudian_open_id  1@#QlEMZy4wLjtuPBNlQSl3ZFTc4uBAfgexNFmQfxskmdrNHd+WQzmN5vF8g6VukV4uJQ==
         MarketingApplyCouponParam param = MarketingApplyCouponParam.builder()
-                .couponMetaId(6972135647914066184L).doudianOpenId("1@#QlEMZy4wLjtuPBNlQSl3ZFTc4uBAfgexNFmQfxskmdrNHd+WQzmN5vF8g6VukV4uJQ==")
+                .couponMetaId(7027819594845143308L)
+                .doudianOpenId("1@#sBWushIim122PENh49Nrg2gIpEKJp30zQshuZQTIe4aB9rz80nDmGsVaYXKsovxnzdreh7z0XA==")
                 .uniqueId(UniqueIdUtil.nextUniqueId()).build();
         DySignRequest<MarketingApplyCouponParam> request = DySignRequest
                 .<MarketingApplyCouponParam>builder().accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)

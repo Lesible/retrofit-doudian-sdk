@@ -3,6 +3,7 @@ package io.lesible;
 import com.sumwhy.util.JsonUtil;
 import io.lesible.api.OrderApi;
 import io.lesible.common.constant.MethodConstants;
+import io.lesible.model.enumeration.EncryptType;
 import io.lesible.model.request.DySignRequest;
 import io.lesible.model.request.order.*;
 import io.lesible.model.response.DyResult;
@@ -70,8 +71,7 @@ public class OrderApiTestCase {
     @Test
     @SneakyThrows
     public void orderOrderDetail() {
-        List<Long> orderIds = Collections.singletonList(
-                4857754448688776525L);
+        List<Long> orderIds = Collections.singletonList(4816712432702037325L);
         for (Long orderId : orderIds) {
             OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId(orderId).build();
 //        Authorization auth = new Authorization("6840999917109446151", "dbcb95bb-9aff-4dff-9caa-3be62008b773");
@@ -148,6 +148,21 @@ public class OrderApiTestCase {
             DyResult<DeSensitiveResult> body = result.execute().body();
             log.info("body: {}", JsonUtil.jsonValue(body));
         }
+    }
+
+    @Test
+    @SneakyThrows
+    public void orderBatchSearchIndex() {
+        OrderBatchSearchIndexParam param = OrderBatchSearchIndexParam.builder().plainTextList(Collections.singletonList(
+                EncryptText.builder().plainText("15168300521")
+                        .encryptType(EncryptType.PHONE_NUM_ENCRYPT).build())).build();
+        DySignRequest<OrderBatchSearchIndexParam> request = DySignRequest.<OrderBatchSearchIndexParam>builder()
+                .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
+                .businessParam(param).method(MethodConstants.ORDER_BATCH_SEARCH_INDEX).build();
+        Map<String, String> paramMap = ParamUtil.buildParamMap(request);
+        Call<String> dyResultCall = orderApi.batchSearchIndex(paramMap);
+        String body = dyResultCall.execute().body();
+        log.info("body: {}", body);
     }
 
 }
