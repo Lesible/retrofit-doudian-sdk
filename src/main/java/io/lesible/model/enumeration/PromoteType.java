@@ -30,7 +30,32 @@ public enum PromoteType {
     /**
      * 自有渠道推广
      */
-    SELF_CHANNEL_PROMOTE(1);
+    SELF_CHANNEL_PROMOTE(1),
+
+    /**
+     * 新客专享
+     */
+    NEW_CUSTOMER_PROMOTE(2),
+
+    /**
+     * 定向券
+     */
+    DIRECT_COUPON_PROMOTE(3),
+
+    /**
+     * 单品广告推广券
+     */
+    SINGLE_ITEM_PROMOTE(4),
+
+    /**
+     * 评价返券
+     */
+    COMMENT_COUPON_PROMOTE(5),
+
+    /**
+     * 会员开卡礼
+     */
+    MEMBER_CREATE_CARD_PROMOTE(9);
 
     private final Integer promoteType;
 
