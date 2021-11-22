@@ -2,6 +2,7 @@ package io.lesible.model.response.product;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sumwhy.util.JsonUtil;
 import lombok.Data;
 
 import java.util.Date;
@@ -204,4 +205,7 @@ public class ProductDetail {
      */
     private Long spuId;
 
+    public ProductDetailExtra getExtra() {
+        return JsonUtil.parseJson(extra, ProductDetailExtra.class);
+    }
 }

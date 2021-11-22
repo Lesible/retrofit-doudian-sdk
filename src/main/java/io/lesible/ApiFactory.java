@@ -9,6 +9,8 @@ import io.lesible.model.request.DySignRequest;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
+import java.util.TimeZone;
+
 /**
  * <p> @date: 2021-04-19 16:07</p>
  *
@@ -20,6 +22,7 @@ public class ApiFactory {
 
     static {
         OBJECT_MAPPER.registerModule(new JavaTimeModule());
+        OBJECT_MAPPER.setTimeZone(TimeZone.getDefault());
         // 出现额外的字段时不失败
         OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         // 空字符串解析为 null

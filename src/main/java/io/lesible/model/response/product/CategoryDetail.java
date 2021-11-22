@@ -1,53 +1,37 @@
 package io.lesible.model.response.product;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-/**
- * <p> @date: 2021-04-20 11:51</p>
- *
- * @author 何嘉豪
- */
 @Data
 public class CategoryDetail {
 
-    /**
-     * 新一级类目
-     */
+    @JsonProperty("first_cid")
     private Long firstCid;
 
-    /**
-     * 新二级类目
-     */
-    private Long secondCid;
-
-    /**
-     * 新三级类目
-     */
-    private Long thirdCid;
-
-    /**
-     * 新四级类目
-     */
-    private Long fourthCid;
-
-    /**
-     * 一级类目名称
-     */
+    @JsonProperty("first_cname")
     private String firstCname;
 
-    /**
-     * 二级类目名称
-     */
+    @JsonProperty("second_cid")
+    private Long secondCid;
+
+    @JsonProperty("second_cname")
     private String secondCname;
 
-    /**
-     * 三级类目名称
-     */
+    @JsonProperty("third_cid")
+    private Long thirdCid;
+
+    @JsonProperty("third_cname")
     private String thirdCname;
 
-    /**
-     * 四级类目名称
-     */
+    @JsonProperty("fourth_cid")
+    private Integer fourthCid;
+
+    @JsonProperty("fourth_cname")
     private String fourthCname;
+
+    @JsonProperty("is_leaf")
+    private Boolean isLeaf;
+
 
 }

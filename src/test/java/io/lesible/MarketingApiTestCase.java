@@ -68,7 +68,14 @@ public class MarketingApiTestCase {
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
         Call<DyResult<ShopCouponMetaListRes>> body = marketingApi.getShopCouponMetaList(paramMap);
         DyResult<ShopCouponMetaListRes> result = body.execute().body();
-        log.info("result: {}", result);
+        ShopCouponMetaListRes data = result.getData();
+        data.getShopCouponMetaList().forEach(it -> {
+            String print = it.getCouponName() + "_" +
+                    it.getCouponType().getCouponType() + "_" +
+                    it.getPromoteType().getPromoteType();
+            log.info("couponInfo: {}", print);
+        });
+//        log.info("result: {}", result);
     }
 
     /**
