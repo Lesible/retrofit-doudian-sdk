@@ -33,5 +33,4 @@ public class CategoryDetail {
     @JsonProperty("is_leaf")
     private Boolean isLeaf;
 
-
 }
