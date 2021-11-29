@@ -3,6 +3,7 @@ package io.lesible.api;
 import io.lesible.model.response.DyResult;
 import io.lesible.model.response.order.DeSensitiveResult;
 import io.lesible.model.response.order.OrderPageInfo;
+import io.lesible.model.response.order.SearchIndexResult;
 import io.lesible.model.response.order.ShopOrderDetailInfo;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -57,5 +58,5 @@ public interface OrderApi {
      * 批量获取索引串接口
      */
     @GET("order/BatchSearchIndex")
-    Call<String> batchSearchIndex(@QueryMap Map<String, String> queryMap);
+    Call<DyResult<SearchIndexResult>> batchSearchIndex(@QueryMap Map<String, String> queryMap);
 }

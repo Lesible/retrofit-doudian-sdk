@@ -7,10 +7,7 @@ import io.lesible.model.enumeration.EncryptType;
 import io.lesible.model.request.DySignRequest;
 import io.lesible.model.request.order.*;
 import io.lesible.model.response.DyResult;
-import io.lesible.model.response.order.DeSensitiveResult;
-import io.lesible.model.response.order.OrderPageInfo;
-import io.lesible.model.response.order.ShopOrderDetail;
-import io.lesible.model.response.order.ShopOrderDetailInfo;
+import io.lesible.model.response.order.*;
 import io.lesible.util.ParamUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -154,15 +151,15 @@ public class OrderApiTestCase {
     @SneakyThrows
     public void orderBatchSearchIndex() {
         OrderBatchSearchIndexParam param = OrderBatchSearchIndexParam.builder().plainTextList(Collections.singletonList(
-                EncryptText.builder().plainText("15168300521")
+                EncryptText.builder().plainText("15728046568")
                         .encryptType(EncryptType.PHONE_NUM_ENCRYPT).build())).build();
         DySignRequest<OrderBatchSearchIndexParam> request = DySignRequest.<OrderBatchSearchIndexParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(param).method(MethodConstants.ORDER_BATCH_SEARCH_INDEX).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);
-        Call<String> dyResultCall = orderApi.batchSearchIndex(paramMap);
-        String body = dyResultCall.execute().body();
-        log.info("body: {}", body);
+        Call<DyResult<SearchIndexResult>> dyResultCall = orderApi.batchSearchIndex(paramMap);
+        DyResult<SearchIndexResult> body = dyResultCall.execute().body();
+        log.info("body: {}", JsonUtil.jsonValue(body));
     }
 
 }

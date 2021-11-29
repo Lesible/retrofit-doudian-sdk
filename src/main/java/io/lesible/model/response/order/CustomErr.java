@@ -1,23 +1,12 @@
 package io.lesible.model.response.order;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * 业务错误
- * <p> @date: 2021-07-21 11:20</p>
- *
- * @author 何嘉豪
- */
-@Data
 public class CustomErr {
 
-    /**
-     * 错误码
-     */
-    private Integer errCode;
-
-    /**
-     * 错误描述
-     */
+    @JsonProperty("err_msg")
     private String errMsg;
+
+    @JsonProperty("err_code")
+    private Integer errCode;
 }
