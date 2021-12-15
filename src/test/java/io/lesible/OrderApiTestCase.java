@@ -165,10 +165,10 @@ public class OrderApiTestCase {
     @Test
     @SneakyThrows
     public void antiSpamOrderSend() {
-        AntiSpamOrderSendParam param = AntiSpamOrderSendParam.builder()
+        AntiSpamParam param = AntiSpamParam.builder()
                 .eventTime(System.currentTimeMillis())
                 .params("{}").build();
-        DySignRequest<AntiSpamOrderSendParam> request = DySignRequest.<AntiSpamOrderSendParam>builder()
+        DySignRequest<AntiSpamParam> request = DySignRequest.<AntiSpamParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
                 .businessParam(param).method(MethodConstants.ORDER_ANTI_SPAM_ORDER_SEND).build();
         Map<String, String> paramMap = ParamUtil.buildParamMap(request);

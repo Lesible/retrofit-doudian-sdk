@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AntiSpamOrderSendParam {
+public class AntiSpamParam {
 
     private Long eventTime;
 
