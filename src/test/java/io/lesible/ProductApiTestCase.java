@@ -63,7 +63,7 @@ public class ProductApiTestCase {
     @SneakyThrows
     public void productDetail() {
         ProductDetailParam productDetailParam = ProductDetailParam.builder()
-                .productId(3426428809224829466L).build();
+                .productId(3481940313990424094L).build();
         DySignRequest<ProductDetailParam> request = DySignRequest.<ProductDetailParam>builder()
                 .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN).businessParam(productDetailParam)
                 .method(MethodConstants.PRODUCT_DETAIL).build();

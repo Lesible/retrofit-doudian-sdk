@@ -7,7 +7,6 @@ import java.util.List;
 @Data
 public class SearchIndexResult {
 
-
     private CustomErr customErr;
 
     private List<PlainToEncryptIndex> plainToEncryptIndexList;

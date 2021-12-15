@@ -48,6 +48,11 @@ public class MethodConstants {
     public static final String ORDER_BATCH_SEARCH_INDEX = "order.batchSearchIndex";
 
     /**
+     * 风控安全上报
+     */
+    public static final String ORDER_ANTI_SPAM_ORDER_SEND = "antispam.orderSend";
+
+    /**
      * 获取店铺的评论列表
      */
     public static final String COMMENT_LIST = "comment.list";

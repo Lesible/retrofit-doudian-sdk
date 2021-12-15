@@ -1,10 +1,7 @@
 package io.lesible.api;
 
 import io.lesible.model.response.DyResult;
-import io.lesible.model.response.order.DeSensitiveResult;
-import io.lesible.model.response.order.OrderPageInfo;
-import io.lesible.model.response.order.SearchIndexResult;
-import io.lesible.model.response.order.ShopOrderDetailInfo;
+import io.lesible.model.response.order.*;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
@@ -59,4 +56,24 @@ public interface OrderApi {
      */
     @GET("order/BatchSearchIndex")
     Call<DyResult<SearchIndexResult>> batchSearchIndex(@QueryMap Map<String, String> queryMap);
+
+    /**
+     * 订单发送风控安全上报
+     */
+    @GET("antispam/orderSend")
+    Call<DyResult<AntiSpamResult>> antiSpamOrderSend(@QueryMap Map<String, String> queryMap);
+
+    /**
+     * 下载订单商户登陆风险检查
+     */
+
+    @GET("antispam/orderQuery")
+    Call<DyResult<AntiSpamResult>> antiSpamOrderQuery(@QueryMap Map<String, String> queryMap);
+
+    /**
+     * 户在ISV查看订单、下载订单商户
+     */
+    @GET("antispam/userLogin")
+    Call<DyResult<AntiSpamResult>> antiSpamUserLogin(@QueryMap Map<String, String> queryMap);
+
 }

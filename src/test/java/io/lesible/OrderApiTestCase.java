@@ -68,7 +68,7 @@ public class OrderApiTestCase {
     @Test
     @SneakyThrows
     public void orderOrderDetail() {
-        List<Long> orderIds = Collections.singletonList(4816712432702037325L);
+        List<Long> orderIds = Collections.singletonList(4872325627760834469L);
         for (Long orderId : orderIds) {
             OrderOrderDetailParam param = OrderOrderDetailParam.builder().shopOrderId(orderId).build();
 //        Authorization auth = new Authorization("6840999917109446151", "dbcb95bb-9aff-4dff-9caa-3be62008b773");
@@ -160,6 +160,24 @@ public class OrderApiTestCase {
         Call<DyResult<SearchIndexResult>> dyResultCall = orderApi.batchSearchIndex(paramMap);
         DyResult<SearchIndexResult> body = dyResultCall.execute().body();
         log.info("body: {}", JsonUtil.jsonValue(body));
+    }
+
+    @Test
+    @SneakyThrows
+    public void antiSpamOrderSend() {
+        AntiSpamOrderSendParam param = AntiSpamOrderSendParam.builder()
+                .eventTime(System.currentTimeMillis())
+                .params("{}").build();
+        DySignRequest<AntiSpamOrderSendParam> request = DySignRequest.<AntiSpamOrderSendParam>builder()
+                .accessToken(ApiFactoryInitializer.GLOBAL_TOKEN)
+                .businessParam(param).method(MethodConstants.ORDER_ANTI_SPAM_ORDER_SEND).build();
+        Map<String, String> paramMap = ParamUtil.buildParamMap(request);
+        Call<DyResult<AntiSpamResult>> dyResultCall = orderApi.antiSpamOrderSend(paramMap);
+        DyResult<AntiSpamResult> body = dyResultCall.execute().body();
+        if (body != null && body.isSuccess()) {
+            Decision decision = body.getData().getDecision();
+            log.info("decision:{}", decision);
+        }
     }
 
 }
